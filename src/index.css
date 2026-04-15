@@ -76,24 +76,24 @@ html, body, #root {
     cursor: pointer;
 
 
-    &.btn-primary {
+    &.btnPrimary {
         background-color: var(--brand-primary-color);
         color: #fff;
     }
 
-    &.btn-secondary {
+    &.btnSecondary {
         background-color: var(--surface-color);
         color: var(--text-primary-color);
         border: 1px solid #4F8BFF26;
     }
 
-    &.btn-danger {
+    &.btnDanger {
         background-color: var(--danger-color);
         color: #fff;
 
     }
 
-    &.btn-ghost {
+    &.btnGhost {
         background-color: transparent;
         color: var(--text-primary-color);
         border: 1px solid #E5E7EB
@@ -105,6 +105,67 @@ html, body, #root {
     font-size: 14px;
     font-weight: 400;
     text-decoration: none;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+
+}
+
+h5 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.bodyText {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.bodyTextSm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.caption {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+
+}
+
+.label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.badge{
+
 }
 
 @media (max-width: 640px) {
