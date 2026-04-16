@@ -8,5 +8,11 @@
   "my_notes": "ملاحظاتي",
   "favorites": "المفضلة",
   "trash": "سلة المحذوفات",
-  "settings": "الإعدادات"
+  "settings": "الإعدادات",
+  "create_note": "إنشاء ملاحظة جديدة",
+  "create_note_description": "ابدأ ملاحظة جديدة",
+  "import_pdf": "استيراد PDF",
+  "import_pdf_description": "تحويل PDF الي ملاحظة",
+  "collaborate": "تعاون",
+  "collaborate_description": "شارك مع الفريق"
 }

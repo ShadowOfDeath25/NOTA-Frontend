@@ -1,0 +1,42 @@
+.card{
+    display: flex;
+    gap:var(--sp4);
+    align-items: center;
+    border-radius:var(--radius-lg);
+    background-color: #0F1420;
+    padding: 24px;
+    width: 266px;
+    border: 1.6px solid transparent;
+    &:hover {
+        
+        border: 1.6px solid var(--brand-primary-color);
+    }
+}
+.iconContainer{ 
+    width: 48px;
+    height: 48px;
+    border-radius:var(--radius-md);
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.purpleIcon {
+    background: var(--gradient-purple-pink);
+}
+
+.blueIcon {   
+    background: var( --gradient-blue-cyan);
+
+}
+.greenIcon { 
+    background: var(--gradient-green) 
+}
+.title{
+    color: var(--surface-color);
+}
+.description{
+    color: var(--text-muted-color);
+}
