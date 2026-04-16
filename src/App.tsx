@@ -1,5 +1,6 @@
 import Sidebar from "@components/Sidebar/Sidebar.tsx";
 import i18n from "i18next";
+import ActionList from "@components/ActionList/ActionList.tsx";
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
             <Sidebar/>
             {/* This button is for testing purposes*/}
             <button onClick={() => switchLanguage("ar")}>change language</button>
+            <ActionList/>
+          
+           
         </>
     )
 }
