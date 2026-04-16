@@ -1,0 +1,1 @@
+export const isRTL = (text: string) => /[\u0600-\u06FF]/.test(text);

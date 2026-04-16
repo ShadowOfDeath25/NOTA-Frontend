@@ -31,6 +31,9 @@
       ],
       "@translation/*": [
         "src/translation/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
       ]
     },
     /* Bundler mode */

@@ -1,6 +1,23 @@
+@font-face {
+    font-family: "Cairo";
+    src: url("../assets/fonts/Cairo/Cairo-VariableFont_slnt,wght.ttf") format("woff2");
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
+}
+
 html, body, #root {
     height: 100%;
     width: 100%;
+
+}
+
+html:not([lang="ar"]) {
+    font-family: Arial, sans-serif;
+}
+
+html[lang="ar"] {
+    font-family: "Cairo", sans-serif;
 }
 
 #root {
@@ -28,7 +45,7 @@ html, body, #root {
     --text-sidebar-nav: #d1d5dc;
     --danger-color: #d4183d;
     --badge-blue-bg: #e5f0fc;
-    --sidebar-divider-color: #1e2939;
+    --sidebar-divider-color: #1E2939;
     --sidebar-border-color: #364153;
     --border-divider: #e5e7eb;
 
@@ -107,6 +124,7 @@ html, body, #root {
     text-decoration: none;
 }
 
+
 h1 {
     font-size: 36px;
     line-height: 40px;
@@ -148,6 +166,7 @@ h5 {
     font-size: 14px;
     line-height: 20px;
     font-weight: 400;
+
 }
 
 .caption {
@@ -163,10 +182,35 @@ h5 {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-weight: 400;
-}
-.badge{
 
 }
+
+.badge {
+
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    opacity:0.6;
+    transition: opacity .3s ease-in-out;
+}
+
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar:hover{
+   opacity:1;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--brand-primary-color);
+    border-radius: 10px;
+
+
+}
+
 
 @media (max-width: 640px) {
 

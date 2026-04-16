@@ -1,0 +1,17 @@
+.noteLink {
+    color: var(--text-sidebar-item);
+    height: 36px;
+    min-height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-inline: var(--sp4);
+    font-size: 14px;
+    margin-bottom: var(--sp1);
+    &:hover {
+        color: var(--brand-primary-color);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--brand-primary-color);
+    }
+}

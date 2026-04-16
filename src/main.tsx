@@ -5,11 +5,13 @@ import {router} from './router.tsx'
 import {QueryClientProvider} from "@tanstack/react-query"
 import {queryClient} from "./queryClient.ts";
 import './index.css'
-
+import LanguageSync from "@components/LanguageSync/LanguageSync.tsx";
+import './i18n.ts'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
+            <LanguageSync/>
             <RouterProvider router={router}></RouterProvider>
         </QueryClientProvider>
     </StrictMode>

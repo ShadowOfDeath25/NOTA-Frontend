@@ -1,0 +1,31 @@
+.searchbar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-block:4px;
+    padding-inline-start:32px;
+    padding-inline-end:12px;
+    background: rgba(38, 38, 38, 0.3);
+    border: 0.8px solid #364153;
+    border-radius: 8px;
+    height: 100%;
+    width:100%;
+    color: var(--text-sidebar-nav)
+}
+
+.container {
+    width: 100%;
+    position: relative;
+    height: 36px;
+    margin-top:24px;
+    min-height:36px;
+}
+
+.icon {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: var(--sp3) !important;
+
+}
