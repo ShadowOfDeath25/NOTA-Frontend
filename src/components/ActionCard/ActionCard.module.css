@@ -1,42 +1,48 @@
-.card{
+.card {
     display: flex;
-    gap:var(--sp4);
+    gap: var(--sp4);
     align-items: center;
-    border-radius:var(--radius-lg);
+    border-radius: var(--radius-lg);
     background-color: #0F1420;
     padding: 24px;
     width: 266px;
     border: 1.6px solid transparent;
+    cursor: pointer;
+
     &:hover {
-        
+
         border: 1.6px solid var(--brand-primary-color);
     }
 }
-.iconContainer{ 
+
+.iconContainer {
     width: 48px;
     height: 48px;
-    border-radius:var(--radius-md);
+    border-radius: var(--radius-md);
     display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
 }
 
 .purpleIcon {
     background: var(--gradient-purple-pink);
 }
 
-.blueIcon {   
-    background: var( --gradient-blue-cyan);
+.blueIcon {
+    background: var(--gradient-blue-cyan);
 
 }
-.greenIcon { 
-    background: var(--gradient-green) 
+
+.greenIcon {
+    background: var(--gradient-green)
 }
-.title{
+
+.title {
     color: var(--surface-color);
 }
-.description{
+
+.description {
     color: var(--text-muted-color);
 }
