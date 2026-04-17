@@ -20,7 +20,7 @@
       "@pages/*": [
         "src/pages/*"
       ],
-      "@types/*": [
+      "@customTypes/*": [
         "src/types/*"
       ],
       "@hooks/*": [

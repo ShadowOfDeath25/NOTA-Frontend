@@ -1,7 +1,7 @@
 import styles from "./NotesList.module.css";
 import NoteCard from "@components/NoteCard/NoteCard.tsx";
 import NoNotesFound from "@components/NoNotesFound/NoNotesFound.tsx";
-import type { NoteData } from "@components/NoteCard/NoteCard.tsx";
+import type { NoteData } from "@customTypes/NoteData.ts";
 import { useTranslation } from "react-i18next";
 
 const NotesList = ({ recentNotes }: {recentNotes: NoteData[]}) => {

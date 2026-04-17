@@ -4,8 +4,8 @@ import styles from "./ActionList.module.css";
 import addIcon from "@assets/icons/add.svg";
 import uploadIcon from "@assets/icons/upload.svg";
 import collaborateIcon from "@assets/icons/collaborate.svg";
-// @ts-ignore
-import type {Action} from "@types/Action.ts";
+
+import type {Action} from "@customTypes/Action.ts";
 
 const ActionList = () => {
     const {t} = useTranslation();
