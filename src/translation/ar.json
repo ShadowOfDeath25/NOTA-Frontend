@@ -14,5 +14,7 @@
   "import_pdf": "استيراد PDF",
   "import_pdf_description": "تحويل PDF الي ملاحظة",
   "collaborate": "تعاون",
-  "collaborate_description": "شارك مع الفريق"
+  "collaborate_description": "شارك مع الفريق",
+  "recent_notes": "الملاحظات الأخيرة",
+  "view_all": "عرض الكل"
 }

@@ -7,3 +7,4 @@ export type Action = {
     icon: string,
     color: "purpleIcon" | "blueIcon" | "greenIcon",
 }
+
