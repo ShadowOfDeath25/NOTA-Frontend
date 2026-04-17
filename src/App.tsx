@@ -3,66 +3,66 @@ import NotesList from "@components/NotesList/NotesList.tsx";
 import type { NoteData } from "@components/NoteCard/NoteCard.tsx";
 function App() {
  const Notes: NoteData[] = [
-  {
-    id: "1",
-    title: "Untitled Note",
-    summary: "", 
-    date: "11/30/2025",
-    starred: false,
-  },
-  {
-    id: "2",
-    title: "Meeting Notes - Q4",
-    summary: "Discussed quarterly objectives and key results...",
-    date: "11/18/2024",
-    tag: "work",
-    starred: true,
-  },
-  {
-    id: "3",
-    title: "Project Ideas",
-    summary: "Collection of innovative project concepts...",
-    date: "11/19/2024",
-    tag: "ideas",
-    starred: false,
-  },
-  {
-    id: "4",
-    title: "Reading Notes - AI Researc",
-    summary: "Key insights from recent AI papers and articles...",
-    date: "11/20/2024",
-    starred: false,
-  },{
+  // {
+  //   id: "1",
+  //   title: "Untitled Note",
+  //   summary: "", 
+  //   date: "11/30/2025",
+  //   starred: false,
+  // },
+  // {
+  //   id: "2",
+  //   title: "Meeting Notes - Q4",
+  //   summary: "Discussed quarterly objectives and key results...",
+  //   date: "11/18/2024",
+  //   tag: "work",
+  //   starred: true,
+  // },
+  // {
+  //   id: "3",
+  //   title: "Project Ideas",
+  //   summary: "Collection of innovative project concepts...",
+  //   date: "11/19/2024",
+  //   tag: "ideas",
+  //   starred: false,
+  // },
+  // {
+  //   id: "4",
+  //   title: "Reading Notes - AI Researc",
+  //   summary: "Key insights from recent AI papers and articles...",
+  //   date: "11/20/2024",
+  //   starred: false,
+  // },{
   
-    id: "5",
-    title: "Untitled Note",
-    summary: "", 
-    date: "11/30/2025",
-    starred: false,
-  }, 
-  {
-    id: "6",
-    title: "Meeting Notes - Q4",
-    summary: "Discussed quarterly objectives and key results...",
-    date: "11/18/2024",
-    tag: "work",
-    starred: true,
-  },
-  {
-    id: "7",
-    title: "Project Ideas",
-    summary: "Collection of innovative project concepts...",
-    date: "11/19/2024",
-    tag: "ideas",
-    starred: false,
-  },
-  {
-    id: "8",
-    title: "Reading Notes - AI Researc",
-    summary: "Key insights from recent AI papers and articles...",
-    date: "11/20/2024",
-    starred: false,
-  }
+  //   id: "5",
+  //   title: "Untitled Note",
+  //   summary: "", 
+  //   date: "11/30/2025",
+  //   starred: false,
+  // }, 
+  // {
+  //   id: "6",
+  //   title: "Meeting Notes - Q4",
+  //   summary: "Discussed quarterly objectives and key results...",
+  //   date: "11/18/2024",
+  //   tag: "work",
+  //   starred: true,
+  // },
+  // {
+  //   id: "7",
+  //   title: "Project Ideas",
+  //   summary: "Collection of innovative project concepts...",
+  //   date: "11/19/2024",
+  //   tag: "ideas",
+  //   starred: false,
+  // },
+  // {
+  //   id: "8",
+  //   title: "Reading Notes - AI Researc",
+  //   summary: "Key insights from recent AI papers and articles...",
+  //   date: "11/20/2024",
+  //   starred: false,
+  // }
 ];
 
     function switchLanguage(lang: string = "ar") {

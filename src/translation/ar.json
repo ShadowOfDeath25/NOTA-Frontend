@@ -16,5 +16,7 @@
   "collaborate": "تعاون",
   "collaborate_description": "شارك مع الفريق",
   "recent_notes": "الملاحظات الأخيرة",
-  "view_all": "عرض الكل"
+  "view_all": "عرض الكل",
+  "no_notes_found_yet": "لا توجد ملاحظات بعد",
+  "create_note_to_get_started": "أنشئ ملاحظتك الأولى للبدء في تدوين أفكارك ومشاريعك"
 }
