@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import NotesList from "@components/NotesList/NotesList.tsx";
-import type { NoteProps } from "@types/NoteProps.ts";
+import type { NoteData } from "@components/NoteCard/NoteCard.tsx";
 function App() {
- const Notes: NoteProps[] = [
+ const Notes: NoteData[] = [
   {
     id: "1",
     title: "Untitled Note",

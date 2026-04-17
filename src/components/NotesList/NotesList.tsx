@@ -1,11 +1,11 @@
-
-import type { NoteProps } from "@types/NoteProps.ts";
 import styles from "./NotesList.module.css";
 import NoteCard from "@components/NoteCard/NoteCard.tsx";
+import type { NoteData } from "@components/NoteCard/NoteCard.tsx";
 import { useTranslation } from "react-i18next";
-const NotesList = ({ recentNotes }: NoteProps) => {
+
+const NotesList = ({ recentNotes }: {recentNotes: NoteData[]}) => {
     const { t } = useTranslation();
-    const handleNoteSelection = (id: string, starred: boolean) => {
+    const handleNoteSelection = (id: string, starred?: boolean) => {
         console.log("ID:", id);
         console.log("Starred:", starred);
 
