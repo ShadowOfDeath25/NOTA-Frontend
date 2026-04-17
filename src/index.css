@@ -36,6 +36,7 @@ html[lang="ar"] {
     --brand-primary-color: #9810fa;
     --brand-secondary-color: #4f8bff;
     --sidebar-bg-color: #101828;
+    --notecard-bg-color: #0F1420;
     --bg-page-color: #f9fafb;
     --surface-color: #fff;
     --text-primary-color: #0a0a0a;
@@ -43,6 +44,8 @@ html[lang="ar"] {
     --text-muted-color: #6a7282;
     --text-sidebar-item: #99a1af;
     --text-sidebar-nav: #d1d5dc;
+    --text-home-page: #fafafa;
+    --text-home-tag: #1A2030;
     --danger-color: #d4183d;
     --badge-blue-bg: #e5f0fc;
     --sidebar-divider-color: #1E2939;
