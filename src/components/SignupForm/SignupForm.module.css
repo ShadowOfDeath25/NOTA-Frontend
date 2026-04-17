@@ -1,0 +1,9 @@
+.buttonSubmit{
+    outline: none;
+   transition: transform 0.1s ease, background-color 0.2s ease;
+    width: 100%;
+    &:hover{
+      background-color: #a855f7; 
+    box-shadow: 0px 4px 12px rgba(147, 51, 234, 0.3); 
+    }
+}

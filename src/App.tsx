@@ -1,9 +1,7 @@
 import i18n from "i18next";
-
-import type {NoteData} from "@components/NoteCard/NoteCard.tsx";
 import AddIcon from '@assets/icons/add.svg?react'
-
-
+import type {NoteData} from "@components/NoteCard/NoteCard.tsx";
+import Authentication from "@components/Authentication/Authentication";
 function App() {
     const Notes: NoteData[] = [
         // {
@@ -85,6 +83,7 @@ function App() {
 
             {/*<Icon svgPath={AddIcon}/>*/}
             <AddIcon className={"test"}/>
+            <Authentication/>
         </>
     )
 }
