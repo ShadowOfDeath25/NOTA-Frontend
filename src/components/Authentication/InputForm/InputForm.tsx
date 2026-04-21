@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styles from "./InputForm.module.css";
-import eyeIcon from "@assets/icons/eye.svg";
-import eyeOffIcon from "@assets/icons/eyeoff.svg";
+// @ts-ignore
+import EyeIcon from "@assets/icons/eye.svg?react";
+// @ts-ignore
+import EyeOffIcon from "@assets/icons/eyeoff.svg?react";
 
 interface InputFieldProps {
   label: string;
@@ -19,7 +21,7 @@ export const InputForm = ({ label, type = "text", placeholder, id, value, onChan
 
 
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
-
+ 
   return (
     <div className={styles.emailInputContainer}>
       <label htmlFor={id} className={`${styles.label} bodyTextSm`}>
@@ -45,7 +47,7 @@ export const InputForm = ({ label, type = "text", placeholder, id, value, onChan
             className={styles.passwordToggle}
           >
            
-            {showPassword ? <img src={eyeOffIcon} alt="Hide" /> : <img src={eyeIcon} alt="Show" />}
+            {showPassword ? <EyeOffIcon className={styles.icon}/> : <EyeIcon className={styles.icon}/>}
           </button>
         )}
       </div>

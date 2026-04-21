@@ -1,10 +1,10 @@
 import styles from "./Authentication.module.css";
 import { useState } from "react";
-import SocialButtons from "@components/SocialButtons/SocialButtons.tsx";
-import HeaderAuthentication from "@components/HeaderAuthentication/HeaderAuthentication.tsx";
-import LoginForm from "@components/LoginForm/LoginForm.tsx";
-import SignupForm from "@components/SignupForm/SignupForm.tsx";
-
+import SocialButtons from "@components/Authentication/SocialButtons/SocialButtons";
+import HeaderAuthentication from "@components/Authentication/HeaderAuthentication/HeaderAuthentication";
+import LoginForm from "@components/Authentication/LoginForm/LoginForm";
+import SignupForm from "@components/Authentication/SignupForm/SignupForm";
+import { useTranslation } from "react-i18next";
 type AuthTab = "login" | "signup";
 
 interface AuthenticationProps {
@@ -13,6 +13,7 @@ interface AuthenticationProps {
 
 function Authentication({ initialTab = "login" }: AuthenticationProps) {
   const [activeTab, setActiveTab] = useState<AuthTab>(initialTab);
+  const { t } = useTranslation();
 
   return (
     <div className={styles.container}>
@@ -24,14 +25,14 @@ function Authentication({ initialTab = "login" }: AuthenticationProps) {
           role="button"
           onClick={() => setActiveTab("login")}
         >
-          Log In
+          {t("sign_in","Log In")}
         </div>
         <div
           className={`${styles.tabButton} ${activeTab === "signup" ? styles.activeTab : ""} bodyText`}
           role="button"
           onClick={() => setActiveTab("signup")}
         >
-          Sign Up
+          {t("create_account","Sign Up")}
         </div>
       </div>
 

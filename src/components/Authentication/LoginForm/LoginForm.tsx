@@ -1,12 +1,13 @@
 import styles from "./LoginForm.module.css";
-import { InputForm } from "@components/InputForm/InputForm.tsx";
+import { InputForm } from "@components/Authentication/InputForm/InputForm";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 function LoginForm() {
     interface LoginFormData {
         email: string;
         password: string;
     }
+    const { t } = useTranslation();
     const [formData, setFormData] = useState<LoginFormData>({
         email: "",  
         password: "",
@@ -23,29 +24,29 @@ function LoginForm() {
   <>
   <div className={styles.container}>
             <InputForm
-                label="Email"
+                label={t("email","Email")}
                 id="email"
                 type="email"
-                placeholder="user@example.com"
+                placeholder={t("user@example.com","user@example.com")}
                 value={formData.email}
                 onChange={handleChange}
             />
             <InputForm
-                label="Password"
+                label={t("password","Password")}
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder={t("Enter your password","Enter your password")}
                 value={formData.password}
                 onChange={handleChange}
             />
             <div className={styles.forgotPasswordContainer}>
               <a href="#" className={`${styles.forgotPassword} bodyTextSm`}>
-                Forgot Password?
+                {t("forgot_password","Forgot Password?")}
               </a>
             </div>
         </div>
         <button type="submit" onClick={handleSubmit} className={`${styles.buttonSubmit} btn btnPrimary bodyText`}>
-              Log In
+              {t("sign_in","Log In")}
             </button>
   </>
     );
