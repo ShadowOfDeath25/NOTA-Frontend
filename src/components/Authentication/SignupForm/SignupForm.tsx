@@ -3,8 +3,9 @@ import { InputForm } from "@components/Authentication/InputForm/InputForm";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function SignupForm() {
+function SignupForm({handleSuccessA}: {handleSuccessA: () => void}) {
     const { t } = useTranslation();
+    
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -18,10 +19,14 @@ function SignupForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Data Submitted:", formData);
+        handleSuccessA();
+        
     };
     return (
-        <>
+
+            <>
         <div className={styles.container}>
+            <form className={styles.authForm} onSubmit={(e) => e.preventDefault()}>
             <InputForm
                 label={t("name","Name")}
                 id="name"
@@ -54,11 +59,15 @@ function SignupForm() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
             />
-        </div>
         <button type="submit" onClick={handleSubmit} className={`${styles.buttonSubmit} btn btnPrimary bodyTextSm`}>
               {t("create_account","Create Account")}
             </button>
-        </>
+            </form>
+        </div>
+            </>
+        
+        
+        
     );
 }
 

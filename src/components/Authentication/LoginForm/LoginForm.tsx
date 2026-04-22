@@ -2,7 +2,7 @@ import styles from "./LoginForm.module.css";
 import { InputForm } from "@components/Authentication/InputForm/InputForm";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-function LoginForm() {
+function LoginForm({ handleForgotPassword }: { handleForgotPassword: () => void }) {
     interface LoginFormData {
         email: string;
         password: string;
@@ -23,6 +23,7 @@ function LoginForm() {
     return (
   <>
   <div className={styles.container}>
+    <form className={styles.authForm} onSubmit={(e) => e.preventDefault()}>
             <InputForm
                 label={t("email","Email")}
                 id="email"
@@ -40,14 +41,16 @@ function LoginForm() {
                 onChange={handleChange}
             />
             <div className={styles.forgotPasswordContainer}>
-              <a href="#" className={`${styles.forgotPassword} bodyTextSm`}>
+              <a href="#" className={`${styles.forgotPassword} bodyTextSm`} onClick={handleForgotPassword}>
                 {t("forgot_password","Forgot Password?")}
               </a>
             </div>
-        </div>
         <button type="submit" onClick={handleSubmit} className={`${styles.buttonSubmit} btn btnPrimary bodyText`}>
               {t("sign_in","Log In")}
             </button>
+            </form>
+        </div>
+
   </>
     );
 }

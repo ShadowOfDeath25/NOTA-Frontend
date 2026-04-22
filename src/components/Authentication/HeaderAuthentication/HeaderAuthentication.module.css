@@ -11,6 +11,7 @@
 }
 .logoDescription{
     display: flex;
+    padding: 0px;
     color: var(--text-sidebar-item);
 }
 

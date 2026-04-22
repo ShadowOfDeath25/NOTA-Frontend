@@ -1,0 +1,10 @@
+.alert {
+    border-radius: var(--radius-sm);
+    background-color: #0D542B;
+    color: #B9F8CF;
+    width: 100%;
+    
+}
+p{
+    padding: 16px;
+}

@@ -27,5 +27,8 @@
   "create_account": "إنشاء حساب",
   "sign_in": "تسجيل الدخول",
   "or_continue_with": "أو المتابعة باستخدام",
-  "forgot_password": "نسيت كلمة المرور"
+  "forgot_password": "نسيت كلمة المرور",
+  "Account_Created_Successfully": "تم إنشاء الحساب بنجاح",
+  "success_description": "تم إنشاء حسابك. يمكنك الآن البدء في تدوين الملاحظات.",
+  "Get_Started": "ابدأ"
 }
