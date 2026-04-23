@@ -7,7 +7,7 @@
 }
 
 svg * {
-    fill: currentColor;
+    /* fill: currentColor; */
     stroke: currentColor;
 }
 

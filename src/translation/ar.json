@@ -18,5 +18,17 @@
   "recent_notes": "الملاحظات الأخيرة",
   "view_all": "عرض الكل",
   "no_notes_found_yet": "لا توجد ملاحظات بعد",
-  "create_note_to_get_started": "أنشئ ملاحظتك الأولى للبدء في تدوين أفكارك ومشاريعك"
+  "create_note_to_get_started": "أنشئ ملاحظتك الأولى للبدء في تدوين أفكارك ومشاريعك",
+  "AI_Powered_Note_Taking_Platform": "منصة تدوين الملاحظات بالذكاء الاصطناعي",
+  "name": "الاسم",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirm_password": "تأكيد كلمة المرور",
+  "create_account": "إنشاء حساب",
+  "sign_in": "تسجيل الدخول",
+  "or_continue_with": "أو المتابعة باستخدام",
+  "forgot_password": "نسيت كلمة المرور",
+  "Account_Created_Successfully": "تم إنشاء الحساب بنجاح",
+  "success_description": "تم إنشاء حسابك. يمكنك الآن البدء في تدوين الملاحظات.",
+  "Get_Started": "ابدأ"
 }
