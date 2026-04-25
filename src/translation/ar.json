@@ -30,5 +30,11 @@
   "forgot_password": "نسيت كلمة المرور",
   "Account_Created_Successfully": "تم إنشاء الحساب بنجاح",
   "success_description": "تم إنشاء حسابك. يمكنك الآن البدء في تدوين الملاحظات.",
-  "Get_Started": "ابدأ"
+  "Get_Started": "ابدأ",
+  "send_reset_link": "إرسال رابط إعادة تعيين كلمة المرور",
+  "reset_password": "إعادة تعيين كلمة المرور",
+  "back_to_login": "العودة إلى تسجيل الدخول",
+  "password_reset_link_sent": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
+  "new_password": "كلمة المرور الجديدة",
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة"
 }

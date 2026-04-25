@@ -2,9 +2,10 @@ import styles from "./ResetPassword.module.css";
 import {InputForm} from "../InputForm/InputForm";
 import {useState} from "react";
 import MessageCard from "../../MessageCard/MessageCard";
+import {useTranslation} from "react-i18next";
 
 export function ResetPassword({handleBackToLogin}: { handleBackToLogin: () => void }) {
-
+    const {t} = useTranslation();
     const handleSendResetLink = () => {
         setEmailSend(true);
     };
@@ -13,12 +14,12 @@ export function ResetPassword({handleBackToLogin}: { handleBackToLogin: () => vo
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>Rest Password</h3>
-            {emailSend && <MessageCard message="Password reset link sent to your email"/>}
+            <h3 className={styles.title}>{t("reset_password", "Rest Password")}</h3>
+            {emailSend && <MessageCard message={t("password_reset_link_sent", "Password reset link sent to your email")}/>}
             {!emailSend && (<>
                 <form className={styles.authForm} onSubmit={(e) => e.preventDefault()}>
                     <InputForm
-                        label="Email"
+                        label={t("email", "Email")}
                         id="email"
                         type="email"
                         placeholder="Enter your email"
@@ -30,12 +31,12 @@ export function ResetPassword({handleBackToLogin}: { handleBackToLogin: () => vo
                                 onClick={() => {
                                     handleSendResetLink()
                                 }}>
-                            {"Send Reset Link"}
+                            {t("send_reset_link", "Send Reset Link")}
                         </button>
                         <button className={`${styles.backToLogin} bodyTextSm btn`} onClick={() => {
                             handleBackToLogin()
                         }}>
-                            Back to Login
+                            {t("back_to_login", "Back to Login")}
                         </button>
                     </div>
                 </form>
