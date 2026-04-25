@@ -1,4 +1,4 @@
-import {routes} from "../router.tsx";
+
 import type {RouteObject} from "react-router";
 import LoginPage from "@pages/auth/LoginPage/LoginPage.tsx";
 import SignupPage from "@pages/auth/SignupPage/SignupPage.tsx";

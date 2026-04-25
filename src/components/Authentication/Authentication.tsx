@@ -9,7 +9,7 @@ import HeaderAuthentication from "@components/Authentication/HeaderAuthenticatio
 import LoginForm from "@components/Authentication/LoginForm/LoginForm";
 import SignupForm from "@components/Authentication/SignupForm/SignupForm";
 import SuccessView from "@components/Authentication/SuccessView/SuccessView";
-import ForgotPassword from "@components/Authentication/RestPassword/RestPassword";
+import ForgotPassword from "@components/Authentication/ResetPassword/ResetPassword.tsx";
 import NewPassword from "@components/Authentication/NewPassword/NewPassword";
 
 type AuthStep = "login" | "signup" | "forgot-password" | "new-password";
