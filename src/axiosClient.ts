@@ -11,4 +11,12 @@ export const AxiosClientV1: AxiosInstance = axios.create({
     },
 })
 
+export const AxiosClientRaw: AxiosInstance = axios.create({
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}`,
+    withCredentials: true,
+    withXSRFToken: true,
+    headers: {
+        Accept: "application/json"
+    },
+})
 
