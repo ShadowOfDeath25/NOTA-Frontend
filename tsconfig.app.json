@@ -37,6 +37,9 @@
       ],
       "@routes/*": [
         "src/routes/*"
+      ],
+      "@guards/*": [
+        "src/guards/*"
       ]
     },
     /* Bundler mode */

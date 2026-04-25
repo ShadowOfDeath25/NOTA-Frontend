@@ -1,34 +1,24 @@
-import App from "./App.tsx";
 import {createBrowserRouter} from "react-router-dom";
 import type {RouteObject} from 'react-router'
 import authRoutes from "@routes/auth";
+import appRoutes from '@routes/app'
+import Authenticated from "./guards/Authenticated.tsx";
+import Guest from "@guards/Guest.tsx";
 
 export const routes: RouteObject[] = [
-    ...authRoutes,
     {
-        path: "/home",
-        element: <App/>
+        element: <Authenticated/>,
+        children: [
+            ...appRoutes
+        ]
     },
     {
-        path: "/spaces",
-        element: <App/>
-    },
-    {
-        path: "summarize",
-        element: <App/>
-    },
-    {
-        path: "import-pdf",
-        element: <App/>
-    },
-    {
-        path: "settings",
-        element: <App/>
-    },
-    {
-        path: "trash",
-        element: <App/>
-    },
+        element: <Guest/>,
+        children: [
+
+            ...authRoutes,
+        ]
+    }
 
 ]
 

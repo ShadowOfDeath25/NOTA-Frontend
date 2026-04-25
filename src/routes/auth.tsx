@@ -1,9 +1,9 @@
-
 import type {RouteObject} from "react-router";
 import LoginPage from "@pages/auth/LoginPage/LoginPage.tsx";
 import SignupPage from "@pages/auth/SignupPage/SignupPage.tsx";
 import ResetPasswordPage from "@pages/auth/ResetPasswordPage/RestPasswordPage.tsx";
 import NewPasswordPage from "@pages/auth/NewPasswordPage/NewPasswordPage.tsx";
+
 
 const routes: RouteObject[] = [
     {
@@ -23,5 +23,6 @@ const routes: RouteObject[] = [
         element: <NewPasswordPage/>
     }
 ]
+
 
 export default routes;
