@@ -3,7 +3,7 @@ import {
     type UseQueryOptions,
     type UseQueryResult,
 } from "@tanstack/react-query";
-import axiosClient from "../../axiosClient";
+import {AxiosClientV1} from "../../axiosClient.ts";
 
 interface QueryProps<
     TData,
@@ -28,7 +28,7 @@ export const useRead = <
         queryKey: [resource, id] as const,
 
         queryFn: async () => {
-            const res = await axiosClient.get<TData>(
+            const res = await AxiosClientV1.get<TData>(
                 `/${resource}${id ? `/${id}` : ""}`
             );
             return res.data;

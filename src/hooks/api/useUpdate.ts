@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient, type UseMutationOptions} from "@tanstack/react-query";
 import {type AxiosResponse} from "axios";
-import axiosClient from "../../axiosClient.ts";
+import {AxiosClientV1} from "../../axiosClient.ts";
 
 interface BasePayload {
     id: string | number;
@@ -31,7 +31,7 @@ export const useUpdate = <
         ...options,
         mutationKey: [resource, "update"],
         mutationFn: (payload: TVariables) =>
-            axiosClient.put<TData>(`/${resource}/${payload.id}`, payload),
+            AxiosClientV1.put<TData>(`/${resource}/${payload.id}`, payload),
 
         onSuccess: (data, variables, onMutateResult, context) => {
             queryClient.invalidateQueries({queryKey: [resource]});

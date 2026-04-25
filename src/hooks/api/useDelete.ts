@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient, type UseMutationOptions} from "@tanstack/react-query";
 import {type AxiosResponse} from "axios";
-import axiosClient from "../../axiosClient.ts";
+import {AxiosClientV1} from "../../axiosClient.ts";
 
 type IdType = string | number;
 
@@ -30,7 +30,7 @@ export const useDelete = <
         mutationKey: [resource, "delete"],
 
         mutationFn: (id: TVariables) =>
-            axiosClient.delete<TData>(`/${resource}/${id}`),
+            AxiosClientV1.delete<TData>(`/${resource}/${id}`),
 
         onSuccess: (data, variables, onMutateResult, context) => {
             queryClient.invalidateQueries({queryKey: [resource]});
