@@ -9,12 +9,15 @@ import SpacesIcon from '@assets/icons/files.svg';
 import UploadIcon from '@assets/icons/upload.svg'
 import SettingsIcon from '@assets/icons/settings.svg'
 import TrashIcon from '@assets/icons/trash.svg'
+import MenuIcon from '@assets/icons/menu.svg?react'
+import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
 
 export default function Sidebar() {
     const [active, setActive] = useState<string>("home")
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const {t} = useTranslation()
     const navigate = useNavigate();
 
@@ -22,16 +25,31 @@ export default function Sidebar() {
         setActive(e.target.id);
         navigate(`/${e.target.id}`)
     }
+    const handleMenuClick = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    }
+    const handleCloseClick = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    }
     const isEmpty: boolean = false;
     return (
-        <div className={styles.container}>
+        <>
+            {!isSidebarOpen && (
+                <div className={styles.menuIcon} onClick={handleMenuClick}>
+                    <MenuIcon/>
+                </div>
+            )}
+        <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>
             <div className={styles.header}>
-
-                <img src={logo} className={styles.logo} alt="Logo"/>
-                <h4>Nota</h4>
+                <div className={styles.logoContainer}><img src={logo} className={styles.logo} alt="Logo"/>
+                <h4>Nota</h4></div>
+                {isSidebarOpen && (
+                <div className={styles.closeIcon} onClick={handleCloseClick}>
+                    <CloseIcon/>
+                </div>)}
             </div>
             <Searchbar/>
-            <div className={styles.navigation}>
+            <div className={styles.navigation}> 
                 <div className={`${styles.navCard} ${active == "home" ? styles.active : ""}`} onClick={handleClick}
                      id={"home"}
                 >
@@ -102,6 +120,7 @@ export default function Sidebar() {
                 </div>
             </Activity>
         </div>
+        </>
     );
 }
 

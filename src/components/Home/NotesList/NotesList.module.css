@@ -1,0 +1,45 @@
+.recentNotes { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp4);
+    width: 100%;
+}
+
+.header{
+    margin-bottom: var(--sp6);
+    color: var(--text-home-page);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.viewAllButton{
+    color: var(--text-home-page);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        color: var(--brand-primary-color);
+    }
+}
+.container{
+    border: 1px solid rgba(79, 139, 255, 0.15);
+    border-radius:var(--radius-lg);
+    margin-top: 48px;
+    height:fit-content;
+    padding: var(--sp8);
+    width: 100%;
+    background-color: var(--notecard-bg-color);
+}
+
+
+@media (max-width: 1024px) {
+    .recentNotes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .recentNotes {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

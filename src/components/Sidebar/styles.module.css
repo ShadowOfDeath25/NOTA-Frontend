@@ -118,3 +118,60 @@
     margin-top: var(--sp1);
 
 }
+.logoContainer{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menuIcon, .closeIcon {
+
+    display:none;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+    & svg {
+        width: 20px;
+        height: 20px;
+        color: var(--text-sidebar-nav);
+    }
+}
+@media (max-width: 1024px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .container {
+       position:fixed;
+       top:0;
+       bottom:0;
+       left:0;
+       right:0; 
+       z-index:10;
+      transform: translateX(-100%);
+    }
+    .menuIcon {
+        display:block;
+        width: fit-content;
+        float: left;
+        position:fixed;
+        top:35px;
+        left:3px;
+        z-index:1000;
+    }
+    .closeIcon {
+        display:block;
+       z-index:1000;
+    }
+    .open {
+        transform: translateX(0);
+    }
+   
+}

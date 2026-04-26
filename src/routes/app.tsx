@@ -1,12 +1,12 @@
 import type {RouteObject} from "react-router";
-
+import Homepage from "@pages/HomePage/HomePage.tsx";
 import App from "../App.tsx";
 
 const routes: RouteObject[] = [
 
     {
         path: "/",
-        element: <App/>
+        element: <Homepage/>
     },
     {
         path: "/spaces",
