@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {Activity, useState} from "react";
 import styles from "./InputForm.module.css";
 // @ts-ignore
 import EyeIcon from "@assets/icons/eye.svg?react";
@@ -13,7 +13,7 @@ interface InputFieldProps {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     helperText?: string;
-    isError?: boolean;
+    error?: string;
 }
 
 
@@ -25,14 +25,14 @@ export const InputForm = ({
                               value,
                               onChange,
                               helperText,
-                              isError
+                              error
                           }: InputFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
 
 
     const inputType = isPassword ? (showPassword ? "text" : "password") : type;
-    const inputClassName = `${styles.input} bodyTextSm ${isError ? styles.inputError : ""}`;
+    const inputClassName = `${styles.input} bodyTextSm ${error ? styles.inputError : ""}`;
 
     return (
         <div className={styles.container}>
@@ -62,11 +62,14 @@ export const InputForm = ({
                         {showPassword ? <EyeOffIcon className={styles.icon}/> : <EyeIcon className={styles.icon}/>}
                     </button>
                 )}
-                {helperText && (
-                    <span className={`${styles.helperText} ${isError ? styles.helperTextError : ""}`}>
+                <Activity mode={(helperText || error) ? "visible" : "hidden"}>
+
+                    <span className={`${styles.helperText} ${error ? styles.helperTextError : ""}`}>
                         {helperText}
+                        {error}
                     </span>
-                )}
+
+                </Activity>
             </div>
 
         </div>

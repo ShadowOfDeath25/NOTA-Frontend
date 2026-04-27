@@ -40,6 +40,9 @@
       ],
       "@guards/*": [
         "src/guards/*"
+      ],
+      "@validators/*": [
+        "src/validation/*"
       ]
     },
     /* Bundler mode */

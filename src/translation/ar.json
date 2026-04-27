@@ -36,5 +36,7 @@
   "back_to_login": "العودة إلى تسجيل الدخول",
   "password_reset_link_sent": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
   "new_password": "كلمة المرور الجديدة",
-  "confirm_new_password": "تأكيد كلمة المرور الجديدة"
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+  "something_went_wrong": "حدث خطأ غير معروف",
+  "invalid_email_address": "صيغة البريد الالكتروني غير صحيحة"
 }

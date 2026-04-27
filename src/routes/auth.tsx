@@ -19,7 +19,7 @@ const routes: RouteObject[] = [
         element: <ResetPasswordPage/>
     },
     {
-        path: "/new-password",
+        path: "/reset-password",
         element: <NewPasswordPage/>
     }
 ]
