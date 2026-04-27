@@ -4,11 +4,12 @@ type ActionCardProps = {
     title: string,
     description: string,
     icon: string,
-    iconColorClass: "blueIcon" | "greenIcon" | "purpleIcon"
+    iconColorClass: "blueIcon" | "greenIcon" | "purpleIcon",
+    onClick: () => void,
 }
-const ActionCard = ({title, description, icon, iconColorClass}: ActionCardProps) => {
+const ActionCard = ({title, description, icon, iconColorClass, onClick}: ActionCardProps) => {
     return (
-        <div className={`${styles.card}`}>
+        <button className={`${styles.card}`} onClick={onClick}>
             <div className={`${styles.iconContainer} ${styles[iconColorClass]}`}>
                 <img src={icon} alt="add icon"/>
             </div>
@@ -16,7 +17,7 @@ const ActionCard = ({title, description, icon, iconColorClass}: ActionCardProps)
                 <h3 className={`${styles.title} bodyText`}>{title}</h3>
                 <p className={`${styles.description} bodyTextSm`}>{description}</p>
             </div>
-        </div>
+        </button>
     );
 };
 

@@ -1,0 +1,55 @@
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 48px;
+}
+.welcome{
+    display: flex;
+    flex-direction: column;
+    gap:8px
+}
+.synced{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+   
+}
+p{
+padding: 0;}
+
+.cloudIcon{
+  color: #00C950;
+  
+
+}
+ .notification{
+  cursor: pointer;
+    position: relative;
+    padding: 9px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition:transform 0.2s ease;
+  &:hover{
+    transform: scale(1.05);
+  }
+
+ }  
+
+ .badge{
+    position: absolute;
+    top: -3px;
+    right: -5px;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background-color: var(--brand-primary-color);
+    border-radius: 50%;
+
+ }
+    
+ 
+  

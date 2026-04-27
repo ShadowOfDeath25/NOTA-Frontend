@@ -4,13 +4,14 @@ import starFilledIcon from "@assets/icons/star-filled.svg";
 import clockIcon from "@assets/icons/clock.svg";
 import {useState} from "react";
 import type {NoteData} from '@customTypes/NoteData.ts';
-
+import { useNavigate } from "react-router-dom";
 
 export interface NoteCardProps extends NoteData {
     onNoteClick: (id: string, starred?: boolean) => void;
 }
 
 const NoteCard = ({id, title, summary = " ", date, tag, starred, onNoteClick}: NoteCardProps) => {
+    const navigate = useNavigate();
     const [isStarred, setIsStarred] = useState(starred);
 
     function handleStarClick(e: React.MouseEvent) {
@@ -23,7 +24,7 @@ const NoteCard = ({id, title, summary = " ", date, tag, starred, onNoteClick}: N
 
     function handleNoteClick() {
 
-        onNoteClick(id);
+        navigate(`/notes/${id}`);
     }
 
     return (

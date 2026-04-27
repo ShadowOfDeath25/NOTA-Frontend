@@ -1,5 +1,6 @@
 
 import {useAuth} from "@hooks/api/useAuth.ts";
+import HomePage from "@pages/HomePage/HomePage.tsx";
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
 
     return (
         <>
-            <button onClick={()=>logout.mutate()}>Logout</button>
+            {/* <button onClick={()=>logout.mutate()}>Logout</button> */}
+            <HomePage/>
         </>
     )
 }

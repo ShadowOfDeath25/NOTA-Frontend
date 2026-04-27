@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import ActionCard from "@components/ActionCard/ActionCard.tsx";
+import ActionCard from "@components/Home/ActionCard/ActionCard";
 import styles from "./ActionList.module.css";
 import addIcon from "@assets/icons/add.svg";
 import uploadIcon from "@assets/icons/upload.svg";
@@ -9,6 +9,10 @@ import type {Action} from "@customTypes/Action.ts";
 
 const ActionList = () => {
     const {t} = useTranslation();
+    
+    const handleActionClick = (actionId: string) => {
+        console.log(actionId);
+    };
 
     const actions: Action[] = [
         {
@@ -43,12 +47,14 @@ const ActionList = () => {
     return (
         <div className={styles.container}>
             {actions.map((item) => (
+                
                 <ActionCard
                     key={item.id}
                     title={t(item.titleAr, item.titleEn)}
                     description={t(item.descAr, item.descEn)}
                     icon={item.icon}
                     iconColorClass={item.color}
+                    onClick={() => handleActionClick(item.id)}
                 />
             ))}
         </div>
