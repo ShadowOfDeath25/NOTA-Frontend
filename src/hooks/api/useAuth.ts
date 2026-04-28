@@ -42,10 +42,10 @@ export const useAuth = () => {
         queryKey: ["user"],
         queryFn: async () => {
             try {
-                //const res = await AxiosClientV1.get('/user', {})
-                //return res.data.user
-                return {id: 1, name: "Test User"};
-                //return null;
+                const res = await AxiosClientV1.get('/user', {})
+                return res.data.user
+                // return {id: 1, name: "Test User"};
+                // return null;
             } catch (e) {
                 if (e instanceof AxiosError && e.response?.status === 401) {
                     return null;

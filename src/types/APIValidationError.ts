@@ -1,4 +1,4 @@
 export interface APIValidationError {
-    message: string,
-    errors: Record<string, string[]>
+    message: string | string[],
+    errors: Record<string, string[] | string>
 }

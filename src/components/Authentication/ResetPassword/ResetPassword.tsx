@@ -51,11 +51,12 @@ export function ResetPassword({handleBackToLogin}: { handleBackToLogin: () => vo
                     <InputForm
                         label={t("email", "Email")}
                         id="email"
+                        name={"email"}
                         type="text"
                         placeholder="Enter your email"
                         value={email}
                         onChange={onChange}
-                        error={errorMessage}
+                        errors={[errorMessage]}
 
                     />
                     <div className={styles.buttonContainer}>

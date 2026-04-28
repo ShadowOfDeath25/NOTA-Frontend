@@ -49,6 +49,7 @@
 
 .helperTextError {
     color: var(--danger-color);
+    display: block;
 }
 
 .inputError {

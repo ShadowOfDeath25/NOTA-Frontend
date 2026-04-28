@@ -36,7 +36,7 @@ function LoginForm({handleForgotPassword}: { handleForgotPassword: () => void })
                         placeholder={t("user@example.com", "user@example.com")}
                         value={formData.email}
                         onChange={handleChange}
-                        error={login.error?.response?.data?.errors?.email?.[0]}
+                        errors={login.error?.response?.data?.errors?.email}
                         helperText={login.error?.response?.data?.errors?.email?.[0]}
                     />
                     <InputForm
@@ -46,7 +46,7 @@ function LoginForm({handleForgotPassword}: { handleForgotPassword: () => void })
                         placeholder={t("Enter your password", "Enter your password")}
                         value={formData.password}
                         onChange={handleChange}
-                        error={login.error?.response?.data?.errors?.password?.[0]}
+                        errors={login.error?.response?.data?.errors?.password}
                         helperText={login.error?.response?.data?.errors?.password?.[0]}
                     />
                     <div className={styles.forgotPasswordContainer}>

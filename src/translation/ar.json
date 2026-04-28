@@ -38,5 +38,17 @@
   "new_password": "كلمة المرور الجديدة",
   "confirm_new_password": "تأكيد كلمة المرور الجديدة",
   "something_went_wrong": "حدث خطأ غير معروف",
-  "invalid_email_address": "صيغة البريد الالكتروني غير صحيحة"
+  "invalid_email_address": "صيغة البريد الالكتروني غير صحيحة",
+  "validation": {
+    "password": {
+      "at_least_8_characters": "يجب ان لا يقل البريد الالكتروني عن 8 رموز",
+      "lowercase_letters": "يجب ان تحتوي كلمة المرور علي حرف صغير علي الاقل",
+      "uppercase_letters": "يجب ان تحتوي كلمة المرور علي حرف كبير علي الاقل",
+      "special_character": "يجب ان تحتوي كلمة المرور علي رمز مميز علي الاقل",
+      "numbers": "يجب ان تحتوي كلمة المرور علي رقم علي الاقل"
+    }
+  },
+  "password_reset": {
+    "success": "تم تغيير كلمة المرور بنجاح"
+  }
 }
