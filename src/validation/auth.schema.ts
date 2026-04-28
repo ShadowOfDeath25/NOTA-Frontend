@@ -20,6 +20,7 @@ const auth = {
             email: fields.email,
             password: fields.password
         }),
+
         signup: z.object({
             email: fields.email,
             password: fields.password,
@@ -28,12 +29,20 @@ const auth = {
             error: i18n.t("passwords_do_not_match", "Passwords do not match"),
             path: ["password_confirmation"]
         }),
+
         newPassword: z.object({
             password: fields.password,
             password_confirmation: z.string(),
         }).refine((data) => (data.password === data.password_confirmation), {
             error: i18n.t("passwords_do_not_match", "Passwords do not match"),
             path: ["password_confirmation"]
+        }),
+
+        register: z.object({
+            name: z.string(),
+            email: fields.email,
+            password: fields.password,
+            password_confirmation: z.string(),
         })
     }
 }

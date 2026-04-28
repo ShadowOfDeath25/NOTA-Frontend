@@ -8,6 +8,7 @@ const routes: RouteObject[] = [
         path: "/",
         element: <Homepage/>
     },
+
     {
         path: "/spaces",
         element: <App/>

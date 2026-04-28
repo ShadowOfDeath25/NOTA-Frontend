@@ -20,8 +20,8 @@ export const useAuth = () => {
             const response = await AxiosClientV1.post<LoginResponse>("/login", credentials);
             return response.data.user;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["user"]})
+        onSuccess: (data) => {
+            queryClient.setQueryData(["user"], data)
         },
 
 
@@ -30,11 +30,12 @@ export const useAuth = () => {
         mutationKey: ["signup"],
         mutationFn: async (credentials) => {
             await AxiosClientRaw.get("/csrf-cookie");
-            const response = await AxiosClientV1.post<LoginResponse>("/signup", credentials);
+            const response = await AxiosClientV1.post<LoginResponse>("/register", credentials);
             return response.data.user;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["user"]})
+        onSuccess: (data) => {
+            queryClient.setQueryData(["user"], data)
+
         },
 
     })
@@ -42,9 +43,9 @@ export const useAuth = () => {
         queryKey: ["user"],
         queryFn: async () => {
             try {
-                const res = await AxiosClientV1.get('/user', {})
-                return res.data.user
-                // return {id: 1, name: "Test User"};
+                // const res = await AxiosClientV1.get('/user', {})
+                // return res.data.user
+                return {id: 1, name: "Test User"};
                 // return null;
             } catch (e) {
                 if (e instanceof AxiosError && e.response?.status === 401) {
@@ -61,7 +62,7 @@ export const useAuth = () => {
             await AxiosClientV1.post("/logout");
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["user"]})
+            queryClient.setQueryData(["user"], null)
             navigate("/login")
         },
     })

@@ -5,8 +5,9 @@ import {useTranslation} from "react-i18next";
 import * as React from "react";
 import type {LoginCredentials} from '@customTypes/LoginCredentials'
 import {useAuth} from "@hooks/api/useAuth.ts";
+import {Link} from "react-router-dom";
 
-function LoginForm({handleForgotPassword}: { handleForgotPassword: () => void }) {
+function LoginForm() {
 
     const {t} = useTranslation();
     const {login} = useAuth()
@@ -50,9 +51,9 @@ function LoginForm({handleForgotPassword}: { handleForgotPassword: () => void })
                         helperText={login.error?.response?.data?.errors?.password?.[0]}
                     />
                     <div className={styles.forgotPasswordContainer}>
-                        <a href="#" className={`${styles.forgotPassword} bodyTextSm`} onClick={handleForgotPassword}>
+                        <Link to={'/forgot-password'} className={`${styles.forgotPassword} bodyTextSm`}>
                             {t("forgot_password", "Forgot Password?")}
-                        </a>
+                        </Link>
                     </div>
                     <button type="submit" className={`${styles.buttonSubmit} btn btnPrimary bodyText`}>
                         {t("sign_in", "Log In")}

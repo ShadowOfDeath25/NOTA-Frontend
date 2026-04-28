@@ -4,6 +4,8 @@ import authRoutes from "@routes/auth";
 import appRoutes from '@routes/app'
 import Authenticated from "./guards/Authenticated.tsx";
 import Guest from "@guards/Guest.tsx";
+import GuestLayout from "./layouts/GuestLayout/GuestLayout.tsx";
+import GettingStartedPage from "@pages/auth/GettingStartedPage/GettingStartedPage.tsx";
 
 export const routes: RouteObject[] = [
     {
@@ -15,8 +17,26 @@ export const routes: RouteObject[] = [
     {
         element: <Guest/>,
         children: [
-
-            ...authRoutes,
+            {
+                element: <GuestLayout/>,
+                children: [
+                    ...authRoutes,
+                ]
+            }
+        ]
+    },
+    {
+        element: <Authenticated/>,
+        children: [
+            {
+                element: <GuestLayout/>,
+                children: [
+                    {
+                        path: "/getting-started",
+                        element: <GettingStartedPage/>
+                    }
+                ]
+            }
         ]
     }
 
