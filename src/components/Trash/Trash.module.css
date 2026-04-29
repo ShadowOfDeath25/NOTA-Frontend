@@ -1,0 +1,35 @@
+.descriptionText{
+    color: var(--text-sidebar-item);
+
+
+}
+
+.description {
+    display: flex;
+    align-items: center;
+    gap: var(--sp2);
+    margin-top: var(--sp2);
+}
+.emptyTrashContainer{
+    margin-top: var(--sp8) ;
+  background-color: var(--notecard-bg-color);
+  padding: var(--sp12);
+ border-radius: var(--radius-sm);
+ border: 1px solid rgba(79,139,255,0.15);
+  
+}
+.deletedNotesContainer{
+   display: flex;
+   
+   gap: var(--sp4);
+   flex-wrap: wrap;
+
+   
+margin-top: var(--sp8);
+
+}
+@media (max-width: 1024px) {
+    .deletedNotesContainer{
+      justify-content: center;
+    }
+}

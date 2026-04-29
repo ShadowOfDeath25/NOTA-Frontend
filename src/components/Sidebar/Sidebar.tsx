@@ -12,11 +12,13 @@ import TrashIcon from '@assets/icons/trash.svg'
 import MenuIcon from '@assets/icons/menu.svg?react'
 import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
 
 export default function Sidebar() {
-    const [active, setActive] = useState<string>("home")
+    const location = useLocation();
+    const pathname = location.pathname.split("/")[1];
+    const [active, setActive] = useState<string>(pathname)
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const {t} = useTranslation()
     const navigate = useNavigate();

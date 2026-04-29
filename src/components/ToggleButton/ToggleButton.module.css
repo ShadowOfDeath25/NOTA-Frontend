@@ -1,0 +1,26 @@
+/* ToggleButton.module.css */
+.group {
+  display: flex;
+  gap: var(--sp2);
+}
+
+.button {
+  padding: var(--sp2) var(--sp3);
+  border-radius: var(--radius-sm);
+  border: solid rgba(79, 139, 255, 0.1) 1px;
+  background-color:  rgba(79, 139, 255, 0.03);
+  cursor: pointer;
+  color: var(--text-home-page);
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    border: solid var(--brand-primary-color) 1px;
+    background-color: var(--brand-primary-color);
+    color:var(--surface-color);
+  }
+}
+
+.active {
+  background-color: var(--brand-primary-color);
+  color:var(--surface-color);
+  
+}

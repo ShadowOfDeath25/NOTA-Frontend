@@ -152,26 +152,38 @@
        position:fixed;
        top:0;
        bottom:0;
-       left:0;
-       right:0; 
+
        z-index:10;
-      transform: translateX(-100%);
+    }
+    [dir="ltr"] .container{
+      left:0;
+        transform: translateX(-100%);
+    }
+    [dir="rtl"] .container {
+        right:0;
+        transform: translateX(100%);
     }
     .menuIcon {
         display:block;
         width: fit-content;
-        float: left;
+        
         position:fixed;
         top:35px;
-        left:3px;
+        
         z-index:1000;
+    }
+    [dir="ltr"] .menuIcon {
+    left: 3px;
+    }
+    [dir="rtl"] .menuIcon {
+    right: 3px;
     }
     .closeIcon {
         display:block;
        z-index:1000;
     }
     .open {
-        transform: translateX(0);
+        transform: translateX(0) !important;
     }
    
 }

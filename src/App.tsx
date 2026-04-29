@@ -10,7 +10,7 @@ function App() {
     return (
         <>
             {/* <button onClick={()=>logout.mutate()}>Logout</button> */}
-            <HomePage/>
+           
         </>
     )
 }

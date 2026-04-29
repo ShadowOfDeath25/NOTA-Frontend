@@ -7,6 +7,7 @@ import Guest from "@guards/Guest.tsx";
 import GuestLayout from "./layouts/GuestLayout/GuestLayout.tsx";
 import GettingStartedPage from "@pages/auth/GettingStartedPage/GettingStartedPage.tsx";
 
+
 export const routes: RouteObject[] = [
     {
         element: <Authenticated/>,

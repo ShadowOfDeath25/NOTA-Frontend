@@ -1,0 +1,58 @@
+.card{
+
+background-color:var(--sidebar-bg-color);
+padding: var(--sp6);
+border-radius: var(--radius-sm);
+border: 1px solid rgba(79,139,255,0.15);
+}
+.title{
+    color: var(--text-home-page);   
+    margin-bottom:80px;
+}
+.info{
+    display: flex;
+    align-items: center;
+    gap: var(--sp1);
+    color: var(--text-sidebar-item);
+  
+    margin-bottom:var(--sp10) ;
+    
+}
+.divider{
+    width: 100%;
+    height: 1px;
+    background-color: rgba(79,139,255,0.15);
+    margin-bottom: var(--sp4) ;
+    
+}
+.actions{
+    display: flex;
+    align-items: center;
+    gap: var(--sp2);
+}
+.btn{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--sp2);
+    border-radius: var(--radius-sm);
+    padding: var(--sp2);
+    color: var(--text-home-page);
+    background-color: transparent;
+    border:none
+}
+
+.restoreBtn{
+    border: 1px solid rgba(79,139,255,0.15);
+    &:hover{
+        background-color:rgba(79,139,255,0.1)
+    }
+
+
+}
+.deleteBtn{
+    background-color:rgba(130,24,26,0.60);
+   &:hover{
+   background-color:rgba(130,24,26,0.9)
+   }
+}

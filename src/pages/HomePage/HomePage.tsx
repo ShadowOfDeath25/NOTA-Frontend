@@ -1,10 +1,7 @@
-import styles from "./HomePage.module.css"
-import Sidebar from "@components/Sidebar/Sidebar"
+
 import WelcomeHeader from "@components/Home/WelcomeHeader/WelcomeHeader"
 import ActionList from "@components/Home/ActionList/ActionList"
 import NotesList from "@components/Home/NotesList/NotesList"
-
-
 const HomePage = () => {
     const NoteData = [
         {
@@ -65,16 +62,11 @@ const HomePage = () => {
         },
     ]
     return (
-        <>
-        <div className={styles.container}>
-            <Sidebar/>
-            <main className={styles.main}>
-                <WelcomeHeader/>
-                <ActionList/>
-                <NotesList recentNotes={NoteData} />
-            </main>
-        </div>
-        </>
+        <main >
+            <WelcomeHeader/>
+            <ActionList/>
+            <NotesList recentNotes={NoteData}/>
+        </main>
     )
 }
 

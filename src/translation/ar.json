@@ -50,5 +50,20 @@
   },
   "password_reset": {
     "success": "تم تغيير كلمة المرور بنجاح"
-  }
+  },
+  "account": "الحساب",
+  "preferences": "التفضيلات",
+  "notifications": "الإشعارات",
+  "security_privacy": "الأمان والخصوصية",
+  "language": "اللغة",
+  "theme": "المظهر",
+  "email_notifications": "إشعارات البريد الإلكتروني",
+  "notification_description": "تلقي التحديثات حول الملاحظات",
+  "push_notifications": "إشعارات فورية",
+  "push_description": "احصل على إشعارات حول التحديثات في الوقت الفعلي",
+  "two_factor_authentication": "المصادقة الثنائية",
+  "add_extra_layer": "اضف طبقة اضافية من الامان لحسابك",
+  "dark":"الداكن",
+  "light":"الفاتح",
+  "change_password": "تغيير كلمة المرور"
 }
