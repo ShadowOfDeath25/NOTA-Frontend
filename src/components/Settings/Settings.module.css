@@ -125,4 +125,30 @@
     
 }
 
+.logoutBtn{
+    margin-top: var(--sp6);
+     display: flex;
+     justify-content: center;
+    gap: var(--sp1);
+    align-items: center;
+   width: 100%;
+   padding: var(--sp2);
+   border-radius: var(--radius-sm);
+   color: var(--text-home-page);
+   cursor: pointer;
+    background-color:rgba(130,24,26,0.60);
+    border: none;
+    svg{
+        width: 14px;
+        height: 14px;
+        color: var(--text-home-page);
+       
+    }
+    &:hover{
+    background-color:rgba(130,24,26,0.9)
+    }
+
+
+
+}
 

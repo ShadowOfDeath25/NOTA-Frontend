@@ -6,12 +6,18 @@
  import ToggleButton from '../ToggleButton/ToggleButton';
  import NotificationIcon from "@assets/icons/notification.svg?react";
  import LockIcon from "@assets/icons/Lock.svg?react";
+ import LogoutIcon from "@assets/icons/logout.svg?react";
  import i18n from "../../i18n";
+ import {useAuth} from "@hooks/api/useAuth.ts";
  import { useTranslation } from "react-i18next";
  import { Switch } from '@mui/material';
  import { useState } from "react";
 
  function Settings() {
+  const {logout} = useAuth();
+    const handleLogout = () => {
+        logout.mutate();
+    };
     const { t } = useTranslation();
     const [activeLanguage, setActiveLanguage] = useState("en");
     const [activeTheme, setActiveTheme] = useState("dark");
@@ -176,6 +182,13 @@
 
            </div>
 
+          
+            <button className={`${styles.logoutBtn} bodyTextSm` } onClick={handleLogout}>
+                <div className={styles.icon}>
+                    <LogoutIcon />
+                </div>
+                <span>{t("logout", "Logout")}</span>
+            </button>
         </div>
        
     )
