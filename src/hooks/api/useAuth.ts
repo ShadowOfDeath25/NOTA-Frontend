@@ -46,7 +46,7 @@ export const useAuth = () => {
                 // const res = await AxiosClientV1.get('/user', {})
                 // return res.data.user
                 return {id:1,name:"Mahmoud", email:"[EMAIL_ADDRESS]"};
-                // return null;
+                 //return null;
             } catch (e) {
                 if (e instanceof AxiosError && e.response?.status === 401) {
                     return null;

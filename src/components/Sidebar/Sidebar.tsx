@@ -14,6 +14,7 @@ import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
 import {useNavigate, useLocation} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
+import { useModal } from "../../context/ModalContext.tsx";
 
 export default function Sidebar() {
     const location = useLocation();
@@ -22,7 +23,6 @@ export default function Sidebar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const {t} = useTranslation()
     const navigate = useNavigate();
-
     const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent> & { target: HTMLDivElement }) => {
         setActive(e.target.id);
         navigate(`/${e.target.id}`)
@@ -32,6 +32,10 @@ export default function Sidebar() {
     }
     const handleCloseClick = () => {
         setIsSidebarOpen(!isSidebarOpen);
+    }
+    const { setImportModal } = useModal();
+    const handleImportClick = () => {
+        setImportModal(true);
     }
     const isEmpty: boolean = false;
     return (
@@ -72,7 +76,7 @@ export default function Sidebar() {
                     <img src={AiIcon} alt={"summarize"}/>
                     {t("summarize", "Summarize & Analyze")}
                 </div>
-                <div className={`${styles.navCard} ${styles.importPDF}`} id={"import-pdf"}>
+                <div className={`${styles.navCard} ${styles.importPDF}`} id={"import-pdf"} onClick={handleImportClick}>
                     <img src={UploadIcon} alt={"upload"}/>
                     {t("import_PDF", "Import PDF")}
                 </div>

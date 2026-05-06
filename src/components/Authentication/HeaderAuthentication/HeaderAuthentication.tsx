@@ -3,16 +3,14 @@ import styles from "./HeaderAuthentication.module.css";
 import WorldIcon from "@assets/icons/world.svg?react";
 // @ts-ignore
 import LightIcon from "@assets/icons/light.svg?react";
+import { useSettings } from "../../../context/SettingsContext";
 import { useTranslation } from "react-i18next";
-import i18n from "i18next";
 function HeaderAuthentication() {
     const { t } = useTranslation();
-    function switchLanguage(lang: string = "ar") {
-        i18n.changeLanguage(lang).then();
-        console.log(i18n.language)
-    }
+    const { setLang, lang } = useSettings();
     const handleLanguageChange = () => {
-        switchLanguage(i18n.language === "ar" ? "en" : "ar");
+        const newLang = lang === "ar" ? "en" : "ar";
+        setLang(newLang);
     }
     return (
         <div className={styles.header}>

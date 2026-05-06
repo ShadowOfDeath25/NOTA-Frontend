@@ -7,32 +7,26 @@
  import NotificationIcon from "@assets/icons/notification.svg?react";
  import LockIcon from "@assets/icons/Lock.svg?react";
  import LogoutIcon from "@assets/icons/logout.svg?react";
- import i18n from "../../i18n";
  import {useAuth} from "@hooks/api/useAuth.ts";
  import { useTranslation } from "react-i18next";
  import { Switch } from '@mui/material';
  import { useState } from "react";
+import { useSettings } from "../../context/SettingsContext.tsx";
 
- function Settings() {
-  const {logout} = useAuth();
+function Settings() {
+    const {logout} = useAuth();
     const handleLogout = () => {
         logout.mutate();
     };
     const { t } = useTranslation();
-    const [activeLanguage, setActiveLanguage] = useState("en");
-    const [activeTheme, setActiveTheme] = useState("dark");
+  
     const [isEmailNotificationsOn, setIsEmailNotificationsOn] = useState(true);
     const [isPushNotificationsOn, setIsPushNotificationsOn] = useState(true);
     const [isTwoFactorAuthenticationOn, setIsTwoFactorAuthenticationOn] = useState(false );
+    const { lang, setLang, theme, setTheme } = useSettings();
 
     const toggleLang = (lang: string) => {
-        if(lang === "en") {
-            setActiveLanguage("en");
-            i18n.changeLanguage("en");
-        } else {
-            setActiveLanguage("ar");
-            i18n.changeLanguage("ar");
-        }
+        setLang(lang);
     };
     return (
         <div className="container">
@@ -68,7 +62,7 @@
                     </div>
                     <div className={styles.info}>
                         <p>{t("language", "Language")}</p>
-                        <p className={styles.email}>{activeLanguage=== 'en'?'English':'العربية'}</p>
+                        <p className={styles.email}>{lang=== 'en'?'English':'العربية'}</p>
                     </div>
 
                 </div>
@@ -78,7 +72,7 @@
                             { label: "English", value: "en" },
                             { label: "العربية", value: "ar" },
                         ]} 
-                        activeValue={activeLanguage} 
+                        activeValue={lang} 
                         onChange={toggleLang} 
                         />
                     </div>
@@ -87,12 +81,12 @@
             <div className={styles.row}>
                 <div className={styles.theme}>
                     <div className={styles.icon}>
-                      { activeTheme=== 'light'? <LightIcon /> : <DarkIcon />}
+                      {theme=== 'light'? <LightIcon /> : <DarkIcon />}
                        
                     </div>
                     <div className={styles.info}>
                         <p>{t("theme", "Theme")}</p>
-                        <p className={styles.email}>{activeTheme=== 'light'?t("light", "Light"):t("dark", "Dark")}</p>
+                        <p className={styles.email}>{theme=== 'light'?t("light", "Light"):t("dark", "Dark")}</p>
                     </div>
 
                 </div>
@@ -102,8 +96,8 @@
                             { label: t("dark", "Dark"), value: "dark" },
                             { label: t("light", "Light"), value: "light" },
                         ]} 
-                        activeValue={activeTheme} 
-                        onChange={setActiveTheme} 
+                        activeValue={theme} 
+                        onChange={setTheme} 
                         />
                     </div>
             </div>

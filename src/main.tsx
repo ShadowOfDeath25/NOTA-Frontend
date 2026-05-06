@@ -7,6 +7,8 @@ import {queryClient} from "./queryClient.ts";
 import './index.css'
 import LanguageSync from "@components/LanguageSync/LanguageSync.tsx";
 import './i18n.ts'
+import { SettingsProvider } from "./context/SettingsContext.tsx";
+import { ModalProvider } from "./context/ModalContext.tsx";
 
 declare global {
     interface Window {
@@ -21,7 +23,12 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
             <LanguageSync/>
-            <RouterProvider router={router}></RouterProvider>
+            <SettingsProvider>
+                <ModalProvider>
+                    
+                <RouterProvider router={router}></RouterProvider>
+                </ModalProvider>
+            </SettingsProvider>
         </QueryClientProvider>
     </StrictMode>
     ,
