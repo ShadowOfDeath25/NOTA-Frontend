@@ -3,7 +3,7 @@ import type {AxiosInstance} from 'axios'
 
 
 export const AxiosClientV1: AxiosInstance = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/v1`,
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/v1`,
     withCredentials: true,
     withXSRFToken: true,
     headers: {
@@ -12,7 +12,7 @@ export const AxiosClientV1: AxiosInstance = axios.create({
 })
 
 export const AxiosClientRaw: AxiosInstance = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}`,
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
     withCredentials: true,
     withXSRFToken: true,
     headers: {

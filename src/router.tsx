@@ -6,7 +6,8 @@ import Authenticated from "./guards/Authenticated.tsx";
 import Guest from "@guards/Guest.tsx";
 import GuestLayout from "./layouts/GuestLayout/GuestLayout.tsx";
 import GettingStartedPage from "@pages/auth/GettingStartedPage/GettingStartedPage.tsx";
-
+import Test from '@components/Test/Test'
+import MainLayout from "./layouts/MainLayout/MainLayout.tsx";
 
 export const routes: RouteObject[] = [
     {
@@ -37,6 +38,17 @@ export const routes: RouteObject[] = [
                         element: <GettingStartedPage/>
                     }
                 ]
+            }
+        ]
+    }
+    ,
+    {
+        element: <MainLayout/>,
+        children: [
+            {
+
+                path: "/test",
+                element: <Test/>
             }
         ]
     }
