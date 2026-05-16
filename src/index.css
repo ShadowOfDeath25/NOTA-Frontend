@@ -76,7 +76,7 @@ html[lang="ar"] {
     --sp5: 20px;
     --sp6: 24px;
     --sp8: 32px;
-    --sp10:40px ;
+    --sp10: 40px;
     --sp12: 48px;
 
 
@@ -90,6 +90,14 @@ html[lang="ar"] {
     /* Heights */
     --btn-height: 36px;
 }
+
+:root[data-theme=dark] {
+    --current-background-color: var(--home-bg-color)
+}
+:root[data-theme=light]{
+    --current-background-color:#fafafa;
+}
+
 
 .focus-outline:focus {
     outline: 2px solid var(--brand-primary-color);

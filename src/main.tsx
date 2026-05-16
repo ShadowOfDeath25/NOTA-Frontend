@@ -25,7 +25,6 @@ createRoot(document.getElementById('root')!).render(
             <LanguageSync/>
             <SettingsProvider>
                 <ModalProvider>
-                    
                 <RouterProvider router={router}></RouterProvider>
                 </ModalProvider>
             </SettingsProvider>

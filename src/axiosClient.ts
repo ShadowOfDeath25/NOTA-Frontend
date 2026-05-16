@@ -7,7 +7,8 @@ export const AxiosClientV1: AxiosInstance = axios.create({
     withCredentials: true,
     withXSRFToken: true,
     headers: {
-        Accept: "application/json"
+        Accept: "application/json",
+        'ngrok-skip-browser-warning':true
     },
 })
 
@@ -16,7 +17,8 @@ export const AxiosClientRaw: AxiosInstance = axios.create({
     withCredentials: true,
     withXSRFToken: true,
     headers: {
-        Accept: "application/json"
+        Accept: "application/json",
+        'ngrok-skip-browser-warning':true
     },
 })
 

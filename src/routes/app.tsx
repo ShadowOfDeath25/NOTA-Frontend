@@ -5,6 +5,7 @@ import App from "../App.tsx";
 import { Navigate } from "react-router-dom";
 import SettingsPage from "@pages/SettingsPage/SettingsPage.tsx";
 import TrashPage from "@pages/TrashPage/TrashPage.tsx";
+import NotePage from "@pages/NotePage/NotePage.tsx";
 
 const routes: RouteObject[] = [
 
@@ -19,6 +20,7 @@ const routes: RouteObject[] = [
             { path: "/import-pdf", element: <App/>},
             { path: "/settings", element: <SettingsPage/>},
             { path: "/trash", element: <TrashPage/>},
+            { path: "/notes/:noteId", element: <NotePage />},
         ]
     },
 
