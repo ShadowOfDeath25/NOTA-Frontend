@@ -9,7 +9,7 @@ interface SettingsContextType {
   setLang: (lang: string) => void;
 }
 
-const SettingsContext = createContext<SettingsContextType | null>(null);
+const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
 
@@ -43,6 +43,12 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     </SettingsContext.Provider>
   );
 };
-export const useSettings = () => useContext(SettingsContext);
+export const useSettings = () => {
+  const context = useContext(SettingsContext);
 
+  if (!context) {
+    throw new Error("useSettings must be used within a SettingsProvider");
+  }
 
+  return context;
+};
