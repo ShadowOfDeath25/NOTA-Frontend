@@ -12,40 +12,36 @@
       "vite/client"
     ],
     "skipLibCheck": true,
-
     "paths": {
-      "@/*": [
-        "./*"
-      ],
       "@components/*": [
-        "src/components/*"
+        "./src/components/*"
       ],
       "@pages/*": [
-        "src/pages/*"
+        "./src/pages/*"
       ],
       "@customTypes/*": [
-        "src/types/*"
+        "./src/types/*"
       ],
       "@hooks/*": [
-        "src/hooks/*"
+        "./src/hooks/*"
       ],
       "@utils/*": [
-        "src/utils/*"
+        "./src/utils/*"
       ],
       "@translation/*": [
-        "src/translation/*"
+        "./src/translation/*"
       ],
       "@assets/*": [
-        "src/assets/*"
+        "./src/assets/*"
       ],
       "@routes/*": [
-        "src/routes/*"
+        "./src/routes/*"
       ],
       "@guards/*": [
-        "src/guards/*"
+        "./src/guards/*"
       ],
       "@validators/*": [
-        "src/validation/*"
+        "./src/validation/*"
       ]
     },
     /* Bundler mode */
