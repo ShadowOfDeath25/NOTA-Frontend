@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp2);
+}
+
+.title {
+  color: var(--text-home-page);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+.subtitle {
+  color: var(--text-sidebar-item);
+  margin: 0;
+}
+
+.createBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btnIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp4);
+  }
+}

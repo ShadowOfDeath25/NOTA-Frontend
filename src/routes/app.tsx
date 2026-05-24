@@ -6,26 +6,25 @@ import { Navigate } from "react-router-dom";
 import SettingsPage from "@pages/SettingsPage/SettingsPage.tsx";
 import TrashPage from "@pages/TrashPage/TrashPage.tsx";
 import NotePage from "@pages/NotePage/NotePage.tsx";
+import SpacesPage from "@pages/SpacesPage/SpacesPage.tsx";
+import SpaceDetailPage from "@pages/SpaceDetailPage/SpaceDetailPage.tsx";
 
 const routes: RouteObject[] = [
-
     {
         path: "/",
         element: <MainLayout/>,
         children: [
             { index: true, element: <Navigate to="/home" replace /> },
-            { path: "/home",element: <Homepage/>},
-            { path: "spaces", element: <App/>},
-            { path: "summarize", element: <App/>},
-            { path: "/import-pdf", element: <App/>},
-            { path: "/settings", element: <SettingsPage/>},
-            { path: "/trash", element: <TrashPage/>},
-            { path: "/notes/:noteId", element: <NotePage />},
+            { path: "/home", element: <Homepage/> },
+            { path: "spaces", element: <SpacesPage/> },
+            { path: "spaces/:spaceId", element: <SpaceDetailPage/> },
+            { path: "summarize", element: <App/> },
+            { path: "/import-pdf", element: <App/> },
+            { path: "/settings", element: <SettingsPage/> },
+            { path: "/trash", element: <TrashPage/> },
+            { path: "/notes/:noteId", element: <NotePage /> },
         ]
     },
-
-
-
 ]
 
 export default routes;

@@ -1,0 +1,40 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  svg{
+    color:var(--text-sidebar-item);
+    
+  
+  }
+
+}
+
+.input {
+  width: 100%;
+  height: var(--btn-height);
+  background-color: rgba(79, 139, 255, 0.03);
+  border: 1px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--sp3) var(--sp3);
+  padding-left: 36px;
+  color: var(--text-sidebar-nav);
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--text-muted-color);
+  }
+
+  &:focus {
+    border-color: rgba(79, 139, 255, 0.35);
+  }
+}

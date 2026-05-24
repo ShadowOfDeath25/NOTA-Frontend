@@ -3,5 +3,11 @@
   flex-wrap: wrap;
   gap: 20px;
   direction: inherit;
+}
 
+@media (max-width: 640px) {
+  .container {
+    flex-direction: column;
+    gap: var(--sp3);
+  }
 }

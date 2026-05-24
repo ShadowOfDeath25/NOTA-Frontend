@@ -1,0 +1,86 @@
+import styles from './SpaceDetailHeader.module.css';
+import type { Space } from '@customTypes/Space';
+import SpaceBadge from '@components/Spaces/SpaceBadge/SpaceBadge';
+import FilesIcon from '@assets/icons/files.svg?react';
+import SettingsIcon from '@assets/icons/settings.svg?react';
+import FileIcon from '@assets/icons/file.svg?react';
+import CollaborateIcon from '@assets/icons/collaborate.svg?react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+interface SpaceDetailHeaderProps {
+  space: Space;
+}
+
+const GRADIENT_MAP: Record<Space['gradient'], string> = {
+  'purple-pink': 'var(--gradient-purple-pink)',
+  'blue-cyan': 'var(--gradient-blue-cyan)',
+  'green': 'var(--gradient-green)',
+};
+
+export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  return (
+    <div className={styles.container}>
+      {/* Top row: back + icon + title + settings */}
+      <div className={styles.topRow}>
+        <button
+          className={styles.backBtn}
+          onClick={() => navigate('/spaces')}
+          aria-label={t('back_to_spaces', 'Back to Spaces')}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+
+        <div
+          className={styles.spaceIcon}
+          style={{ backgroundImage: GRADIENT_MAP[space.gradient] }}
+          aria-hidden="true"
+        >
+          <div className={styles.spaceIconImg}>
+          <FilesIcon/>
+          </div >
+          
+        </div>
+
+        <div className={styles.titleGroup}>
+          <h1 className={`${styles.title} h3`}>{space.name}</h1>
+          <p className={`${styles.description} bodyText`}>{space.description}</p>
+        </div>
+
+        <button className={`${styles.settingsBtn} bodyTextSm`}>
+            <div className={styles.settingsBtnIcon}>
+          <SettingsIcon/>
+          </div >
+          
+          <span>{t('settings', 'Settings')}</span>
+        </button>
+      </div>
+
+      {/* Meta row: note count + member count + role badge */}
+      <div className={styles.metaRow}>
+        <div className={styles.metaItem}>
+            <div className={styles.metaIcon}>
+          <FileIcon/>
+          </div >
+          <span className={`${styles.metaText} bodyTextSm`}>
+            {t('note_count', '{{count}} notes', { count: space.noteCount })}
+          </span>
+        </div>
+        <div className={styles.metaItem}>
+        <div className={styles.metaIcon}>
+          <CollaborateIcon/>
+          </div >
+          <span className={`${styles.metaText} bodyTextSm`}>
+            {t('member_count', '{{count}} members', { count: space.memberCount })}
+          </span>
+        </div>
+        <SpaceBadge role={space.role} />
+      </div>
+    </div>
+  );
+}
