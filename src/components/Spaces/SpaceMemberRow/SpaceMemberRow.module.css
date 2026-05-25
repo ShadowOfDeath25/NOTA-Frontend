@@ -119,3 +119,67 @@
     display: none;
   }
 }
+
+.menuWrapper{
+  position: relative;
+}
+
+.memberMenu{
+
+  position: absolute;
+
+  top: calc(100% + 8px);
+
+  right: 0;
+
+  min-width: 190px;
+
+  background: #08142B;
+
+  border: 1px solid rgba(79,139,255,.15);
+
+  border-radius: 12px;
+
+  padding: 8px;
+
+  z-index: 9999;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.35);
+}
+
+.memberMenu button{
+
+  width:100%;
+
+  background:none;
+
+  border:none;
+
+  color:var(--text-home-page);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px 12px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+
+  transition:.15s ease;
+}
+
+.memberMenu button:hover{
+
+  background:
+    rgba(79,139,255,.08);
+}
+
+.danger{
+
+  color:#ff5252;
+}

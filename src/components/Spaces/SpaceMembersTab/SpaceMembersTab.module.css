@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp6);
-  padding: var(--sp4) var(--sp6) var(--sp6);
+  padding: var(--sp6);
   width: 100%;
 }
 
@@ -21,13 +21,14 @@
 }
 
 .searchIcon {
-  position: absolute;
+  svg
+{  position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  pointer-events: none;
+  pointer-events: none;}
 }
 
 .searchInput {
@@ -64,9 +65,12 @@
 }
 
 .inviteIcon {
+  svg{
+
   width: 16px;
   height: 16px;
-  filter: brightness(0) invert(1);
+  }
+
 }
 
 /* ── List ── */

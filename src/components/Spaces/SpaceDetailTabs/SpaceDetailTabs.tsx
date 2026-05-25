@@ -1,9 +1,10 @@
 import styles from './SpaceDetailTabs.module.css';
 import fileIcon from '@assets/icons/file.svg';
 import collaborateIcon from '@assets/icons/collaborate.svg';
+import settingsIcon from '@assets/icons/settings.svg';
 import { useTranslation } from 'react-i18next';
 
-export type SpaceTab = 'notes' | 'members';
+export type SpaceTab = 'notes' | 'members' | 'settings';
 
 interface SpaceDetailTabsProps {
   activeTab: SpaceTab;
@@ -14,7 +15,7 @@ export default function SpaceDetailTabs({ activeTab, onTabChange }: SpaceDetailT
   const { t } = useTranslation();
 
   return (
-    <div className={styles.container} role="tablist" aria-label={t('space_tabs', 'Space sections')}>
+    <div className={styles.container} role="tablist" >
       <button
         role="tab"
         aria-selected={activeTab === 'notes'}
@@ -22,7 +23,7 @@ export default function SpaceDetailTabs({ activeTab, onTabChange }: SpaceDetailT
         onClick={() => onTabChange('notes')}
       >
         <img src={fileIcon} alt="" className={styles.tabIcon} aria-hidden="true" />
-        <span>{t('notes', 'Notes')}</span>
+        <span>{t('space.notes', 'Notes')}</span>
       </button>
 
       <button
@@ -32,7 +33,7 @@ export default function SpaceDetailTabs({ activeTab, onTabChange }: SpaceDetailT
         onClick={() => onTabChange('members')}
       >
         <img src={collaborateIcon} alt="" className={styles.tabIcon} aria-hidden="true" />
-        <span>{t('members', 'Members')}</span>
+        <span>{t('space.members', 'Members')}</span>
       </button>
     </div>
   );

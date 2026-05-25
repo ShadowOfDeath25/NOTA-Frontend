@@ -20,22 +20,22 @@ export default function EmptySpaces({ onCreateSpace }: EmptySpacesProps) {
       </div>
 
       <h3 className={`${styles.title} h3`}>
-        {t('no_spaces_yet', 'No spaces yet')}
+        {t('space.no_spaces_yet', 'No spaces yet')}
       </h3>
 
       <p className={`bodyText ${styles.description}`}>
-        {t('spaces_empty_description', 'Create a space to organize your notes and collaborate')}
+        {t('space.spaces_empty_description', 'Create a space to organize your notes and collaborate')}
       </p>
 
       <button
         className={`btn btnPrimary ${styles.createBtn}`}
         onClick={onCreateSpace}
-        aria-label={t('create_space', 'Create Space')}
+        aria-label={t('space.create_space', 'Create Space')}
       >
          <div className={styles.iconbtn}>
           <AddIcon/>
         </div>
-        <span>{t('create_space', 'Create Space')}</span>
+        <span>{t('space.create_space', 'Create Space')}</span>
       </button>
     </div>
   );

@@ -56,11 +56,11 @@ export default function SpaceCard({ space, onClick }: SpaceCardProps) {
 
           <div className={styles.meta}>
             <span className={`${styles.metaText} caption`}>
-              {t('member_count', '{{count}} members', { count: space.memberCount })}
+              {t('space.member_count', '{{count}} members', { count: space.memberCount })}
             </span>
             <span className={styles.dot} aria-hidden="true">•</span>
             <span className={`${styles.metaText} caption`}>
-              {t('note_count', '{{count}} notes', { count: space.noteCount })}
+              {t('space.note_count', '{{count}} notes', { count: space.noteCount })}
             </span>
           </div>
         </div>

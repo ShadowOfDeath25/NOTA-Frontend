@@ -15,4 +15,3 @@ export default function Authenticated({fallback = <h1>Loading ....</h1>}: { fall
     return <Outlet/>
 
 }
-

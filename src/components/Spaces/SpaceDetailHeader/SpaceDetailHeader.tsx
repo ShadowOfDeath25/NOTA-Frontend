@@ -5,6 +5,7 @@ import FilesIcon from '@assets/icons/files.svg?react';
 import SettingsIcon from '@assets/icons/settings.svg?react';
 import FileIcon from '@assets/icons/file.svg?react';
 import CollaborateIcon from '@assets/icons/collaborate.svg?react';
+import BackIcon from '@assets/icons/back.svg?react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,9 +32,9 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           onClick={() => navigate('/spaces')}
           aria-label={t('back_to_spaces', 'Back to Spaces')}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <div className={styles.backIcon}>
+            <BackIcon/>
+          </div>
         </button>
 
         <div
@@ -52,11 +53,13 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           <p className={`${styles.description} bodyText`}>{space.description}</p>
         </div>
 
-        <button className={`${styles.settingsBtn} bodyTextSm`}>
-            <div className={styles.settingsBtnIcon}>
-          <SettingsIcon/>
-          </div >
-          
+        <button
+          className={`${styles.settingsBtn} bodyTextSm`}
+          onClick={() => navigate(`/spaces/${space.id}/settings`)}
+        >
+          <div className={styles.settingsBtnIcon}>
+            <SettingsIcon />
+          </div>
           <span>{t('settings', 'Settings')}</span>
         </button>
       </div>
@@ -68,7 +71,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           <FileIcon/>
           </div >
           <span className={`${styles.metaText} bodyTextSm`}>
-            {t('note_count', '{{count}} notes', { count: space.noteCount })}
+            {t('space.note_count', '{{count}} notes', { count: space.noteCount })}
           </span>
         </div>
         <div className={styles.metaItem}>
@@ -76,7 +79,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           <CollaborateIcon/>
           </div >
           <span className={`${styles.metaText} bodyTextSm`}>
-            {t('member_count', '{{count}} members', { count: space.memberCount })}
+            {t('space.member_count', '{{count}} members', { count: space.memberCount })}
           </span>
         </div>
         <SpaceBadge role={space.role} />

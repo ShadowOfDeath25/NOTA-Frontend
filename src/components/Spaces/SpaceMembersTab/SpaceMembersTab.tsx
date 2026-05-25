@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from './SpaceMembersTab.module.css';
 import SpaceMemberRow from '@components/Spaces/SpaceMemberRow/SpaceMemberRow';
-import magnifierIcon from '@assets/icons/magnifier.svg';
-import collaborateIcon from '@assets/icons/collaborate.svg';
+import MagnifierIcon from '@assets/icons/magnifier.svg?react';
+import CollaborateIcon from '@assets/icons/collaborate.svg?react';
 import type { SpaceMember, SpaceRole } from '@customTypes/Space';
 import { useTranslation } from 'react-i18next';
 import { useModal } from '../../../context/ModalContext';
@@ -35,14 +35,16 @@ export default function SpaceMembersTab({
       {/* Toolbar */}
       <div className={styles.toolbar}>
         <div className={styles.searchWrapper}>
-          <img src={magnifierIcon} alt="" className={styles.searchIcon} aria-hidden="true" />
+            <div className={styles.searchIcon}>
+                <MagnifierIcon />
+            </div>
           <input
             type="search"
             className={`${styles.searchInput} bodyTextSm`}
-            placeholder={t('search_members', 'Search members...')}
+            placeholder={t('space.search_members', 'Search members...')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            aria-label={t('search_members', 'Search members')}
+            
           />
         </div>
 
@@ -50,10 +52,12 @@ export default function SpaceMembersTab({
           <button
             className={`btn btnPrimary ${styles.inviteBtn} bodyTextSm`}
             onClick={() => setInviteMemberModal(true)}
-            aria-label={t('invite_member', 'Invite Member')}
+          
           >
-            <img src={collaborateIcon} alt="" className={styles.inviteIcon} aria-hidden="true" />
-            <span>{t('invite_member', 'Invite Member')}</span>
+            <div className={styles.inviteIcon}>
+                <CollaborateIcon />
+            </div>
+            <span>{t('space.invite_member', 'Invite Member')}</span>
           </button>
         )}
       </div>
@@ -63,8 +67,8 @@ export default function SpaceMembersTab({
         {filtered.length === 0 ? (
           <p className={`${styles.empty} bodyText`}>
             {search
-              ? t('no_members_match', 'No members match your search.')
-              : t('no_members', 'No members yet.')}
+              ? t('space.no_members_match', 'No members match your search.')
+              : t('space.no_members', 'No members yet.')}
           </p>
         ) : (
           filtered.map((member) => (

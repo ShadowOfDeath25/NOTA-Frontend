@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './InviteMemberModal.module.css';
 import CloseIcon from '@assets/icons/close.svg?react';
-import collaborateIcon from '@assets/icons/collaborate.svg';
-import addIcon from '@assets/icons/add.svg';
+import CollaborateIcon from '@assets/icons/collaborate.svg?react';
+import ChevronIcon from '@assets/icons/chevron.svg?react';
+import AddIcon from '@assets/icons/add.svg?react';
+import SendIcon from '@assets/icons/mail.svg?react';
 import type { SpaceRole } from '@customTypes/Space';
 import { useTranslation } from 'react-i18next';
+import i18n from '../../../i18n';
 
 interface InviteMemberModalProps {
   isOpen: boolean;
@@ -14,10 +17,10 @@ interface InviteMemberModalProps {
   onCopyLink?: () => void;
 }
 
-const ROLES: { value: SpaceRole; label: string }[] = [
-  { value: 'contributor', label: 'Contributor' },
-  { value: 'viewer', label: 'Viewer' },
-  { value: 'admin', label: 'Admin' },
+const ROLES: { value: SpaceRole; labelEn: string;labelAr:string }[] = [
+  { value: 'contributor', labelEn: 'Contributor',labelAr:"محرر" },
+  { value: 'viewer', labelEn: 'Viewer',labelAr:"مراقب" },
+  { value: 'admin', labelEn: 'Admin',labelAr:"مسؤول" },
 ];
 
 export default function InviteMemberModal({
@@ -89,7 +92,7 @@ export default function InviteMemberModal({
     if (e.target === e.currentTarget) onClose();
   };
 
-  const selectedRoleLabel = ROLES.find((r) => r.value === role)?.label ?? 'Contributor';
+  const selectedRoleLabel = (i18n.language === 'en' ? ROLES.find((r) => r.value === role)?.labelEn : ROLES.find((r) => r.value === role)?.labelAr) ?? 'Contributor';
 
   return (
     <div
@@ -105,16 +108,16 @@ export default function InviteMemberModal({
         <div className={styles.header}>
           <div>
             <h2 id="invite-member-title" className={`${styles.title} h5`}>
-              {t('invite_members', 'Invite Members')}
+              {t('space.invite_members', 'Invite Members')}
             </h2>
             <p className={`${styles.subtitle} bodyTextSm`}>
-              {t('invite_members_subtitle', 'Add new members to this space')}
+              {t('space.invite_members_subtitle', 'Add new members to this space')}
             </p>
           </div>
           <button
             className={styles.closeBtn}
             onClick={onClose}
-            aria-label={t('close', 'Close')}
+            
           >
             <CloseIcon />
           </button>
@@ -126,7 +129,7 @@ export default function InviteMemberModal({
           {/* Email */}
           <div className={styles.field}>
             <label htmlFor="invite-email" className={`${styles.label} bodyTextSm`}>
-              {t('email_address', 'Email Address')}
+              {t('space.email_address', 'Email Address')}
             </label>
             <input
               ref={emailRef}
@@ -144,7 +147,7 @@ export default function InviteMemberModal({
           {/* Role selector */}
           <div className={styles.field}>
             <span className={`${styles.label} bodyTextSm`}>
-              {t('assign_role', 'Assign Role')}
+              {t('space.assign_role', 'Assign Role')}
             </span>
             <div className={styles.selectWrapper} ref={dropdownRef}>
               <button
@@ -154,18 +157,22 @@ export default function InviteMemberModal({
                 aria-haspopup="listbox"
                 aria-expanded={roleOpen}
               >
+                
                 <div className={styles.selectLeft}>
-                  <img src={collaborateIcon} alt="" className={styles.selectIcon} aria-hidden="true" />
+                  <div className={styles.iconWrapper}>
+
+                 <CollaborateIcon />
+                  </div>
                   <span>{selectedRoleLabel}</span>
                 </div>
-                {/* chevron */}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={`${styles.chevron} ${roleOpen ? styles.chevronOpen : ''}`}>
-                  <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <div className={styles.iconWrapper}>
+
+               <ChevronIcon/>
+                </div>
               </button>
 
               {roleOpen && (
-                <ul className={styles.dropdown} role="listbox" aria-label={t('select_role', 'Select role')}>
+                <ul className={styles.dropdown} role="listbox" >
                   {ROLES.map((r) => (
                     <li
                       key={r.value}
@@ -174,7 +181,7 @@ export default function InviteMemberModal({
                       className={`${styles.dropdownItem} ${role === r.value ? styles.dropdownItemActive : ''} bodyTextSm`}
                       onClick={() => { setRole(r.value); setRoleOpen(false); }}
                     >
-                      {r.label}
+                      {i18n.language === 'en' ? r.labelEn : r.labelAr}
                     </li>
                   ))}
                 </ul>
@@ -188,8 +195,8 @@ export default function InviteMemberModal({
             className={`${styles.copyLinkBtn} bodyTextSm`}
             onClick={handleCopyLink}
           >
-            <img src={addIcon} alt="" className={styles.copyLinkIcon} aria-hidden="true" />
-            <span>{copied ? t('link_copied', 'Link Copied!') : t('copy_invite_link', 'Copy Invite Link')}</span>
+           <div className={styles.copyLinkIcon}><AddIcon/></div>
+            <span>{copied ? t('space.link_copied', 'Link Copied!') : t('space.copy_invite_link', 'Copy Invite Link')}</span>
           </button>
 
         </div>
@@ -201,7 +208,7 @@ export default function InviteMemberModal({
             className={`${styles.cancelBtn} bodyTextSm`}
             onClick={onClose}
           >
-            {t('cancel', 'Cancel')}
+            {t('space.cancel', 'Cancel')}
           </button>
           <button
             type="button"
@@ -210,8 +217,11 @@ export default function InviteMemberModal({
             disabled={!isValid}
             aria-disabled={!isValid}
           >
-            <img src={collaborateIcon} alt="" className={styles.sendIcon} aria-hidden="true" />
-            <span>{t('send_invite', 'Send Invite')}</span>
+            <div className={styles.sendIcon}>
+                <SendIcon />
+
+            </div>
+            <span>{t('space.send_invite', 'Send Invite')}</span>
           </button>
         </div>
 

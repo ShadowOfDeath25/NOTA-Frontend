@@ -130,7 +130,9 @@
 .metaText {
   color: var(--text-sidebar-item);
 }
-
+[dir="rtl"] .backIcon{
+  transform: rotate(180deg);
+}
 @media (max-width: 640px) {
   .container {
     padding: var(--sp4);

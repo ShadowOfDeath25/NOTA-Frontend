@@ -164,3 +164,6 @@
  justify-content: space-between;
 }
 
+.dotsContainer{
+  position:relative;
+}

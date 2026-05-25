@@ -7,6 +7,7 @@ import SpaceNotesTab from '@components/Spaces/SpaceNotesTab/SpaceNotesTab';
 import SpaceMembersTab from '@components/Spaces/SpaceMembersTab/SpaceMembersTab';
 import type { SpaceTab } from '@components/Spaces/SpaceDetailTabs/SpaceDetailTabs';
 import type { Space, SpaceMember } from '@customTypes/Space';
+import { useModal } from '../../context/ModalContext';
 
 // ── Mock data — replace with API calls ──────────────────────────────────────
 const MOCK_SPACES: Space[] = [
@@ -70,6 +71,7 @@ const MOCK_MEMBERS: SpaceMember[] = [
 export default function SpaceDetailPage() {
   const { spaceId } = useParams<{ spaceId: string }>();
   const [activeTab, setActiveTab] = useState<SpaceTab>('notes');
+  const { setAddNoteModal } = useModal();
 
   const space = MOCK_SPACES.find((s) => s.id === spaceId);
   if (!space) return <Navigate to="/spaces" replace />;
@@ -83,9 +85,7 @@ export default function SpaceDetailPage() {
         {activeTab === 'notes' && (
           <SpaceNotesTab
             notes={MOCK_NOTES}
-            onAddNote={() => {
-              // TODO: open add-note modal or navigate
-            }}
+            onAddNote={() => setAddNoteModal(true)}
           />
         )}
         {activeTab === 'members' && (

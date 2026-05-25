@@ -58,7 +58,7 @@ html[lang="ar"] {
     --sidebar-divider-color: #1E2939;
     --sidebar-border-color: #364153;
     --border-divider: #e5e7eb;
-
+    --icon-color: #94A3B8;
 
     /* Gradients */
     --overlay-linear-gradient: linear-gradient(135deg, rgba(89, 22, 139, 0.3) 0%, rgba(134, 16, 67, 0.3) 100%);

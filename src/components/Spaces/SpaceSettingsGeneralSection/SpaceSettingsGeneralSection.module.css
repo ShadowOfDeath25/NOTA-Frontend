@@ -1,0 +1,163 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp4);
+  width: 100%;
+}
+
+.sectionTitle {
+  color: var(--text-home-page);
+  margin: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+}
+
+/* ── Field ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp2);
+}
+
+.fieldLabel {
+  color: var(--text-home-page);
+}
+
+.input {
+  width: 100%;
+  height: var(--btn-height);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding-inline: var(--sp3);
+  color: var(--text-home-page);
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--text-muted-color);
+  }
+
+  &:focus {
+    border-color: rgba(79, 139, 255, 0.4);
+  }
+}
+
+/* ── Privacy options ── */
+.privacyOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp2);
+}
+
+.privacyCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp3);
+  padding: var(--sp4);
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover:not(.privacySelected) {
+    border-color: rgba(79, 139, 255, 0.3);
+  }
+}
+
+.privacySelected {
+  background: rgba(60, 3, 102, 0.2);
+  border-color: #ad46ff;
+}
+
+.privacyIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sidebar-nav);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.privacyText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.privacyTitle {
+  color: var(--text-home-page);
+  display: block;
+}
+
+.privacyDesc {
+  color: var(--text-sidebar-item);
+  display: block;
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--sidebar-border-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+.radioSelected {
+  background: var(--brand-primary-color);
+  border-color: var(--brand-primary-color);
+}
+
+.radioDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ── Read-only state (viewer / contributor) ── */
+.readOnlyField {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveBtn {
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    box-shadow: 0 0 8px 0 var(--brand-primary-color);
+  }
+}

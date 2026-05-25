@@ -14,16 +14,15 @@ export default function SpacesHeader({ onCreateSpace }: SpacesHeaderProps) {
       <div className={styles.textGroup}>
         <h3 className={styles.title}>{t('spaces', 'Spaces')}</h3>
         <p className={`bodyText ${styles.subtitle}`}>
-          {t('spaces_subtitle', 'Organize your notes with collaborative workspaces')}
+          {t('space.Organize_your_notes_with_collaborative_workspaces', 'Organize your notes with collaborative workspaces')}
         </p>
       </div>
       <button
         className={`btn btnPrimary ${styles.createBtn}`}
         onClick={onCreateSpace}
-        aria-label={t('create_space', 'Create Space')}
       >
         <img src={addIcon} alt="" className={styles.btnIcon} aria-hidden="true" />
-        <span>{t('create_space', 'Create Space')}</span>
+        <span>{t('space.create_space', 'Create Space')}</span>
       </button>
     </div>
   );

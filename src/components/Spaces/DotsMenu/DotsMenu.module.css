@@ -62,5 +62,15 @@
 
 
 .danger{
-    color:#FF3B3B;
+    color:var(--danger-color);
 }
+.trashIcon,
+.contributorIcon,
+.clockIcon {
+  svg{
+    width: 16px;
+    height: 16px;
+    color: var(--icon-color);
+  }
+}
+

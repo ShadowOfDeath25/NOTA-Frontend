@@ -8,6 +8,7 @@ import TrashPage from "@pages/TrashPage/TrashPage.tsx";
 import NotePage from "@pages/NotePage/NotePage.tsx";
 import SpacesPage from "@pages/SpacesPage/SpacesPage.tsx";
 import SpaceDetailPage from "@pages/SpaceDetailPage/SpaceDetailPage.tsx";
+import SpaceSettingsPage from "@pages/SpaceSettingsPage/SpaceSettingsPage.tsx";
 
 const routes: RouteObject[] = [
     {
@@ -18,6 +19,7 @@ const routes: RouteObject[] = [
             { path: "/home", element: <Homepage/> },
             { path: "spaces", element: <SpacesPage/> },
             { path: "spaces/:spaceId", element: <SpaceDetailPage/> },
+            { path: "spaces/:spaceId/settings", element: <SpaceSettingsPage/> },
             { path: "summarize", element: <App/> },
             { path: "/import-pdf", element: <App/> },
             { path: "/settings", element: <SettingsPage/> },

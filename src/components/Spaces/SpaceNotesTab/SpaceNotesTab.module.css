@@ -21,13 +21,15 @@
 }
 
 .searchIcon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
+  svg{
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
 }
 
 .searchInput {
@@ -60,6 +62,11 @@
 
   &:hover {
     box-shadow: 0 0 8px 0 var(--brand-primary-color);
+  }
+  svg{
+    width: 16px;
+    height: 16px;
+   
   }
 }
 

@@ -19,7 +19,7 @@ export default function SpacesSearchBar({ value = '', onChange }: SpacesSearchBa
       <input
         type="search"
         className={`bodyTextSm ${styles.input}`}
-        placeholder={t('search_spaces', 'Search spaces...')}
+        placeholder={t('space.search_spaces', 'Search spaces...')}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
       />

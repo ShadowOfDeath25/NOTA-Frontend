@@ -68,16 +68,16 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
         <div className={styles.header}>
           <div>
             <h2 id="create-space-title" className={`${styles.title} h5`}>
-              {t('create_new_space', 'Create New Space')}
+              {t('space.create_new_space', 'Create New Space')}
             </h2>
             <p className={`${styles.subtitle} bodyTextSm`}>
-              {t('create_space_subtitle', 'Create a new space to organize your notes')}
+              {t('space.create_space_subtitle', 'Create a new space to organize your notes')}
             </p>
           </div>
           <button
             className={styles.closeBtn}
             onClick={onClose}
-            aria-label={t('close', 'Close')}
+            aria-label={t('space.close', 'Close')}
           >
             <CloseIcon />
           </button>
@@ -89,14 +89,14 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
           {/* Space Name */}
           <div className={styles.field}>
             <label htmlFor="space-name" className={`${styles.label} bodyTextSm`}>
-              {t('space_name', 'Space Name')}
+              {t('space.space_name', 'Space Name')}
             </label>
             <input
               ref={nameInputRef}
               id="space-name"
               type="text"
               className={`${styles.input} bodyTextSm`}
-              placeholder={t('space_name_placeholder', 'Enter space name')}
+              placeholder={t('space.note_name_placeholder', 'Enter space name')}
               value={name}
               onChange={(e) => setName(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
@@ -107,13 +107,13 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
           {/* Description */}
           <div className={styles.field}>
             <label htmlFor="space-description" className={`${styles.label} bodyTextSm`}>
-              {t('description', 'Description')}
+              {t('space.description', 'Description')}
             </label>
             <input
               id="space-description"
               type="text"
               className={`${styles.input} bodyTextSm`}
-              placeholder={t('space_description_placeholder', 'Enter space description')}
+              placeholder={t('space.space_description_placeholder', 'Enter space description')}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={200}
@@ -123,7 +123,7 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
           {/* Privacy */}
           <div className={styles.field}>
             <span className={`${styles.label} bodyTextSm`}>
-              {t('privacy', 'Privacy')}
+              {t('space.privacy', 'Privacy')}
             </span>
             <div className={styles.privacyOptions}>
 
@@ -139,10 +139,10 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
                 </div>
                 <div className={styles.privacyText}>
                   <span className={`${styles.privacyTitle} bodyText`}>
-                    {t('private', 'Private')}
+                    {t('space.private', 'Private')}
                   </span>
                   <span className={`${styles.privacyDesc} caption`}>
-                    {t('private_desc', 'Only invited members can access')}
+                    {t('space.private_desc', 'Only invited members can access')}
                   </span>
                 </div>
                 <div className={`${styles.radio} ${privacy === 'private' ? styles.radioSelected : ''}`}>
@@ -162,10 +162,10 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
                 </div>
                 <div className={styles.privacyText}>
                   <span className={`${styles.privacyTitle} bodyText`}>
-                    {t('public', 'Public')}
+                    {t('space.public', 'Public')}
                   </span>
                   <span className={`${styles.privacyDesc} caption`}>
-                    {t('public_desc', 'Anyone can join')}
+                    {t('space.public_desc', 'Anyone can join')}
                   </span>
                 </div>
                 <div className={`${styles.radio} ${privacy === 'public' ? styles.radioSelected : ''}`}>
@@ -184,7 +184,7 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
             className={`${styles.cancelBtn} bodyTextSm`}
             onClick={onClose}
           >
-            {t('cancel', 'Cancel')}
+            {t('space.cancel', 'Cancel')}
           </button>
           <button
             type="button"
@@ -193,7 +193,7 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
             disabled={!isValid}
             aria-disabled={!isValid}
           >
-            {t('create', 'Create')}
+            {t('space.create', 'Create')}
           </button>
         </div>
 

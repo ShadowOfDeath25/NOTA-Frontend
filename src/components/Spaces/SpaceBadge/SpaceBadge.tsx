@@ -16,20 +16,21 @@ const ROLE_ICONS: Record<SpaceRole, React.ReactNode> = {
 };
 
 
-const ROLE_LABELS: Record<SpaceRole, string> = {
-  admin: 'Admin',
-  contributor: 'Contributor',
-  viewer: 'Viewer',
+const ROLE_LABELS: Record<SpaceRole, { labelEn: string; labelAr: string }> = {
+  admin: { labelEn: 'Admin', labelAr: 'مسؤول' },
+  contributor: { labelEn: 'Contributor', labelAr: 'محرر' },
+  viewer: { labelEn: 'Viewer', labelAr: 'مراقب' },
 };
 
 export default function SpaceBadge({ role }: SpaceBadgeProps) {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const roleLabel = ROLE_LABELS[role];
+  const displayLabel = i18n.language === 'en' ? roleLabel.labelEn : roleLabel.labelAr;
 
   return (
     <span className={`${styles.badge} ${styles[role]} caption`}>
-      <span className={styles.icon}></span>
-        {ROLE_ICONS[role]}
-      {t(`role_${role}`, ROLE_LABELS[role])}
+      {ROLE_ICONS[role]}
+      {displayLabel}
     </span>
   );
 }

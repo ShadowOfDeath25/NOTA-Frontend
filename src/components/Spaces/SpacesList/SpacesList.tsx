@@ -14,7 +14,7 @@ export default function SpacesList({ spaces, onSpaceClick }: SpacesListProps) {
   return (
     <section className={styles.section}>
       <h2 className={`${styles.sectionTitle} bodyText`}>
-        {t('my_spaces', 'My Spaces')}
+        {t('space.my_spaces', 'My Spaces')}
       </h2>
       <div className={styles.grid}>
         {spaces.map((space) => (
