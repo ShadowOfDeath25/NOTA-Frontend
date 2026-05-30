@@ -63,7 +63,7 @@ function SignupForm() {
                         type="text"
                         placeholder={t("e.g. John Doe", "e.g. John Doe")}
                         value={formData.name}
-                        errors={validationErrors?.errors.name}
+                        errors={validationErrors?.errors?.name}
                         onChange={handleChange}
                     />
                     <InputForm
@@ -74,7 +74,7 @@ function SignupForm() {
                         placeholder={t("user@example.com", "user@example.com")}
                         value={formData.email}
                         onChange={handleChange}
-                        errors={validationErrors?.errors.email}
+                        errors={validationErrors?.errors?.email}
                     />
                     <InputForm
                         label={t("password", "Password")}
@@ -84,7 +84,7 @@ function SignupForm() {
                         placeholder={t("Enter your password", "Enter your password")}
                         value={formData.password}
                         onChange={handleChange}
-                        errors={validationErrors?.errors.password}
+                        errors={validationErrors?.errors?.password}
                     />
                     <InputForm
                         label={t("confirm_password", "Confirm Password")}
@@ -93,7 +93,7 @@ function SignupForm() {
                         type="password"
                         placeholder={t("Confirm your password", "Confirm your password")}
                         value={formData.password_confirmation}
-                        errors={validationErrors?.errors.password_confirmation}
+                        errors={validationErrors?.errors?.password_confirmation}
                         onChange={handleChange}
                     />
                     <button type="submit"
