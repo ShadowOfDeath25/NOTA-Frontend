@@ -148,6 +148,56 @@
   "can_delete_notes":"يمكنه حذف الملاحظات",
   "can_invite_members":"يمكنه دعوة أعضاء",
   "role_viewer":"المشاهد"
+  },
+  "summarizePage":{
+  "summarize_analyze": "تلخيص وتحليل",
+  "summarize_subtitle": "قم بتحميل مستند أو اختر ملاحظة للتحليل",
+  "text_to_analyze": "النص المراد تحليله",
+  "paste_or_type": "الصق النص أو اكتبه هنا",
+  "select_a_note": "اختر ملاحظة",
+  "choose_note": "اختر ملاحظة للتحليل",
+  "generate_ai_summary": "إنشاء ملخص بالذكاء الاصطناعي",
+  "untitled_note": "ملاحظة بدون عنوان",
+  "note_title": "عنوان الملاحظة",
+  "saved": "تم الحفظ",
+  "saving": "جارٍ الحفظ...",
+  "close_note": "إغلاق الملاحظة",
+  "active_collaborators": "المتعاونون النشطون",
+  "ai_summary": "تلخيص بالذكاء الاصطناعي",
+  "copied": "تم النسخ!",
+  "copy_to_clipboard": "نسخ إلى الحافظة",
+  "new_analysis": "تحليل جديد",
+  "summary": "ملخص",
+  "save_as_note": "حفظ كملاحظة",
+  "or": "أو"
+  
+  
 
+  },
+  "ImportModal": {
+    "import_PDF": "استيراد PDF", 
+    "import_pdf_description": "قم بتحميل ملف PDF لتحويله إلى ملاحظة",
+    "Drag_and_drop_your_PDF_here": "اسحب وأفلت ملف PDF الخاص بك هنا",
+    "browse_files": "تصفح الملفات",
+    "analyzing_pages": "تحليل الصفحات",
+    "recognizing_text": "التعرف على النص",
+    "formatting_content": "تنسيق المحتوى",
+    "save_as_note": "حفظ كملاحظة",
+    "or": "أو",
+    "Upload_from_Device": "رفع من الجهاز",
+    "cancel":"الغاء",
+    "Upload_files":"رفع ملفات",
+    "Complete":"تم",
+    "Review_and_edit_the_extracted_content_below":"مراجعة وتحرير المحتوى المستخرج أدناه",
+    "Preview_Content":"عرض المحتوى",
+    "Edit_Content":"تحرير المحتوى"
+    
+  },
+  "Trash":{
+    "Trash":"سلة المهملات",
+    "Items_in_trash_are_automatically_deleted_after_30_days":"العناصر في سلة المهملات يتم حذفها تلقائيًا بعد 30 يومًا",
+    "Deleted_on":"تم الحذف في",
+    "Restore":"استعادة",
+    "Delete_Permanently":"حذف نهائي"
   }
 }

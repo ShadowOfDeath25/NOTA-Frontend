@@ -9,6 +9,7 @@ import ImportResult from "./ImportResult";
 
 import { useImportProgress } from "../../hooks/useImportProgress";
 import { useFileHandler } from "../../hooks/useFileHandler";
+import { t } from "i18next";
 
 interface ImportModalProps {
   isOpen: boolean;
@@ -18,9 +19,9 @@ interface ImportModalProps {
 export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
   const {
     file,
-    fileInputRef,
+    fileInputRef,   
     handleDrop,
-    handleFileSelect,
+    handleFileSelect, 
     openFileDialog,
   } = useFileHandler();
 
@@ -39,10 +40,10 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
             <div className={styles.icon}>
               <FileIcon />
             </div>
-            <h5 className={styles.title}>Import PDF</h5>
+            <h5 className={styles.title}>{t("ImportModal.import_PDF", "Import PDF")}</h5>
           </div>
           <p className={`${styles.subtitle} bodyTextSm`}>
-            Upload a PDF file to convert into a note
+            {t("import_pdf_description", "Upload a PDF file to convert into a note")}
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
                     <StorageIcon />
                   </span>
                   <span className={styles.tabText}>
-                    Upload from Device
+                    {t("ImportModal.Upload_from_Device", "Upload from Device")}
                   </span>
                 </button>
               </div>
@@ -71,8 +72,8 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
                 <UploadIcon />
               </div>
 
-              <h5>Drag and drop your PDF here</h5>
-              <div className={`${styles.or} bodyTextSm`}>or</div>
+              <h5>{t("ImportModal.Drag_and_drop_your_PDF_here", "Drag and drop your PDF here")}</h5>
+              <div className={`${styles.or} bodyTextSm`}>{t("ImportModal.or", "or")}</div>
 
               <button
                 className={`${styles.browseBtn} btn btnPrimary`}
@@ -81,7 +82,7 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
                 <span className={styles.browseIcon}>
                   <FilesIcon />
                 </span>
-                <span>Browse Files</span>
+                <span>{t("ImportModal.browse_files", "Browse Files")}</span>
               </button>
 
               <input
@@ -122,17 +123,17 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
             <div className={styles.steps}>
               <Step
                 active={true}
-                label="Analyzing pages"
+                label={t("ImportModal.analyzing_pages", "Analyzing pages")}
                 done={progress > 30}
               />
               <Step
                 active={progress > 30}
-                label="Recognizing text"
+                label={t("ImportModal.recognizing_text", "Recognizing text")}
                 done={progress > 60}
               />
               <Step
                 active={progress > 60}
-                label="Formatting content"
+                label={t("ImportModal.formatting_content", "Formatting content")}
                 done={false}
               />
             </div>
@@ -148,10 +149,10 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
 
         <div className={styles.footer}>
           <button className={styles.cancelBtn} onClick={onCancel}>
-            Cancel
+            {t("ImportModal.cancel", "Cancel")}
           </button>
 
-          {status === "done" && <button className={`${styles.saveNoteBtn} btn btnPrimary`}>Save as Note</button>}
+          {status === "done" && <button className={`${styles.saveNoteBtn} btn btnPrimary`}>{t("ImportModal.save_as_note", "Save as Note")}</button>}
         </div>
       </div>
     </div>

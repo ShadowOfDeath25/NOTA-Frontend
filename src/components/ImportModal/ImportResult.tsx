@@ -2,11 +2,13 @@ import styles from "./ImportModal.module.css";
 import SuccessPDFIcon from "@assets/icons/successPDF.svg?react";
 import PenIcon from "@assets/icons/pen.svg?react";
 import EyeIcon from "@assets/icons/eye.svg?react";
+import { useTranslation } from "react-i18next";
 interface Props {
   file: File;
 }
 
 export default function ImportResult({ file }: Props) {
+  const { t } = useTranslation();
   return (
     <div className={styles.resultContainer}>
       
@@ -18,11 +20,11 @@ export default function ImportResult({ file }: Props) {
 
         <div className={styles.completeBadge}>
           <SuccessPDFIcon />
-          <span>Complete</span>
+          <span>{t("ImportModal.Complete", "Complete")}</span>
         </div>
       </div>
       <div className={`textBodySm ${styles.reviewText}`}>
-        Review and edit the extracted content below
+        {t("ImportModal.Review_and_edit_the_extracted_content_below", "Review and edit the extracted content below")}
       </div>
       <div className={styles.actions}>
          <button className={`${styles.previewBtn} `}>
@@ -30,7 +32,7 @@ export default function ImportResult({ file }: Props) {
                     <EyeIcon />
                   </span>
                   <span className={styles.tabText}>
-                    Preview Content
+                    {t("ImportModal.Preview_Content", "Preview Content")}
                   </span>
                 </button>
 
@@ -39,14 +41,14 @@ export default function ImportResult({ file }: Props) {
                     <PenIcon />
                   </span>
                   <span className={styles.tabText}>
-                    Edit Content
+                    {t("ImportModal.Edit_Content", "Edit Content")}
                   </span>
                 </button>
       </div>
 
    
       <div className={styles.previewBox}>
-        <h4># Scope</h4>
+        <h4>{t("ImportModal.Scope", "Scope")}</h4>
 
         <h5>## Document Summary</h5>
         <p>

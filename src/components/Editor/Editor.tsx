@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import QuillCursors from "quill-cursors";
@@ -41,9 +41,11 @@ export default function Editor({ noteId }: EditorProps) {
     setQuill(editor);
   }, [quill]);
 
-  const currentUser = authUser?.data
-    ? { id: authUser.data.id, name: authUser.data.name }
-    : null;
+  const currentUser = useMemo(() => 
+    authUser?.data
+      ? { id: authUser.data.id, name: authUser.data.name }
+      : null
+  , [authUser?.data?.id, authUser?.data?.name]);
 
   const { provider } = useCollaboration(noteId, quill, currentUser);
   const { activeUsers } = useAwareness(provider);

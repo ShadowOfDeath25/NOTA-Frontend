@@ -1,17 +1,16 @@
 import {useAuth} from "@hooks/api/useAuth.ts";
 import {Navigate, Outlet} from "react-router-dom";
-import type {ReactNode} from "react";
+import LoadingScreen from "@components/LoadingScreen/LoadingScreen";
 
-export default function Authenticated({fallback = <h1>Loading ....</h1>}: { fallback?: ReactNode | string }) {
-
+export default function Authenticated() {
     const {user} = useAuth();
+
     if (user.isLoading) {
-        return fallback;
+        return <LoadingScreen />;
     }
 
     if (!user.data) {
         return <Navigate to="/login" replace/>;
     }
-    return <Outlet/>
-
+    return <Outlet/>;
 }

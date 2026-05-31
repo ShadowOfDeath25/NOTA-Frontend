@@ -2,6 +2,7 @@ import styles from './TrashCard.module.css';
 import ClockIcon from "@assets/icons/clock.svg?react";
 import TrashIcon from "@assets/icons/trash.svg?react";
 import RestoreIcon from "@assets/icons/restore.svg?react";
+import {useTranslation} from "react-i18next";
 
 interface TrashCardProps {
   title: string;
@@ -16,13 +17,14 @@ const TrashCard: React.FC<TrashCardProps> = ({
   onRestore, 
   onPermanentDelete 
 }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>{title}</h3>
       
       <div className={styles.info}>
         <ClockIcon />
-        <span className={`${styles.dateText} bodyTextSm`}>Deleted on: {deletedDate}</span>
+        <span className={`${styles.dateText} bodyTextSm`}>{t("Trash.Deleted_on", "Deleted on")} {deletedDate}</span>
       </div>
 
       <div className={styles.divider}></div>
@@ -30,12 +32,12 @@ const TrashCard: React.FC<TrashCardProps> = ({
       <div className={styles.actions}>
         <button className={`${styles.btn} ${styles.restoreBtn}`} onClick={onRestore}>
           <RestoreIcon />
-          <span>Restore</span>
+          <span>{t("Trash.Restore", "Restore")}</span>
         </button>
         
         <button className={`${styles.btn} ${styles.deleteBtn}`} onClick={onPermanentDelete}>
           <TrashIcon />
-          <span>Delete Permanently</span>
+          <span>{t("Trash.Delete_Permanently", "Delete Permanently")}</span>
         </button>
       </div>
     </div>
