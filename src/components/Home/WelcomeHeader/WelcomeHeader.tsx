@@ -1,7 +1,7 @@
 import styles from "./WelcomeHeader.module.css"
 import CloudIcon from "@assets/icons/cloud.svg?react"
 import BellIcon from "@assets/icons/bell.svg?react"
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const WelcomeHeader = () => {
     const [events, setEvents] = useState([]);
