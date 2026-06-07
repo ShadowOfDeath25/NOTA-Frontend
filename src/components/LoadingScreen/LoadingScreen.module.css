@@ -5,13 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Figma gradient: 147.97deg, #59168B → #6E11B0 → #A3004C */
-  background: linear-gradient(
-    147.97deg,
-    #59168b 0%,
-    #6e11b0 50%,
-    #a3004c 100%
-  );
+
+  background: linear-gradient(135deg, #59168B 0%, #6E11B0 50%, #A3004C 100%);
   z-index: 9999;
 }
 
