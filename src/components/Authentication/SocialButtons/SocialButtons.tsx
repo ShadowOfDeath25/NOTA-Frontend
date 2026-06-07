@@ -11,7 +11,7 @@ const SocialButtons = () => {
 
     const redirect = (e: React.MouseEvent<HTMLButtonElement>) => {
 
-        window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/social/${e.currentTarget.id}/redirect`
+        window.location.href = `${import.meta.env.VITE_API_BASE_URL}/api/auth/social/${e.currentTarget.id}/redirect`
     }
     return (
         <>

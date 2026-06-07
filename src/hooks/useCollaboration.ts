@@ -4,7 +4,7 @@ import {HocuspocusProvider} from "@hocuspocus/provider";
 import {QuillBinding} from "y-quill";
 import type Quill from "quill";
 
-const WS_URL = import.meta.env.VITE_WS_PROVIDER_URL as string;
+const WS_URL = '/ws'
 
 const COLORS = ["#f97316", "#3b82f6", "#10b981", "#a855f7", "#ef4444", "#eab308"];
 
@@ -19,9 +19,10 @@ export function useCollaboration(
     quill: Quill | null,
     user: UseCollaborationUser | null,
 ) {
-    const [provider, setProvider] = useState<HocuspocusProvider | null>(null);
+    const providerRef = useRef<HocuspocusProvider | null>(null);
     const ydocRef = useRef<Y.Doc | null>(null);
     const bindingRef = useRef<QuillBinding | null>(null);
+    const [, forceRender] = useState(0);
 
     useEffect(() => {
         if (!quill || !noteId || !user) return;
@@ -29,24 +30,24 @@ export function useCollaboration(
         const ydoc = new Y.Doc();
         ydocRef.current = ydoc;
 
-        const provider = new HocuspocusProvider({
+        const p = new HocuspocusProvider({
             url: WS_URL,
             name: noteId,
             document: ydoc,
 
         });
-        setProvider(provider);
+        providerRef.current = p;
+        forceRender(n => n + 1);
 
         const yText = ydoc.getText();
 
-
-        bindingRef.current = new QuillBinding(yText, quill, provider?.awareness ?? undefined);
+        bindingRef.current = new QuillBinding(yText, quill, p?.awareness ?? undefined);
 
 
         const color =
             user.color || COLORS[Math.floor(Math.random() * COLORS.length)];
 
-        provider.awareness?.setLocalStateField("user", {
+        p.awareness?.setLocalStateField("user", {
             id: user.id,
             name: user.name,
             color,
@@ -59,14 +60,13 @@ export function useCollaboration(
             console.log("YDOC KEYS:", [...ydoc.share.keys()]);
         }, 1000);
         return () => {
-
-            provider.awareness?.setLocalStateField("user", null);
+            p.awareness?.setLocalStateField("user", null);
             bindingRef.current?.destroy();
-            provider.destroy();
+            p.destroy();
             ydoc.destroy();
-            setProvider(null);
+            providerRef.current = null;
         };
     }, [quill, noteId, user]);
 
-    return {provider};
+    return {provider: providerRef.current};
 }
