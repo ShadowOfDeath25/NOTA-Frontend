@@ -1,0 +1,224 @@
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  max-width: 100%;
+  flex-shrink: 0;
+  background-color: var(--home-bg-color);
+  border-left: 0.8px solid var(--sidebar-divider-color);
+  overflow: hidden;
+}
+
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp4);
+  height: 72px;
+  padding-inline: var(--sp4);
+  border-bottom: 0.8px solid var(--sidebar-divider-color);
+  flex-shrink: 0;
+}
+
+.panelHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+  min-width: 0;
+}
+
+/* Gradient icon — purple-pink, 32×32px, radius-md */
+.panelIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-purple-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: #fff;
+  }
+}
+
+.panelTitleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.panelTitle {
+  color: var(--text-home-page);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.panelSubtitle {
+  color: var(--text-sidebar-item);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Header action buttons */
+.panelHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp1);
+  flex-shrink: 0;
+}
+
+.headerBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-sidebar-item);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(79, 139, 255, 0.08);
+    color: var(--text-home-page);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Scrollable body ── */
+.panelBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp4);
+}
+
+/* ── Summary card — Figma: bg #0f1420, border rgba(79,139,255,0.15), radius-lg ── */
+.summaryCard {
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp6);
+}
+
+.summaryText {
+  color: var(--text-sidebar-nav);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 26px;
+  margin: 0;
+}
+
+/* ── Action buttons row ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+  flex-wrap: wrap;
+}
+
+/* "Insert into Note" — primary purple, 32px tall */
+.actionBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  height: 32px;
+  padding-inline: var(--sp3);
+
+  &:hover {
+    box-shadow: 0 0 8px 0 var(--brand-primary-color);
+  }
+}
+
+/* "Edit Summary" / "Copy Result" — ghost style */
+.actionBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  height: 32px;
+  padding-inline: var(--sp3);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-home-page);
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(79, 139, 255, 0.3);
+    background-color: rgba(79, 139, 255, 0.06);
+  }
+}
+
+.actionBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Key Points section ── */
+.keyPointsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp3);
+}
+
+.keyPointsTitle {
+  color: var(--text-home-page);
+  margin: 0;
+}
+
+.keyPointsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp2);
+}
+
+/* Key point card — Figma: bg #0f1420, border rgba(79,139,255,0.15), radius-lg */
+.keyPointCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp3);
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp4);
+}
+
+/* Colored bullet dot — 6×6px circle */
+.keyPointDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;   /* vertically align with first text line */
+}
+
+.keyPointText {
+  color: var(--text-home-page);
+  margin: 0;
+  line-height: 20px;
+}
