@@ -63,3 +63,11 @@
     padding: var(--sp4);
   }
 }
+
+
+@media (max-width: 1024px) {
+    .container {
+        /* push content below the fixed 56px TopBar */
+        padding-top: calc(56px );
+    }
+}

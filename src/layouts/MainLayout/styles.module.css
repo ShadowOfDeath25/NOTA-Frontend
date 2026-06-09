@@ -1,13 +1,23 @@
-.container {
+.mainContainer {
     display: flex;
     width: 100%;
-    
-   
+    min-height: 100vh;
 }
+
 main {
     background-color: var(--home-bg-color);
-   color: white;
+    color: white;
     width: 100%;
     padding: 32px;
+    /* fill remaining vertical space so background covers the full height */
+    flex: 1;
+    align-self: stretch;
+}
+
+@media (max-width: 1024px) {
+    main {
+        /* push content below the fixed 56px TopBar */
+        padding-top: calc(56px + 32px);
+    }
 }
 

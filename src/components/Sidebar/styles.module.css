@@ -148,6 +148,10 @@
         display: flex;
         justify-content: space-between;
     }
+    /* logo lives in TopBar on mobile — hide it from the sidebar */
+    .logoContainer {
+        display: none;
+    }
     .container {
        position:fixed;
        top:0;
@@ -164,19 +168,7 @@
         transform: translateX(100%);
     }
     .menuIcon {
-        display:block;
-        width: fit-content;
-        
-        position:fixed;
-        top:35px;
-        
-        z-index:1000;
-    }
-    [dir="ltr"] .menuIcon {
-    left: 3px;
-    }
-    [dir="rtl"] .menuIcon {
-    right: 3px;
+        display: none;
     }
     .closeIcon {
         display:block;
