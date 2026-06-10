@@ -1,6 +1,13 @@
 import Editor from "@components/Editor/Editor.tsx";
+import ReverbTest from "@components/ReverbTest.tsx";
 
 export default function Test() {
-    return <Editor noteId="019e7df2-347c-729a-99a2-1ce96ed434fc"/>;
+    return (
+        <>
+            <Editor noteId="019eaf2f-e48f-7031-a998-bd62c5c89a2b"/>
+            <ReverbTest/>
+        </>
+
+    )
 }
 

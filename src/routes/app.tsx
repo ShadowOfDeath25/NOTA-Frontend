@@ -25,7 +25,7 @@
                 { path: "/import-pdf", element: <App/> },
                 { path: "/settings", element: <SettingsPage/> },
                 { path: "/trash", element: <TrashPage/> },
-                
+
             ]
         },
 

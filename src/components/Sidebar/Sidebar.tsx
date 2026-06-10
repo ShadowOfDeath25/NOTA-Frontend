@@ -13,14 +13,15 @@ import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
 import {useNavigate, useLocation} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
-import { useModal } from "../../context/ModalContext.tsx";
+import {useModal} from "../../context/ModalContext.tsx";
+import {useRead} from "@hooks/api/useRead.ts";
 
 interface SidebarProps {
     isSidebarOpen: boolean;
     onToggle: () => void;
 }
 
-export default function Sidebar({ isSidebarOpen, onToggle }: SidebarProps) {
+export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
     const location = useLocation();
     const pathname = location.pathname.split("/")[1];
     const [active, setActive] = useState<string>(pathname)
@@ -30,23 +31,29 @@ export default function Sidebar({ isSidebarOpen, onToggle }: SidebarProps) {
         setActive(e.target.id);
         navigate(`/${e.target.id}`)
     }
-    const { setImportModal } = useModal();
+    const {setImportModal} = useModal();
     const handleImportClick = () => {
         setImportModal(true);
     }
     const isEmpty: boolean = false;
+
+    const {data: favoriteNotes, isLoading: favoritesLoading} = useRead("notes/favorites");
+
+
+    const {data: notes, isLoading: notesLoading} = useRead('notes');
+
     return (
         <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>
             <div className={styles.header}>
                 <div className={styles.logoContainer}><img src={logo} className={styles.logo} alt="Logo"/>
-                <h4>Nota</h4></div>
+                    <h4>Nota</h4></div>
                 {isSidebarOpen && (
-                <div className={styles.closeIcon} onClick={onToggle}>
-                    <CloseIcon/>
-                </div>)}
+                    <div className={styles.closeIcon} onClick={onToggle}>
+                        <CloseIcon/>
+                    </div>)}
             </div>
             <Searchbar/>
-            <div className={styles.navigation}> 
+            <div className={styles.navigation}>
                 <div className={`${styles.navCard} ${active == "home" ? styles.active : ""}`} onClick={handleClick}
                      id={"home"}
                 >
@@ -78,29 +85,18 @@ export default function Sidebar({ isSidebarOpen, onToggle }: SidebarProps) {
                     <hr className={styles.separator}/>
                     <div className={styles.myNotes}>
                         <span className={`label ${styles.navTitle}`}>{t("favorites", "Favorites")}</span>
-                        {/*Dummy Notes for testing purposes*/}
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
-                        <NoteLink name={"test"} uuid={"test"}/>
+                        <Activity mode={favoritesLoading ? "hidden" : "visible"}>
+                            {favoriteNotes?.data?.map((note: { title: string; id: string; }) => <NoteLink
+                                name={note.title} uuid={note.id}/>)}
+                        </Activity>
                     </div>
                 </Activity>
                 <div className={styles.myNotes}>
                     <span className={`label ${styles.navTitle}`}>{t("my_notes", "My Notes")}</span>
-                    {/*Dummy Notes for testing purposes*/}
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
-                    <NoteLink name={"test"} uuid={"test"}/>
+                    <Activity mode={notesLoading ? "hidden" : "visible"}>
+                        {notes?.data?.map((note: { title: string; id: string; }) => <NoteLink name={note.title}
+                                                                                              uuid={note.id}/>)}
+                    </Activity>
                 </div>
                 <hr className={styles.separator}/>
                 <div className={styles.bottomNav}>

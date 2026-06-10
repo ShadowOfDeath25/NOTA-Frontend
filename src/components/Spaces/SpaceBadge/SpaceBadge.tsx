@@ -11,14 +11,16 @@ interface SpaceBadgeProps {
 
 const ROLE_ICONS: Record<SpaceRole, React.ReactNode> = {
   admin: <AdminIcon />,
-  contributor: <ContributorIcon />,
+  editor: <ContributorIcon />,
   viewer: <EyeIcon />,
+  owner:<AdminIcon/>
 };
 
 
 const ROLE_LABELS: Record<SpaceRole, { labelEn: string; labelAr: string }> = {
   admin: { labelEn: 'Admin', labelAr: 'مسؤول' },
-  contributor: { labelEn: 'Contributor', labelAr: 'محرر' },
+  owner:{ labelEn: 'Owner', labelAr: 'مالك' },
+  editor: { labelEn: 'Editor', labelAr: 'محرر' },
   viewer: { labelEn: 'Viewer', labelAr: 'مراقب' },
 };
 

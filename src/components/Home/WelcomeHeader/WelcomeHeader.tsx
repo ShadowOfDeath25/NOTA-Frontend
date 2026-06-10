@@ -3,26 +3,42 @@ import CloudIcon from "@assets/icons/cloud.svg?react"
 import BellIcon from "@assets/icons/bell.svg?react"
 import { useTranslation } from "react-i18next"
 import {useEffect, useState} from "react";
-import {echo} from "../../../echo.ts";
 import {useAuth} from "@hooks/api/useAuth.ts";
+import {echo} from "../../../echo.ts";
 
 const WelcomeHeader = () => {
     const { t } = useTranslation()
     const [events, setEvents] = useState([]);
-    const {user} = useAuth();
+    const {user} = useAuth()
+    const userId = user?.data?.id
+    console.log('subscribing to reverb ');
     useEffect(() => {
-        const channel = echo.private(`App.Models.User.${user?.data?.id}`);
+        if (!userId) return
 
-        channel
-            .listen(".note.summarized", (e) => {
-                setEvents((prev) => [...prev, {type: "success", payload: e}]);
-            })
-            .listen(".note.summarization_failed", (e) => {
-                setEvents((prev) => [...prev, {type: "error", payload: e}]);
-            });
+        const channel = echo.private(`App.Models.User.${userId}`)
 
-        return () => echo.leave(`users.${user?.data?.id}`);
-    }, []);
+        channel.listen(".note.summarized", (e) => {
+            console.log(e);
+            console.log("summary success");
+        })
+
+        channel.listenToAll((e) => {
+            console.log(e)
+            console.log("event received");
+        })
+        channel.listen(".note.summarization_failed", (e) => {
+            console.log(e);
+            console.log("summary failed")
+        })
+
+        channel.error((error) => {
+            console.error("Channel subscription error:", error)
+        })
+
+        return () => {
+            echo.leave(`App.Models.User.${userId}`)
+        }
+    }, [userId])
 
     return (
         <div className={styles.container}>

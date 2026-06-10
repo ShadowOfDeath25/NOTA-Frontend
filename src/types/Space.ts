@@ -1,28 +1,37 @@
-export type SpaceRole = 'admin' | 'contributor' | 'viewer';
+export type SpaceRole = 'admin' | 'editor' | 'viewer' | 'owner';
 
-export type SpaceGradient =   'blue-cyan' | 'green' |'purple-pink';
+export type SpaceGradient = 'blue-cyan' | 'green' | 'purple-pink';
 
 export type SpaceAccess = 'private' | 'public';
 
 export interface Space {
-  id: string;
-  name: string;
-  description: string;
-  role: SpaceRole;
-  memberCount: number;
-  noteCount: number;
-  gradient: SpaceGradient;
-  access: SpaceAccess;
+    pivot: SpaceUserPivot;
+    notes_count: number;
+    id: string;
+    name: string;
+    description: string;
+    role: SpaceRole;
+    users_count: number;
+
+    gradient: SpaceGradient;
+    access: SpaceAccess;
+}
+
+export interface SpaceUserPivot {
+    role: SpaceRole
+    user_id: string
+    space_id: string
+    joined_at: string
 }
 
 export interface SpaceMember {
-  id: string;
-  name: string;
-  email: string;
-  initials: string;
-  avatarGradient: string;
-  role: SpaceRole;
-  joinedDate: string;
-  isOnline: boolean;
-  isCurrentUser?: boolean;
+    id: string;
+    name: string;
+    email: string;
+    initials: string;
+    avatarGradient: string;
+    role: SpaceRole;
+    joinedDate: string;
+    isOnline: boolean;
+    isCurrentUser?: boolean;
 }
