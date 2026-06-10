@@ -5,20 +5,20 @@
     border-radius: var(--radius-lg);
     background-color: #0F1420;
     padding: 24px;
-    flex:1;
+    flex: 1;
     border: 1.6px solid transparent;
     cursor: pointer;
+    text-align: start;
 
     &:hover {
-
         border: 1.6px solid var(--brand-primary-color);
     }
 }
-.textContainer{
+
+.textContainer {
     display: flex;
     flex-direction: column;
-   align-items: start;
-
+    align-items: start;
 }
 
 .iconContainer {
@@ -38,11 +38,10 @@
 
 .blueIcon {
     background: var(--gradient-blue-cyan);
-
 }
 
 .greenIcon {
-    background: var(--gradient-green)
+    background: var(--gradient-green);
 }
 
 .title {
@@ -51,4 +50,12 @@
 
 .description {
     color: var(--text-muted-color);
+}
+
+@media (max-width: 640px) {
+    .card {
+        width: 100%;
+        flex: unset;
+        padding: var(--sp6);
+    }
 }

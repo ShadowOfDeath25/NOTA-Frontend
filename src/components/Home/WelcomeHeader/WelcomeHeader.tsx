@@ -1,11 +1,13 @@
 import styles from "./WelcomeHeader.module.css"
 import CloudIcon from "@assets/icons/cloud.svg?react"
 import BellIcon from "@assets/icons/bell.svg?react"
+import { useTranslation } from "react-i18next"
 import {useEffect, useState} from "react";
 import {echo} from "../../../echo.ts";
 import {useAuth} from "@hooks/api/useAuth.ts";
 
 const WelcomeHeader = () => {
+    const { t } = useTranslation()
     const [events, setEvents] = useState([]);
     const {user} = useAuth();
     useEffect(() => {
@@ -21,15 +23,16 @@ const WelcomeHeader = () => {
 
         return () => echo.leave(`users.${user?.data?.id}`);
     }, []);
+
     return (
         <div className={styles.container}>
             <div className={styles.welcome}>
-                <h1>Welcome back!</h1>
+                <h1>{t("welcome_back","Welcome back!")}</h1>
                 <div className={styles.synced}>
                     <div className={styles.cloudIcon}>
                         <CloudIcon/>
                     </div>
-                    <p className="bodyTextSm"> All changes synced</p>
+                    <p className="bodyTextSm"> {t("all_changes_synced","All changes synced")}</p>
                 </div>
             </div>
             <div className={styles.notification} onClick={() => alert("hello")}>

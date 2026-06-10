@@ -1,0 +1,210 @@
+/* ── Card shell ── */
+.card {
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+  width: 100%;
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+}
+
+.sectionLabelIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--icon-color);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.sectionLabelText {
+  color: var(--text-home-page);
+}
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%;
+  height: 250px;
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--sp2) var(--sp3);
+  color: var(--text-home-page);
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
+  &:focus {
+    border-color: rgba(79, 139, 255, 0.4);
+  }
+}
+
+/* ── OR divider ── */
+.orDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orText {
+  color: var(--text-muted-color);
+}
+
+/* ── Note selector field ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp2);
+}
+
+.fieldLabel {
+  color: var(--text-home-page);
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectTrigger {
+  width: 100%;
+  height: var(--btn-height);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding-inline: var(--sp3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: var(--text-home-page);
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(79, 139, 255, 0.3);
+  }
+}
+
+.selectPlaceholder {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.selectValueActive {
+  color: var(--text-home-page);
+  font-size: 14px;
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted-color);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--import-modal-bg);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  list-style: none;
+  padding: var(--sp1) 0;
+  margin: 0;
+}
+
+.dropdownItem {
+  padding: var(--sp2) var(--sp3);
+  cursor: pointer;
+  color: var(--text-sidebar-nav);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(79, 139, 255, 0.08);
+    color: var(--text-home-page);
+  }
+}
+
+.dropdownItemActive {
+  color: var(--text-home-page);
+  background-color: rgba(79, 139, 255, 0.06);
+}
+
+/* ── Generate button ── */
+.generateBtn {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(90deg, #4f8bff 0%, #9810fa 100%);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp2);
+  font-size: 14px;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+
+  &:not(:disabled):hover {
+    box-shadow: 0 0 16px rgba(152, 16, 250, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.generateBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--sp6);
+    gap: var(--sp6);
+  }
+}

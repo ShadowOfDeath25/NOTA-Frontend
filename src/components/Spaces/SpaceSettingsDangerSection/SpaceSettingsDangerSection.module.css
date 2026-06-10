@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp4);
+  width: 100%;
+}
+
+.sectionTitle {
+  color: #ff6467;
+  margin: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--notecard-bg-color);
+  border: 0.8px solid #82181a;
+  border-radius: var(--radius-lg);
+  padding: var(--sp6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(79, 139, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* ── Danger row ── */
+.dangerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp4);
+  min-height: 48px;
+}
+
+.dangerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dangerTitle {
+  color: var(--text-home-page);
+  display: block;
+}
+
+.dangerDesc {
+  color: var(--text-sidebar-item);
+  display: block;
+}
+
+/* ── Action buttons ── */
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  height: var(--btn-height);
+  padding-inline: var(--sp3);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: #e7000b;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(231, 0, 11, 0.4);
+    background-color: rgba(231, 0, 11, 0.06);
+  }
+}
+
+.actionBtnRed {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  height: var(--btn-height);
+  padding-inline: var(--sp3);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: #e7000b;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(231, 0, 11, 0.4);
+    background-color: rgba(231, 0, 11, 0.06);
+  }
+}
+
+.actionBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .dangerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp3);
+  }
+}

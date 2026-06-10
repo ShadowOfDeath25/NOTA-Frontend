@@ -1,0 +1,120 @@
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--sp4);
+}
+
+
+.dialog {
+  background: var(--import-modal-bg);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-md);
+  box-shadow: 0px 10px 7.5px rgba(0, 0, 0, 0.1), 0px 4px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 512px;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-home-page);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp4);
+  padding: var(--sp6) var(--sp6) 0;
+}
+
+.title {
+  color: var(--text-home-page);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  margin: 0 0 var(--sp2);
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted-color);
+  padding: var(--sp1);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    color: var(--text-home-page);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp2);
+  padding: var(--sp4) var(--sp6) var(--sp6);
+}
+
+.cancelBtn {
+  height: var(--btn-height);
+  padding-inline: var(--sp4);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-home-page);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(79, 139, 255, 0.3);
+  }
+}
+
+.deleteBtn {
+  height: var(--btn-height);
+  padding-inline: var(--sp4);
+
+  &:hover {
+    box-shadow: 0 0 8px 0 var(--danger-color);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .dialog {
+    max-width: 100%;
+  }
+
+  .header,
+  .footer {
+    padding-inline: var(--sp4);
+  }
+
+  .footer {
+    padding-bottom: var(--sp4);
+  }
+}

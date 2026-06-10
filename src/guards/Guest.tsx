@@ -1,14 +1,14 @@
-import type {ReactNode} from "react";
 import {useAuth} from "@hooks/api/useAuth.ts";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
+import LoadingScreen from "@components/LoadingScreen/LoadingScreen";
 
-export default function Guest({fallback = <h1>Loading ....</h1>}: { fallback?: ReactNode | string }) {
+export default function Guest() {
     const {user} = useAuth();
-    const location = useLocation()
-    if (user.isLoading) {
-        return fallback;
-    }
+    const location = useLocation();
 
+    if (user.isLoading) {
+        return <LoadingScreen />;
+    }
 
     if (user.data) {
         if (location.pathname === "/signup") {
@@ -18,7 +18,5 @@ export default function Guest({fallback = <h1>Loading ....</h1>}: { fallback?: R
     }
 
     return <Outlet/>;
-
-
 }
 

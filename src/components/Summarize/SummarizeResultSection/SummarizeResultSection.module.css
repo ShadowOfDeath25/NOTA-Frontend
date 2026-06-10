@@ -1,0 +1,158 @@
+/* ── Outer container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+  width: 100%;
+}
+
+/* ── Toolbar: heading + action buttons ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp4);
+  height: 36px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+}
+
+.headingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--icon-color);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.headingText {
+  color: var(--text-home-page);
+  margin: 0;
+}
+
+/* ── Action buttons group ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+  flex-shrink: 0;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  height: var(--btn-height);
+  padding-inline: var(--sp3);
+  background: rgba(79, 139, 255, 0.03);
+  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-home-page);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(79, 139, 255, 0.3);
+    background-color: rgba(79, 139, 255, 0.06);
+  }
+}
+
+.actionBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--icon-color);
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Summary card ── */
+.card {
+  background: var(--notecard-bg-color);
+  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--sp6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+}
+
+.cardLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+}
+
+.cardLabelIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--icon-color);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.cardLabelText {
+  color: var(--text-home-page);
+}
+
+.summaryText {
+  color: var(--text-sidebar-nav);
+  line-height: 26px;
+  margin: 0;
+}
+
+/* ── Save as Note button ── */
+.saveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp2);
+  align-self: flex-start;
+
+  &:hover {
+    box-shadow: 0 0 8px 0 var(--brand-primary-color);
+  }
+}
+
+.saveBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: var(--sp3);
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+}

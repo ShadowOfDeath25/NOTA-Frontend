@@ -1,0 +1,67 @@
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    z-index: 200;
+    
+
+    display: none; /* hidden on desktop — sidebar already shows the logo */
+    align-items: center;
+    gap: 12px;
+    padding-inline: 12px;
+
+    background-color: var(--sidebar-bg-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--text-sidebar-nav);
+    transition: background-color 0.15s ease;
+
+    & svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    &:hover {
+        background-color: rgba(152, 16, 250, 0.12);
+        border-color: rgba(152, 16, 250, 0.4);
+    }
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 28px;
+    height: 28px;
+}
+
+.appName {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+/* show only on mobile/tablet where sidebar collapses */
+@media (max-width: 1024px) {
+    .topBar {
+        display: flex;
+    }
+}

@@ -1,0 +1,124 @@
+/* ── Page layout ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  background-color: var(--home-bg-color);
+}
+
+/* ── Page header (mirrors SpaceDetailHeader) ── */
+.pageHeader {
+  background-color: var(--sidebar-bg-color);
+  border-bottom: 0.8px solid var(--sidebar-divider-color);
+  padding: var(--sp6) var(--sp6) var(--sp4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp4);
+  flex-shrink: 0;
+}
+
+.backBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-sidebar-nav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(79, 139, 255, 0.08);
+    color: var(--text-home-page);
+  }
+}
+
+.spaceIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.titleGroup {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp2);
+}
+
+.settingsIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sidebar-item);
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.pageTitle {
+  color: var(--text-home-page);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pageSubtitle {
+  color: var(--text-sidebar-item);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Scrollable content area ── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+  max-width: 800px;
+  width: 100%;
+  align-self: center;
+}
+[dir="rtl"] .backIcon{
+  transform: rotate(180deg);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pageHeader {
+    padding: var(--sp4);
+  }
+
+  .content {
+    padding: var(--sp6) var(--sp4);
+  }
+}

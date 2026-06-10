@@ -1,4 +1,3 @@
-
 .container{
     display: flex;
     justify-content: space-between;
@@ -21,9 +20,8 @@ padding: 0;}
 
 .cloudIcon{
   color: #00C950;
-  
-
 }
+
  .notification{
   cursor: pointer;
     position: relative;
@@ -34,7 +32,6 @@ padding: 0;}
   &:hover{
     transform: scale(1.05);
   }
-
  }  
 
  .badge{
@@ -48,8 +45,13 @@ padding: 0;}
     height: 18px;
     background-color: var(--brand-primary-color);
     border-radius: 50%;
-
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
  }
-    
- 
-  
+
+@media (max-width: 640px) {
+  .container {
+    margin-bottom: var(--sp8);
+  }
+}

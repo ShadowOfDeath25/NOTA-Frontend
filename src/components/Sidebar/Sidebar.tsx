@@ -9,29 +9,26 @@ import SpacesIcon from '@assets/icons/files.svg';
 import UploadIcon from '@assets/icons/upload.svg'
 import SettingsIcon from '@assets/icons/settings.svg'
 import TrashIcon from '@assets/icons/trash.svg'
-import MenuIcon from '@assets/icons/menu.svg?react'
 import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
 import {useNavigate, useLocation} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
 import { useModal } from "../../context/ModalContext.tsx";
 
-export default function Sidebar() {
+interface SidebarProps {
+    isSidebarOpen: boolean;
+    onToggle: () => void;
+}
+
+export default function Sidebar({ isSidebarOpen, onToggle }: SidebarProps) {
     const location = useLocation();
     const pathname = location.pathname.split("/")[1];
     const [active, setActive] = useState<string>(pathname)
-    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const {t} = useTranslation()
     const navigate = useNavigate();
     const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent> & { target: HTMLDivElement }) => {
         setActive(e.target.id);
         navigate(`/${e.target.id}`)
-    }
-    const handleMenuClick = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    }
-    const handleCloseClick = () => {
-        setIsSidebarOpen(!isSidebarOpen);
     }
     const { setImportModal } = useModal();
     const handleImportClick = () => {
@@ -39,18 +36,12 @@ export default function Sidebar() {
     }
     const isEmpty: boolean = false;
     return (
-        <>
-            {!isSidebarOpen && (
-                <div className={styles.menuIcon} onClick={handleMenuClick}>
-                    <MenuIcon/>
-                </div>
-            )}
         <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>
             <div className={styles.header}>
                 <div className={styles.logoContainer}><img src={logo} className={styles.logo} alt="Logo"/>
                 <h4>Nota</h4></div>
                 {isSidebarOpen && (
-                <div className={styles.closeIcon} onClick={handleCloseClick}>
+                <div className={styles.closeIcon} onClick={onToggle}>
                     <CloseIcon/>
                 </div>)}
             </div>
@@ -126,7 +117,6 @@ export default function Sidebar() {
                 </div>
             </Activity>
         </div>
-        </>
     );
 }
 
