@@ -9,6 +9,7 @@ import LanguageSync from "@components/LanguageSync/LanguageSync.tsx";
 import './i18n.ts'
 import { SettingsProvider } from "./context/SettingsContext.tsx";
 import { ModalProvider } from "./context/ModalContext.tsx";
+import { SnackbarProvider } from "@components/Snackbar/SnackbarContext.tsx";
 
 declare global {
     interface Window {
@@ -25,7 +26,9 @@ createRoot(document.getElementById('root')!).render(
             <LanguageSync/>
             <SettingsProvider>
                 <ModalProvider>
-                <RouterProvider router={router}></RouterProvider>
+                <SnackbarProvider>
+                  <RouterProvider router={router} />
+                </SnackbarProvider>
                 </ModalProvider>
             </SettingsProvider>
         </QueryClientProvider>

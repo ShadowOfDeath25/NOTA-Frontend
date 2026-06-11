@@ -114,7 +114,7 @@ export default function HeroSection() {
       <div className={styles.inner}>
         <div className={styles.content}>
           <h1 className={styles.heading}>
-            {t("hero_title", "Think. Write. Collaborate.\\nAll in One Place.")}
+            {t("hero_title", "Think. Write. Collaborate.\nAll in One Place.")}
           </h1>
           <p className={styles.subtitle}>
             {t(
