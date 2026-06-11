@@ -1,0 +1,72 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.item {
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.heading {
+  margin: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--sp4) var(--sp6);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-home-page);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  text-align: start;
+  transition: background-color 0.15s ease;
+  gap: var(--sp4);
+}
+
+.trigger:hover {
+  background-color: rgba(152, 16, 250, 0.05);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--brand-primary-color);
+  outline-offset: -2px;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--icon-color);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.panel {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.panel:not(.panelOpen) {
+  display: none;
+}
+
+.panelContent {
+  padding: 0 var(--sp6) var(--sp5);
+  color: var(--text-sidebar-item);
+  font-size: 14px;
+  line-height: 20px;
+}

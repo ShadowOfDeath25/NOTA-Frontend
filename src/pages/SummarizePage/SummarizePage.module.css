@@ -53,6 +53,18 @@
   max-width: 831px;
 }
 
+.generatingNotice {
+  text-align: center;
+  padding: var(--sp4) 0;
+  color: var(--text-sidebar-item);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .topBar {

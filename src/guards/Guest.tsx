@@ -14,7 +14,7 @@ export default function Guest() {
         if (location.pathname === "/signup") {
             return <Navigate to="/getting-started" replace/>;
         }
-        return <Navigate to="/" replace/>;
+        return <Navigate to="/home" replace/>;
     }
 
     return <Outlet/>;

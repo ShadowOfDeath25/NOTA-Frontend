@@ -9,6 +9,7 @@ import {v4 as uuidv4} from "uuid";
 import NotificationsList from "@components/Notifications/NotificationsList";
 import type {NoteSummarizedEvent} from "@customTypes/Note.ts";
 import type {Notification, NotificationType} from "@customTypes/Notification";
+import {useQueryClient} from "@tanstack/react-query";
 
 
 const WelcomeHeader = () => {
@@ -18,7 +19,7 @@ const WelcomeHeader = () => {
     const [showNotifications, setShowNotifications] = useState(false);
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const panelRef = useRef<HTMLDivElement>(null);
-
+    const queryClient = useQueryClient()
     const unreadCount = notifications.filter((n) => !n.isRead).length;
 
     const addNotification = useCallback(
@@ -43,7 +44,9 @@ const WelcomeHeader = () => {
         const channel = echo.private(`App.Models.User.${userId}`)
 
         channel.listen(".note.summarized", (e: NoteSummarizedEvent) => {
-            console.log(e);
+            queryClient.invalidateQueries({queryKey: ["notes"]}).then();
+            queryClient.invalidateQueries({queryKey: ["notes/favorites"]}).then();
+
             addNotification(
                 'summarize',
                 t('notifications.summary_ready', 'Summary Ready'),
@@ -51,16 +54,28 @@ const WelcomeHeader = () => {
                 `/notes/${e.note_id}`,
             );
         })
+        channel.listen(".note.summarization_failed", () => {
 
-        channel.listenToAll((eventName: string, e: Record<string, unknown>) => {
-            console.log(eventName, e)
-        })
-        channel.listen(".note.summarization_failed", (e: NoteSummarizedEvent) => {
-            console.log(e);
             addNotification(
                 'system',
                 t('notifications.summary_failed', 'Summarization Failed'),
                 t('notifications.summary_failed_desc', 'Could not generate summary. Please try again.'),
+            );
+        })
+
+        channel.listen(".pdf.extracted", (e: NoteSummarizedEvent) => {
+            addNotification(
+                'summarize',
+                t('notifications.pdf_extracted', 'PDF Extracted'),
+                t('notifications.pdf_extracted_desc', 'PDF content has been extracted successfully'),
+                `/notes/${e.note_id}`,
+            );
+        })
+        channel.listen(".pdf.extraction_failed", () => {
+            addNotification(
+                'system',
+                t('notifications.pdf_extraction_failed', 'PDF Extraction Failed'),
+                t('notifications.pdf_extraction_failed_desc', 'Could not extract PDF content. Please try again.'),
             );
         })
 
@@ -82,6 +97,7 @@ const WelcomeHeader = () => {
                 setShowNotifications(false);
             }
         }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
