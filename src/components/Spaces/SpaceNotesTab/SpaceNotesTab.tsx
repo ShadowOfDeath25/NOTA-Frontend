@@ -21,7 +21,7 @@ export default function SpaceNotesTab({ notes, onAddNote }: SpaceNotesTabProps) 
 
   const filtered = notes.filter((n) =>
     n.title.toLowerCase().includes(search.toLowerCase()) ||
-    (n.summary ?? '').toLowerCase().includes(search.toLowerCase())
+    (n.preview ?? '').toLowerCase().includes(search.toLowerCase())
   );
 
   return (

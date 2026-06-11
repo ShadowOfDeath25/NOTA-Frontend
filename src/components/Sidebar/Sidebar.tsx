@@ -13,8 +13,10 @@ import CloseIcon from '@assets/icons/close.svg?react'
 import {useTranslation} from "react-i18next";
 import {useNavigate, useLocation} from "react-router-dom";
 import NoteLink from "@components/NoteLink/NoteLink.tsx";
-import {useModal} from "../../context/ModalContext.tsx";
+import {useModal} from "@context/ModalContext.tsx";
 import {useRead} from "@hooks/api/useRead.ts";
+import type {UseQueryResult} from "@tanstack/react-query";
+import type {Note} from "@customTypes/Note.ts";
 
 interface SidebarProps {
     isSidebarOpen: boolean;
@@ -37,10 +39,10 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
     }
     const isEmpty: boolean = false;
 
-    const {data: favoriteNotes, isLoading: favoritesLoading} = useRead("notes/favorites");
+    const {data: favoriteNotes, isLoading: favoritesLoading} = useRead<UseQueryResult<Note[]>>("notes/favorites");
 
 
-    const {data: notes, isLoading: notesLoading} = useRead('notes');
+    const {data: notes, isLoading: notesLoading} = useRead<UseQueryResult<Note[]>>('notes');
 
     return (
         <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>

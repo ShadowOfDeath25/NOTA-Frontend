@@ -3,16 +3,19 @@ import starIcon from "@assets/icons/star.svg";
 import starFilledIcon from "@assets/icons/star-filled.svg";
 import clockIcon from "@assets/icons/clock.svg";
 import {useState} from "react";
-import type {NoteData} from '@customTypes/NoteData.ts';
-import { useNavigate } from "react-router-dom";
 
-export interface NoteCardProps extends NoteData {
+import {useNavigate} from "react-router-dom";
+import type {Note} from "@customTypes/Note.ts";
+
+export interface NoteCardProps extends Note {
     onNoteClick: (id: string, starred?: boolean) => void;
 }
 
-const NoteCard = ({id, title, summary = " ", date, tag, starred, onNoteClick}: NoteCardProps) => {
+const NoteCard = ({id, title, preview = "", created_at, starred, onNoteClick}: NoteCardProps) => {
     const navigate = useNavigate();
     const [isStarred, setIsStarred] = useState(starred);
+    const date = new Date(created_at.split('T')[0]).toLocaleDateString('en-GB');
+
 
     function handleStarClick(e: React.MouseEvent) {
         e.stopPropagation();
@@ -24,7 +27,7 @@ const NoteCard = ({id, title, summary = " ", date, tag, starred, onNoteClick}: N
 
     function handleNoteClick() {
 
-        navigate(`/notes/${id}`);
+        navigate(`/notes/${id}`, {state: {note_title: title}});
     }
 
     return (
@@ -40,14 +43,14 @@ const NoteCard = ({id, title, summary = " ", date, tag, starred, onNoteClick}: N
                 </button>
             </div>
 
-            <p className={styles.summary}>{summary}</p>
+            <p className={styles.summary}>{preview}</p>
 
             <div className={styles.footer}>
                 <div className={styles.dateContainer}>
                     <img src={clockIcon} alt="clock" className={styles.clockIcon}/>
                     <span className={styles.date}>{date}</span>
                 </div>
-                {tag && <span className={styles.tag}>{tag}</span>}
+                {/*{tag && <span className={styles.tag}>{tag}</span>}*/}
             </div>
         </div>
     );

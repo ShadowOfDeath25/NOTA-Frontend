@@ -5,9 +5,10 @@ import SpacesHeader from '@components/Spaces/SpacesHeader/SpacesHeader';
 import SpacesSearchBar from '@components/Spaces/SpacesSearchBar/SpacesSearchBar';
 import EmptySpaces from '@components/Spaces/EmptySpaces/EmptySpaces';
 import SpacesList from '@components/Spaces/SpacesList/SpacesList';
-import {useModal} from '../../context/ModalContext';
+import {useModal} from '@context/ModalContext.tsx';
 import {useRead} from "@hooks/api/useRead.ts";
 import type {Space} from "@customTypes/Space.ts";
+import type {UseQueryResult} from "@tanstack/react-query";
 
 
 export default function SpacesPage() {
@@ -15,7 +16,7 @@ export default function SpacesPage() {
     const {setCreateSpaceModal} = useModal();
     const navigate = useNavigate();
 
-    const {data: spaces} = useRead('spaces');
+    const {data: spaces} = useRead<UseQueryResult<Space[]>>('spaces');
 
     const handleCreateSpace = () => {
         setCreateSpaceModal(true);
@@ -26,8 +27,8 @@ export default function SpacesPage() {
     };
 
     const filteredSpaces = spaces?.data?.filter((space: { name: string; description: string; }) =>
-        space.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        space.description.toLowerCase().includes(searchQuery.toLowerCase())
+        space?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        space?.description?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (

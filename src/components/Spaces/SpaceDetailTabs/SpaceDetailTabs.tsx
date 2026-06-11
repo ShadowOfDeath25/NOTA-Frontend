@@ -1,7 +1,6 @@
 import styles from './SpaceDetailTabs.module.css';
 import fileIcon from '@assets/icons/file.svg';
 import collaborateIcon from '@assets/icons/collaborate.svg';
-import settingsIcon from '@assets/icons/settings.svg';
 import { useTranslation } from 'react-i18next';
 
 export type SpaceTab = 'notes' | 'members' | 'settings';

@@ -71,7 +71,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           <FileIcon/>
           </div >
           <span className={`${styles.metaText} bodyTextSm`}>
-            {t('space.note_count', '{{count}} notes', { count: space.noteCount })}
+            {t('space.note_count', '{{count}} notes', { count: space.notes_count })}
           </span>
         </div>
         <div className={styles.metaItem}>
@@ -79,7 +79,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
           <CollaborateIcon/>
           </div >
           <span className={`${styles.metaText} bodyTextSm`}>
-            {t('space.member_count', '{{count}} members', { count: space.memberCount })}
+            {t('space.member_count', '{{count}} members', { count: space.users_count })}
           </span>
         </div>
         <SpaceBadge role={space.role} />

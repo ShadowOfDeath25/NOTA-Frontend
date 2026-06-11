@@ -1,7 +1,7 @@
 export  type NoteData = {
     id: string;
     title: string;
-    summary?: string;
+    preview?: string;
     date: string;
     tag?: string;
     starred: boolean;

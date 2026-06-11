@@ -4,7 +4,7 @@ import SpaceCard from '@components/Spaces/SpaceCard/SpaceCard';
 import {useTranslation} from 'react-i18next';
 
 interface SpacesListProps {
-    spaces: Space[];
+    spaces: Space[] | undefined;
     onSpaceClick?: (id: string) => void;
 }
 

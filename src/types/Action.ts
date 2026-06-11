@@ -6,5 +6,6 @@ export type Action = {
     descEn: string,
     icon: string,
     color: "purpleIcon" | "blueIcon" | "greenIcon",
+    onClick: () => void
 }
 

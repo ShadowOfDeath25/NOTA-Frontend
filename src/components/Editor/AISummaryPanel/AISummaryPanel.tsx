@@ -1,7 +1,6 @@
 import styles from './AISummaryPanel.module.css';
 import AiIcon    from '@assets/icons/ai.svg?react';
 import CloseIcon from '@assets/icons/close.svg?react';
-import FullScreenIcon  from '@assets/icons/fullscreen.svg?react';
 import AddIcon   from '@assets/icons/add.svg?react';
 import CopyIcon   from '@assets/icons/copy.svg?react';
 import SaveIcon   from '@assets/icons/save.svg?react';
@@ -48,11 +47,7 @@ The platform aims to bridge the gap in the market for bilingual note-taking appl
 3. Integrate AI summarization API
 4. Test RTL layout extensively`;
 
-const MOCK_KEY_POINTS: KeyPoint[] = [
-  { id: '1', text: 'AI-powered note-taking platform for Arabic and English users',          color: '#ad46ff' },
-  { id: '2', text: 'Features include summarization, PDF conversion, and real-time collaboration', color: '#f6339a' },
-  { id: '3', text: 'Built with modern tech stack and bilingual support',                    color: '#2b7fff' },
-];
+
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
@@ -63,7 +58,7 @@ export default function AISummaryPanel({
   onInsertIntoNote,
   onSaveSummary,
   onCopyResult,
-  noteId,
+  // noteId,
 }: AISummaryPanelProps) {
   const { t } = useTranslation();
 

@@ -1,18 +1,21 @@
 import {useTranslation} from "react-i18next";
-import ActionCard from "@components/Home/ActionCard/ActionCard";
+import ActionCard from "@components/Home/ActionCard/ActionCard.tsx";
 import styles from "./ActionList.module.css";
 import addIcon from "@assets/icons/add.svg";
 import uploadIcon from "@assets/icons/upload.svg";
 import collaborateIcon from "@assets/icons/collaborate.svg";
 
 import type {Action} from "@customTypes/Action.ts";
+import {useModal} from "@context/ModalContext.tsx";
 
 const ActionList = () => {
     const {t} = useTranslation();
-    
-    const handleActionClick = (actionId: string) => {
-        console.log(actionId);
-    };
+
+    const {setAddNoteModal} = useModal();
+    const onCreate = ()=>{
+        setAddNoteModal(true);
+    }
+
 
     const actions: Action[] = [
         {
@@ -23,6 +26,7 @@ const ActionList = () => {
             descEn: "Start a new note",
             icon: addIcon,
             color: "purpleIcon",
+            onClick: onCreate
         },
         {
             id: "pdf",
@@ -32,6 +36,8 @@ const ActionList = () => {
             descEn: "Convert PDF to note",
             icon: uploadIcon,
             color: "blueIcon",
+            onClick: () => {
+            }
         },
         {
             id: "team",
@@ -41,20 +47,22 @@ const ActionList = () => {
             descEn: "Share with team",
             icon: collaborateIcon,
             color: "greenIcon",
+            onClick: () => {
+            }
         },
     ];
 
     return (
         <div className={styles.container}>
             {actions.map((item) => (
-                
+
                 <ActionCard
                     key={item.id}
                     title={t(item.titleAr, item.titleEn)}
                     description={t(item.descAr, item.descEn)}
                     icon={item.icon}
                     iconColorClass={item.color}
-                    onClick={() => handleActionClick(item.id)}
+                    onClick={item.onClick}
                 />
             ))}
         </div>

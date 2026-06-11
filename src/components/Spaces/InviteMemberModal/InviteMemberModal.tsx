@@ -18,9 +18,10 @@ interface InviteMemberModalProps {
 }
 
 const ROLES: { value: SpaceRole; labelEn: string;labelAr:string }[] = [
-  { value: 'contributor', labelEn: 'Contributor',labelAr:"محرر" },
+  { value: 'editor', labelEn: 'Contributor',labelAr:"محرر" },
   { value: 'viewer', labelEn: 'Viewer',labelAr:"مراقب" },
   { value: 'admin', labelEn: 'Admin',labelAr:"مسؤول" },
+  { value: 'owner', labelEn: 'Owner',labelAr:"مالك" },
 ];
 
 export default function InviteMemberModal({
@@ -31,23 +32,23 @@ export default function InviteMemberModal({
 }: InviteMemberModalProps) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState<SpaceRole>('contributor');
+  const [role, setRole] = useState<SpaceRole>('editor');
   const [roleOpen, setRoleOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Focus email on open, reset on close
-  useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => emailRef.current?.focus(), 50);
-    } else {
-      setEmail('');
-      setRole('contributor');
-      setRoleOpen(false);
-      setCopied(false);
-    }
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setTimeout(() => emailRef.current?.focus(), 50);
+  //   } else {
+  //     setEmail('');
+  //     setRole('contributor');
+  //     setRoleOpen(false);
+  //     setCopied(false);
+  //   }
+  // }, [isOpen]);
 
   // Close on Escape
   useEffect(() => {

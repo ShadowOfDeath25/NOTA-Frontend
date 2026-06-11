@@ -3,7 +3,6 @@ import LoginPage from "@pages/auth/LoginPage/LoginPage.tsx";
 import SignupPage from "@pages/auth/SignupPage/SignupPage.tsx";
 import ResetPasswordPage from "@pages/auth/ResetPasswordPage/RestPasswordPage.tsx";
 import NewPasswordPage from "@pages/auth/NewPasswordPage/NewPasswordPage.tsx";
-import {Navigate} from "react-router-dom";
 import {Redirect} from "@components/Redirect/Redirect.tsx";
 
 

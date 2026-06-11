@@ -42,6 +42,9 @@
       ],
       "@validators/*": [
         "./src/validation/*"
+      ],
+      "@context/*": [
+        "./src/context/*"
       ]
     },
     /* Bundler mode */
