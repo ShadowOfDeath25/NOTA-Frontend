@@ -1,8 +1,9 @@
 .container{
-    background-color:var(--sidebar-bg-color);
-    width: 450px;
-    border-radius: var(--radius-md);
+    background-color: var(--auth-card-bg);
+    width: 448px;
+    border-radius: 10px;
     padding: var(--sp8);
+    box-shadow: 0px 25px 25px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -17,13 +18,12 @@
     margin-bottom: var(--sp8);
 }
 
-
 .tabButton {
     text-align: center;
     width: 50%;
     padding: var(--sp1);
     cursor: pointer;
-    color: #94a3b8; 
+    color: var(--text-muted-color);
     z-index: 2; 
     border-radius: var(--radius-lg);
     border: 1px solid transparent;
@@ -31,8 +31,8 @@
 
 .activeTab {
     color: var(--text-home-page);
-    background-color:rgba(79, 139, 255, 0.03);
-    border: 1px solid rgba(79, 139, 255, 0.1) ;
+    background-color: var(--auth-card-bg);
+    border: 1px solid var(--auth-divider);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
 }
 

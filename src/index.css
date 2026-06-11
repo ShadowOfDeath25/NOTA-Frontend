@@ -39,6 +39,9 @@ html[lang="ar"] {
 :root, :root[data-theme="dark"] {
     /* Design Colors */
     --import-modal-bg: #0A0E1A;
+    --auth-card-bg: #101828;    /* auth card keeps the original sidebar tone */
+    --text-home-tag: #1A2030;
+    --auth-divider: rgba(79, 139, 255, 0.1); /* matches Figma divider/border in auth */
     --brand-primary-color: #9810fa;
     --brand-secondary-color: #4f8bff;
     --sidebar-bg-color: #101828;
@@ -86,7 +89,10 @@ html[lang="ar"] {
     --bg-page-editor: #F9FAFB;
     --editor-main-bg: #FFFFFF;
     --topBar-bg-color: #FFFFFF;
-    --sidebar-bg-color: #101828;  /* sidebar stays dark */
+    --auth-card-bg: #FFFFFF;
+    --text-home-tag: #E5E7EB;
+    --auth-divider: #E5E7EB;    /* visible divider on white auth card */
+    --sidebar-bg-color: #101828;
 
     /* Text */
     --text-home-page: #0a0a0a;

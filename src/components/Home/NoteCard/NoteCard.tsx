@@ -50,7 +50,7 @@ const NoteCard = ({id, title, preview = "", created_at, starred, onNoteClick}: N
                     <img src={clockIcon} alt="clock" className={styles.clockIcon}/>
                     <span className={styles.date}>{date}</span>
                 </div>
-                {tag && <span className={styles.tag}>{tag}</span>}
+                {/* {tag && <span className={styles.tag}>{tag}</span>} */}
             </div>
         </div>
     );

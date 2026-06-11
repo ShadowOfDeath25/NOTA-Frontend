@@ -1,9 +1,11 @@
 import Authentication from "@components/Authentication/Authentication";
-
+import styles from "./LoginPage.module.css";
 
 function LoginPage() {
     return (
-        <Authentication initialStep="login"/>
+        <div className={styles.container}>
+            <Authentication initialStep="login"/>
+        </div>
     );
 }
 

@@ -30,16 +30,21 @@
     width: 36px;
     height: 36px;
     border-radius: var(--radius-sm);
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     background-color: transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+        border-color: var(--brand-primary-color);
+        /* background-color: rgba(79, 139, 255, 0.08); */
+    }
 }
 .icon{
     color: var(--text-home-page);
-    fill: none;
+    
     width: 16px;
     height: 16px;
-    &:hover{
-        color: var(--brand-primary-color);
-    }
+
+    
 }

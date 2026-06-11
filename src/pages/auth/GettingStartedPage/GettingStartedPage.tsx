@@ -1,12 +1,15 @@
 import HeaderAuthentication from "@components/Authentication/HeaderAuthentication/HeaderAuthentication.tsx";
-import styles from '@components/Authentication/Authentication.module.css'
+import authStyles from '@components/Authentication/Authentication.module.css';
+import pageStyles from './GettingStartedPage.module.css';
 import SuccessView from "@components/Authentication/SuccessView/SuccessView.tsx";
 
 export default function GettingStartedPage() {
     return (
-        <div className={styles.container}>
-            <HeaderAuthentication/>
-            <SuccessView/>
+        <div className={pageStyles.page}>
+            <div className={authStyles.container}>
+                <HeaderAuthentication/>
+                <SuccessView/>
+            </div>
         </div>
     );
 }
