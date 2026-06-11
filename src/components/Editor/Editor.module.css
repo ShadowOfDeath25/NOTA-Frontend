@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--bg-page-editor);
-  color: var(--text-home-page);
+  color: var(--text-home-page) !important;
   min-height: 100vh;
   padding: 16px;
 }

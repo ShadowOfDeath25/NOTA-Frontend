@@ -36,6 +36,7 @@ export default function Editor({noteId}: EditorProps) {
 
     const navigate = useNavigate();
 
+    console.log(state);
     useEffect(() => {
         if (title === initialTitleRef.current) return;
 

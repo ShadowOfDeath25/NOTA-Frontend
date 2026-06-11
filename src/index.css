@@ -56,12 +56,11 @@ html[lang="ar"] {
     --text-sidebar-nav: #d1d5dc;
     --text-home-page: #fafafa;
     --text-primary: #fafafa;
-    --text-home-tag: #1A2030;
     --danger-color: #d4183d;
     --badge-blue-bg: #e5f0fc;
     --sidebar-divider-color: #1E2939;
     --sidebar-border-color: #364153;
-    --border-divider: #e5e7eb;
+    --border-divider: #1E2939;
     --icon-color: #94A3B8;
     --bg-page-editor: #090F1C;
     --editor-main-bg: #101828;
@@ -69,7 +68,6 @@ html[lang="ar"] {
     --topBar-bg-color: #101828;
     --topBar-divider-color:#1E2939;
     --text-secondary:#0a0a0a;
-    --text-primary:#fafafa;   
     --icon-color-secondary: #0a0a0a;
 
     /* Gradients */

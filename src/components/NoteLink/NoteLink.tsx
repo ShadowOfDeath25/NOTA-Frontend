@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import styles from './styles.module.css';
+
 type NoteLinkProps = {
     name: string,
     uuid: string
@@ -7,7 +8,7 @@ type NoteLinkProps = {
 export default function NoteLink({name, uuid}: NoteLinkProps) {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate(`/notes/${uuid}`)
+        navigate(`/notes/${uuid}`, {state: {note_title: name}})
     }
     return (
         <span onClick={handleClick} className={styles.noteLink}>{name}</span>

@@ -29,9 +29,11 @@ export const useDelete = <
         ...options,
         mutationKey: [resource, "delete"],
 
-        mutationFn: (id: TVariables) =>
-            AxiosClientV1.delete<TData>(`/${resource}/${id}`),
+        mutationFn: (id: TVariables) => {
 
+            return AxiosClientV1.delete<TData>(`/${resource}/${id}`)
+
+        },
         onSuccess: (data, variables, onMutateResult, context) => {
             queryClient.invalidateQueries({queryKey: [resource]});
 

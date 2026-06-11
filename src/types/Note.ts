@@ -27,7 +27,7 @@ export interface Note {
     title: string,
     space_id: string,
     created_at: string,
-    starred: boolean,
+    is_favorite: boolean,
 }
 
 export interface NoteSummarizedEvent {

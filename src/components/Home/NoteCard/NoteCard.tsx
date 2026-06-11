@@ -3,25 +3,41 @@ import starIcon from "@assets/icons/star.svg";
 import starFilledIcon from "@assets/icons/star-filled.svg";
 import clockIcon from "@assets/icons/clock.svg";
 import {useState} from "react";
-
 import {useNavigate} from "react-router-dom";
 import type {Note} from "@customTypes/Note.ts";
+import {type UseMutationResult, useQueryClient} from "@tanstack/react-query";
+import {useCreate} from "@hooks/api/useCreate.ts";
+import {AxiosClientV1} from "../../../axiosClient.ts";
+import * as React from "react";
 
 export interface NoteCardProps extends Note {
     onNoteClick: (id: string, starred?: boolean) => void;
 }
 
-const NoteCard = ({id, title, preview = "", created_at, starred, onNoteClick}: NoteCardProps) => {
+const NoteCard = ({id, title, preview = "", created_at, is_favorite, onNoteClick}: NoteCardProps) => {
     const navigate = useNavigate();
-    const [isStarred, setIsStarred] = useState(starred);
+    const [isStarred, setIsStarred] = useState(is_favorite);
     const date = new Date(created_at.split('T')[0]).toLocaleDateString('en-GB');
+    const queryClient = useQueryClient();
+
+    const onSuccess = () => {
+        queryClient.invalidateQueries({queryKey: ["notes"]}).then();
+        queryClient.invalidateQueries({queryKey: ["notes/favorites"]}).then();
+    }
+    const createMutation = useCreate<UseMutationResult>(`notes/${id}/favorites`, {
+        onSuccess
+    });
 
 
     function handleStarClick(e: React.MouseEvent) {
         e.stopPropagation();
         setIsStarred(!isStarred);
         onNoteClick(id, !isStarred);
-
+        if (!isStarred) {
+            createMutation.mutate({});
+        } else {
+            AxiosClientV1.delete(`notes/${id}/favorites`).then(onSuccess);
+        }
 
     }
 

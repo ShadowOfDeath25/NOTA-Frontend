@@ -50,7 +50,7 @@ const WelcomeHeader = () => {
                     <div className={styles.cloudIcon}>
                         <CloudIcon/>
                     </div>
-                    <p className="bodyTextSm"> {t("all_changes_synced", "All changes synced")}</p>
+                    <p className={`bodyTextSm ${styles.smallText}`}> {t("all_changes_synced", "All changes synced")}</p>
                 </div>
             </div>
             <div className={styles.notification} onClick={() => alert("hello")}>
