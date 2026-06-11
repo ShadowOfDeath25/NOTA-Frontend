@@ -10,8 +10,8 @@
 }
 
 .topBar {
-  background-color: var(--sidebar-bg-color);
-  border-bottom: 0.8px solid var(--sidebar-divider-color);
+  background-color: var(--topBar-bg-color);
+  border-bottom: 0.8px solid var(--topBar-divider-color);
   padding: var(--sp6) var(--sp6) var(--sp4);
   display: flex;
   flex-direction: column;

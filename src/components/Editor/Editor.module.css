@@ -24,7 +24,7 @@
   align-items: center;
   padding: 14px 20px;
   gap: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-divider);
   direction: ltr; /* Keep header layout LTR regardless of document language */
 }
 
@@ -36,7 +36,7 @@
 .titleInput {
   background: #4f8bff08;
   border: none;
-  color: #ffffff;
+  color: var(--text-home-page);
   padding: 4px 16px;
   border-radius: var(--radius-sm);
   font-size: 16px;
@@ -47,7 +47,7 @@
 }
 
 .titleInput::placeholder {
-  color: #4a5568;
+  color: var(--text-muted-color);
 }
 
 .headerRight {
@@ -66,7 +66,7 @@
 
 
 .collaborators {
-  background: var(--sidebar-divider-color);
+  background: var(--surface-row-bg, var(--sidebar-divider-color));
   display: flex;
   padding: 2px 12px;
   border-radius: var(--radius-sm);
@@ -159,7 +159,7 @@
 }
 
 :global(.ql-editor) {
-  color: #d1d5dc !important;
+  color: var(--text-home-page) !important;
   font-size: 15px !important;
   line-height: 1.7 !important;
   padding: 0 !important;
@@ -186,18 +186,18 @@
 
 
 :global(.ql-snow .ql-stroke) {
-  stroke: #a0aec0 !important;
+  stroke: var(--icon-color) !important;
 }
 
 :global(.ql-snow .ql-fill) {
-  fill: #a0aec0 !important;
+  fill: var(--icon-color) !important;
 }
 
 :global(.ql-snow .ql-picker) {
-  color: #a0aec0 !important;
+  color: var(--icon-color) !important;
 }
 
 :global(.ql-snow .ql-picker-options) {
-  background-color: #1a202c !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--editor-main-bg) !important;
+  border-color: var(--border-divider) !important;
 }

@@ -3,14 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-divider);
   background-color: var(--editor-main-bg);
   padding: 4px 20px;
   gap: 8px;
   min-height: 46px;
-  /* Prevent text selection while clicking toolbar */
   user-select: none;
-  direction: ltr; /* Keep toolbar layout LTR regardless of document language */
+  direction: ltr;
 }
 
 /* ── Groups container (left side) ─────────────────────────── */
@@ -35,7 +34,7 @@
   display: block;
   width: 1px;
   height: 18px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--border-divider);
   margin: 0 5px;
   flex-shrink: 0;
   border: none;
@@ -67,18 +66,17 @@
   width: 16px;
   height: 16px;
   display: block;
-  color: var(--text-home-page);
+  color: var(--icon-color);
   stroke: currentColor;
   fill: none;
   flex-shrink: 0;
-  /* Prevent SVGs from capturing pointer events */
   pointer-events: none;
 }
 
 /* Hover — lighter background, brighter icon */
 .btn:hover:not(.disabled) {
-  background: rgba(255, 255, 255, 0.07);
-  color: #e2e8f0;
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-home-page);
 }
 
 /* Active — the format is currently applied at the cursor */
@@ -118,9 +116,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  color: #c4cad6;
+  background: transparent;
+  border: 1px solid var(--border-divider);
+  color: var(--icon-color);
   padding: 5px 14px;
   border-radius: 20px;
   font-size: 13px;
@@ -136,9 +134,9 @@
 }
 
 .aiBtn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: #e2e8f0;
+  background: rgba(100, 116, 139, 0.08);
+  border-color: var(--icon-color);
+  color: var(--text-home-page);
 }
 
 .aiBtn:focus-visible {

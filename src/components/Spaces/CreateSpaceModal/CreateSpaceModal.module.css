@@ -13,7 +13,7 @@
 /* ── Dialog box ── */
 .dialog {
   background: var(--import-modal-bg);
-  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border: 0.8px solid var(--border-color);
   border-radius: var(--radius-md);
   box-shadow: 0px 10px 7.5px rgba(0, 0, 0, 0.1), 0px 4px 3px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -128,7 +128,7 @@
   gap: var(--sp3);
   padding: var(--sp4);
   background: var(--notecard-bg-color);
-  border: 0.8px solid rgba(79, 139, 255, 0.15);
+  border: 0.8px solid var(--border-color);
   border-radius: var(--radius-lg);
   cursor: pointer;
   text-align: left;
@@ -154,6 +154,7 @@
   color: var(--text-sidebar-nav);
 
   & svg {
+    color:var(--icon-color); 
     width: 20px;
     height: 20px;
   }

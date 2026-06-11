@@ -7,7 +7,7 @@
     z-index: 200;
     
 
-    display: none; /* hidden on desktop — sidebar already shows the logo */
+    display: none;
     align-items: center;
     gap: 12px;
     padding-inline: 12px;

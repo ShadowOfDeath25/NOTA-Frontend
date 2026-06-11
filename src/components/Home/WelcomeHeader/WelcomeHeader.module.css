@@ -3,11 +3,12 @@
     justify-content: space-between;
     align-items: start;
     margin-bottom: 48px;
-}
-.welcome{
+  }
+  .welcome{
     display: flex;
     flex-direction: column;
-    gap:8px
+    color: var(--text-home-page);
+    gap:8px;
 }
 .synced{
     display: flex;
@@ -16,7 +17,8 @@
    
 }
 p{
-padding: 0;}
+padding: 0;
+color:#4A5565 ;}
 
 .cloudIcon{
   color: #00C950;
@@ -27,17 +29,21 @@ padding: 0;}
     position: relative;
     padding: 9px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid var(--border-color);
   transition:transform 0.2s ease;
   &:hover{
     transform: scale(1.05);
+  }
+  svg{
+    color: var(--text-home-page);
+    display: block;
   }
  }  
 
  .badge{
     position: absolute;
-    top: -3px;
-    right: -5px;
+    top: -8px;
+    right: -8px;
      display: flex;
     align-items: center;
     justify-content: center;
@@ -47,8 +53,9 @@ padding: 0;}
     border-radius: 50%;
     font-size: 10px;
     font-weight: 700;
-    color: #fff;
+    color: #ffffff;
  }
+
 
 @media (max-width: 640px) {
   .container {

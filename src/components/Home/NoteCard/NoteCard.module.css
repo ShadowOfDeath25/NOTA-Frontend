@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--sp8);
-    border: 1px solid rgb(from var(--brand-secondary-color) r g b / 0.15);
+    border: 1px solid var(--border-color);
     cursor: pointer;
     &:hover{
     border-color: rgb(from var(--brand-secondary-color) r g b / 0.3);

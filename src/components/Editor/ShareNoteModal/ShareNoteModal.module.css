@@ -42,7 +42,7 @@
 }
 
 .subtitle {
-  color: #94a3b8;
+  color: var(--text-muted-color);
   margin: 0;
 }
 
@@ -99,7 +99,7 @@
   font-size: 14px;
 
   &::placeholder {
-    color: #94a3b8;
+    color: var(--text-muted-color);
   }
 
   &:focus {
@@ -206,7 +206,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--sidebar-divider-color);
+  background: var(--surface-row-bg, var(--sidebar-divider-color));
   border-radius: var(--radius-md);
   padding: 0 var(--sp3);
   min-height: 60px;

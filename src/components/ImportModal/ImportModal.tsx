@@ -51,11 +51,9 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
         {status === "idle" && (
           <>
             <div className={styles.tabs}>
-              <div className={`${styles.tab} ${styles.active}`}>
-                <button className={`${styles.tabBtn} ${styles.active}`}>
-                  <span className={styles.iconTab}>
-                    <StorageIcon />
-                  </span>
+              <div className={styles.tab}>
+                <button className={styles.active}>
+                  <StorageIcon />
                   <span className={styles.tabText}>
                     {t("ImportModal.Upload_from_Device", "Upload from Device")}
                   </span>
@@ -79,11 +77,14 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
                 className={`${styles.browseBtn} btn btnPrimary`}
                 onClick={openFileDialog}
               >
-                <span className={styles.browseIcon}>
-                  <FilesIcon />
-                </span>
+                <FilesIcon />
                 <span>{t("ImportModal.browse_files", "Browse Files")}</span>
               </button>
+
+              <div className={styles.uploadHints}>
+                <p className={styles.hintText}>{t("ImportModal.supported_formats", "Supported: PDF files only")}</p>
+                <p className={styles.hintText}>{t("ImportModal.max_size", "Max size: 50MB")}</p>
+              </div>
 
               <input
                 type="file"

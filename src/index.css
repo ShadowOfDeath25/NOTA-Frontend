@@ -36,7 +36,7 @@ html[lang="ar"] {
 }
 
 
-:root {
+:root, :root[data-theme="dark"] {
     /* Design Colors */
     --import-modal-bg: #0A0E1A;
     --brand-primary-color: #9810fa;
@@ -52,6 +52,7 @@ html[lang="ar"] {
     --text-sidebar-item: #99a1af;
     --text-sidebar-nav: #d1d5dc;
     --text-home-page: #fafafa;
+    --text-primary: #fafafa;
     --text-home-tag: #1A2030;
     --danger-color: #d4183d;
     --badge-blue-bg: #e5f0fc;
@@ -61,11 +62,12 @@ html[lang="ar"] {
     --icon-color: #94A3B8;
     --bg-page-editor: #090F1C;
     --editor-main-bg: #101828;
-    --border-color:#4F8BFF26;
-    
-    
-    
-
+    --border-color: #4F8BFF26;
+    --topBar-bg-color: #101828;
+    --topBar-divider-color:#1E2939;
+    --text-secondary:#0a0a0a;
+    --text-primary:#fafafa;   
+    --icon-color-secondary: #0a0a0a;
 
     /* Gradients */
     --overlay-linear-gradient: linear-gradient(135deg, rgba(89, 22, 139, 0.3) 0%, rgba(134, 16, 67, 0.3) 100%);
@@ -73,8 +75,49 @@ html[lang="ar"] {
     --gradient-blue-cyan: linear-gradient(135deg, #2b7fff, #00b8db);
     --gradient-green: linear-gradient(135deg, #00c950, #00bc7d);
     --gradient-purple-pink-light: linear-gradient(135deg, #c27aff, #fb64b6);
+    --current-background-color: var(--home-bg-color);
+}
 
+:root[data-theme="light"] {
+    /* Backgrounds */
+    --home-bg-color: #F9FAFB;
+    --notecard-bg-color: #FFFFFF;
+    --import-modal-bg: #FFFFFF;
+    --bg-page-editor: #F9FAFB;
+    --editor-main-bg: #FFFFFF;
+    --topBar-bg-color: #FFFFFF;
+    --sidebar-bg-color: #101828;  /* sidebar stays dark */
 
+    /* Text */
+    --text-home-page: #0a0a0a;
+    --text-primary: #0a0a0a;
+    --text-secondary: #4a5565;
+    --text-primary-color: #0a0a0a;
+    --text-secondary-color: #4a5565;
+    --text-muted-color: #6a7282;
+    --text-sidebar-item: #6a7282;
+
+    /* Borders & dividers */
+    --border-divider: #E5E7EB;
+    --border-color: rgba(79, 139, 255, 0.15);
+    --topBar-divider-color: #E5E7EB;
+    --sidebar-divider-color: #1E2939;  /* sidebar stays dark */
+
+    /* Icons */
+    --icon-color: #64748b;
+    --icon-color-secondary: #64748b;
+
+    /* Surface */
+    --surface-color: #FFFFFF;
+    --text-light: #fff;
+    --danger-color: #D4183D;
+
+    /* Misc */
+    --surface-row-bg: #F1F5F9;
+    --current-background-color: var(--home-bg-color);
+}
+
+:root {
     /* Spacing */
     --sp1: 4px;
     --sp2: 8px;
@@ -96,13 +139,6 @@ html[lang="ar"] {
 
     /* Heights */
     --btn-height: 36px;
-}
-
-:root[data-theme=dark] {
-    --current-background-color: var(--home-bg-color)
-}
-:root[data-theme=light]{
-    --current-background-color:#fafafa;
 }
 
 

@@ -6,7 +6,11 @@
 .contianer{
     height: 100vh;
 }
-
+.icon{
+    svg{
+        color: var(--danger-color);
+    }
+}
 .description {
     display: flex;
     align-items: center;
@@ -18,7 +22,7 @@
   background-color: var(--notecard-bg-color);
   padding: var(--sp12);
  border-radius: var(--radius-sm);
- border: 1px solid rgba(79,139,255,0.15);
+ border: 1px solid var(--border-color);
   
 }
 .deletedNotesContainer{

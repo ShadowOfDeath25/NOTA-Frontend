@@ -6,7 +6,7 @@
   z-index: 200;
 
   width: 192px;
-  background: #0f1420;
+  background: var(--import-modal-bg);
   border: 0.8px solid rgba(79, 139, 255, 0.15);
   border-radius: var(--radius-sm);          /* 8px */
   box-shadow:
@@ -41,7 +41,7 @@
   border: none;
   cursor: pointer;
 
-  color: #fafafa;
+  color: var(--text-home-page);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;

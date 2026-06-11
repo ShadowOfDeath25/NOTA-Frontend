@@ -15,12 +15,12 @@
   &:hover{
     border: solid var(--brand-primary-color) 1px;
     background-color: var(--brand-primary-color);
-    color:var(--surface-color);
+    color:#fff;
   }
 }
 
 .active {
   background-color: var(--brand-primary-color);
-  color:var(--surface-color);
+  color:#fff;
   
 }

@@ -29,12 +29,8 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
 
 
   useEffect(() => {
-  document.body.classList.remove("light");
-  if (theme === "light") {
-    document.body.classList.add("light");
-  } 
-  localStorage.setItem("theme", theme);
-
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
