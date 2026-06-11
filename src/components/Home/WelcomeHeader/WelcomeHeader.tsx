@@ -2,18 +2,41 @@ import styles from "./WelcomeHeader.module.css"
 import CloudIcon from "@assets/icons/cloud.svg?react"
 import BellIcon from "@assets/icons/bell.svg?react"
 import {useTranslation} from "react-i18next"
-import {useEffect} from "react";
+import {useEffect, useState, useRef, useCallback} from "react";
 import {useAuth} from "@hooks/api/useAuth.ts";
 import {echo} from "../../../echo.ts";
+import {v4 as uuidv4} from "uuid";
+import NotificationsList from "@components/Notifications/NotificationsList";
 import type {NoteSummarizedEvent} from "@customTypes/Note.ts";
+import type {Notification, NotificationType} from "@customTypes/Notification";
 
 
 const WelcomeHeader = () => {
     const {t} = useTranslation()
-    // const [events, setEvents] = useState([]);
     const {user} = useAuth()
     const userId = user?.data?.id
-    console.log('subscribing to reverb ');
+    const [showNotifications, setShowNotifications] = useState(false);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const panelRef = useRef<HTMLDivElement>(null);
+
+    const unreadCount = notifications.filter((n) => !n.isRead).length;
+
+    const addNotification = useCallback(
+        (type: NotificationType, title: string, message: string, actionUrl?: string) => {
+            const notification: Notification = {
+                id: uuidv4(),
+                type,
+                title,
+                message,
+                isRead: false,
+                createdAt: new Date().toISOString(),
+                actionUrl,
+            };
+            setNotifications((prev) => [notification, ...prev]);
+        },
+        [],
+    );
+
     useEffect(() => {
         if (!userId) return
 
@@ -21,16 +44,24 @@ const WelcomeHeader = () => {
 
         channel.listen(".note.summarized", (e: NoteSummarizedEvent) => {
             console.log(e);
-            console.log("summary success");
+            addNotification(
+                'summarize',
+                t('notifications.summary_ready', 'Summary Ready'),
+                t('notifications.summary_ready_desc', 'AI summary generated for your note'),
+                `/notes/${e.note_id}`,
+            );
         })
 
-        channel.listenToAll((e: NoteSummarizedEvent) => {
-            console.log(e)
-            console.log("event received");
+        channel.listenToAll((eventName: string, e: Record<string, unknown>) => {
+            console.log(eventName, e)
         })
         channel.listen(".note.summarization_failed", (e: NoteSummarizedEvent) => {
             console.log(e);
-            console.log("summary failed")
+            addNotification(
+                'system',
+                t('notifications.summary_failed', 'Summarization Failed'),
+                t('notifications.summary_failed_desc', 'Could not generate summary. Please try again.'),
+            );
         })
 
         channel.error((error: Error) => {
@@ -40,7 +71,32 @@ const WelcomeHeader = () => {
         return () => {
             echo.leave(`App.Models.User.${userId}`)
         }
-    }, [userId])
+    }, [userId, t, addNotification])
+
+    useEffect(() => {
+        function handleClickOutside(e: MouseEvent) {
+            if (
+                panelRef.current &&
+                !panelRef.current.contains(e.target as Node)
+            ) {
+                setShowNotifications(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleMarkAsRead = (id: string) => {
+        setNotifications((prev) =>
+            prev.map((n) => (n.id === id ? {...n, isRead: true} : n)),
+        );
+    };
+
+    const handleMarkAllAsRead = () => {
+        setNotifications((prev) =>
+            prev.map((n) => ({...n, isRead: true})),
+        );
+    };
 
     return (
         <div className={styles.container}>
@@ -53,12 +109,34 @@ const WelcomeHeader = () => {
                     <p className={`bodyTextSm ${styles.smallText}`}> {t("all_changes_synced", "All changes synced")}</p>
                 </div>
             </div>
-            <div className={styles.notification} onClick={() => alert("hello")}>
-                <BellIcon/>
-                <span className={styles.badge}>3</span>
+            <div className={styles.bellWrapper} ref={panelRef}>
+                <div
+                    className={styles.notification}
+                    onClick={() => setShowNotifications((prev) => !prev)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === 'Enter' && setShowNotifications((prev) => !prev)}
+                    aria-label={t('notifications.notifications', 'Notifications')}
+                    aria-expanded={showNotifications}
+                >
+                    <BellIcon/>
+                    {unreadCount > 0 && (
+                        <span className={styles.badge}>{unreadCount}</span>
+                    )}
+                </div>
+
+                {showNotifications && (
+                    <div className={styles.panel}>
+                        <NotificationsList
+                            notifications={notifications}
+                            isLoading={false}
+                            isError={false}
+                            onMarkAsRead={handleMarkAsRead}
+                            onMarkAllAsRead={handleMarkAllAsRead}
+                        />
+                    </div>
+                )}
             </div>
-
-
         </div>
     )
 }

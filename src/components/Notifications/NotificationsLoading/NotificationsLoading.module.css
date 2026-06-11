@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp3);
+}
+
+.card {
+    background-color: var(--notecard-bg-color);
+    border: 0.8px solid rgba(79, 139, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: var(--sp4);
+    width: 100%;
+}
+
+.inner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp3);
+}
+
+.iconSkeleton {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: rgba(79, 139, 255, 0.08);
+    flex-shrink: 0;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.textGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp2);
+}
+
+.titleSkeleton {
+    width: 60%;
+    height: 16px;
+    border-radius: 4px;
+    background: rgba(79, 139, 255, 0.08);
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.messageSkeleton {
+    width: 85%;
+    height: 14px;
+    border-radius: 4px;
+    background: rgba(79, 139, 255, 0.05);
+    animation: shimmer 1.5s ease-in-out infinite;
+    animation-delay: 0.1s;
+}
+
+.timeSkeleton {
+    width: 30%;
+    height: 12px;
+    border-radius: 4px;
+    background: rgba(79, 139, 255, 0.05);
+    animation: shimmer 1.5s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+    0% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        padding: var(--sp3);
+    }
+
+    .iconSkeleton {
+        width: 32px;
+        height: 32px;
+    }
+}

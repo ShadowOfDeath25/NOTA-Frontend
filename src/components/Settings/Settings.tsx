@@ -104,7 +104,7 @@ function Settings() {
             </div>
             {/* notifications section */}
             <div className={styles.section}>
-                <h3 className={styles.title}>{t("notifications", "Notifications")}</h3>
+                <h3 className={styles.title}>{t("notifications.title", "Notifications")}</h3>
                 <div className={styles.row}>
                     <div className={styles.emailNotification}>
                         <div className={styles.icon}>
