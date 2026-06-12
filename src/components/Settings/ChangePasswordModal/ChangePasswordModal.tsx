@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { InputForm } from "@components/Authentication/InputForm/InputForm";
@@ -22,7 +22,7 @@ export default function ChangePasswordModal({
     error = null,
 }: ChangePasswordModalProps) {
     const { t } = useTranslation();
-    const currentPasswordRef = useRef<HTMLInputElement>(null);
+    // const currentPasswordRef = useRef<HTMLInputElement>(null);
 
 
     const [currentPassword, setCurrentPassword] = useState("");
