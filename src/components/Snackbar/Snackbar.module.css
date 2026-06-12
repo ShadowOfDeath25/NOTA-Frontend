@@ -22,7 +22,7 @@
 
 .snackbar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--sp3);
   min-width: 320px;
   max-width: 420px;
@@ -78,7 +78,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: var(--sp1);
 
   svg {
     width: 18px;
@@ -130,7 +129,6 @@
   flex-shrink: 0;
   height: 28px;
   padding-inline: var(--sp2);
-  margin-top: var(--sp1);
   background: transparent;
   border: 0.8px solid rgba(79, 139, 255, 0.2);
   border-radius: var(--radius-sm);
@@ -157,7 +155,6 @@
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  margin-top: var(--sp1);
   background: none;
   border: none;
   cursor: pointer;

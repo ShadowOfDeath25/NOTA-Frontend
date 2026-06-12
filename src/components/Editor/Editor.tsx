@@ -168,6 +168,7 @@ export default function Editor({noteId}: EditorProps) {
                 <Toolbar
                     quill={quill}
                     onAISummarize={() => setShowAIPanel(true)}
+                    noteId={noteId}
                 />
 
                 {/* ── Split: Quill editor + AI Summary Panel ──────────────── */}

@@ -2,13 +2,14 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './NoteOptionsMenu.module.css';
 import NoteOptionsMenuItem from './NoteOptionsMenuItem.tsx';
-import { useModal } from '../../../../context/ModalContext';
+import { useModal } from '@context/ModalContext.tsx';
+import { useQueryClient } from '@tanstack/react-query';
+import { useCreate } from '@hooks/api/useCreate.ts';
 
 import StarIcon          from '@assets/icons/star.svg?react';
 import FileIcon          from '@assets/icons/file.svg?react';
 import CollaborateIcon   from '@assets/icons/collaborate.svg?react';
 import FilesIcon         from '@assets/icons/files.svg?react';
-import UploadIcon        from '@assets/icons/upload.svg?react';
 import StorgeIcon        from '@assets/icons/storge.svg?react';
 import RestoreIcon       from '@assets/icons/restore.svg?react';
 import CloudIcon         from '@assets/icons/cloud.svg?react';
@@ -19,9 +20,6 @@ export interface NoteOptionsCallbacks {
   onNoteInformation?: () => void;
   onShare?:           () => void;
   onMoveToSpace?:     () => void;
-  onExportPDF?:       () => void;
-  onExportText?:      () => void;
-  onExportWord?:      () => void;
   onPrint?:           () => void;
   onVersionHistory?:  () => void;
   onArchive?:         () => void;
@@ -30,17 +28,16 @@ export interface NoteOptionsCallbacks {
 
 interface NoteOptionsMenuProps extends NoteOptionsCallbacks {
   onClose: () => void;
+  noteId?: string;
 }
 
 export default function NoteOptionsMenu({
   onClose,
+  noteId,
   onAddToFavorites,
   onNoteInformation,
   onShare,
   onMoveToSpace,
-  onExportPDF,
-  onExportText,
-  onExportWord,
   onPrint,
   onVersionHistory,
   onArchive,
@@ -48,7 +45,14 @@ export default function NoteOptionsMenu({
 }: NoteOptionsMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const { setMoveToSpaceModal, setNoteInfoModal, setNoteInfo, setShareNoteModal, setDeleteNoteModal } = useModal();
+  const { setMoveToSpaceModal, setNoteInfoModal, setNoteInfo, setShareNoteModal, setDeleteNoteModal, setDeleteNoteId, setMoveToSpaceNoteId } = useModal();
+  const queryClient = useQueryClient();
+  const createFavoriteMutation = useCreate(`notes/${noteId}/favorites`, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["notes"]});
+      queryClient.invalidateQueries({queryKey: ["notes/favorites"]});
+    },
+  });
 
   /* Close on outside click */
   useEffect(() => {
@@ -72,9 +76,18 @@ export default function NoteOptionsMenu({
 
   const wrap = (cb?: () => void) => () => { cb?.(); onClose(); };
 
+  const handleAddToFavorites = () => {
+    onAddToFavorites?.();
+    onClose();
+    if (noteId) {
+      createFavoriteMutation.mutate({});
+    }
+  };
+
   const handleMoveToSpace = () => {
     onMoveToSpace?.();
     onClose();
+    setMoveToSpaceNoteId(noteId ?? null);
     setMoveToSpaceModal(true);
   };
 
@@ -87,6 +100,7 @@ export default function NoteOptionsMenu({
   const handleMoveToTrash = () => {
     onMoveToTrash?.();
     onClose();
+    setDeleteNoteId(noteId ?? null);
     setDeleteNoteModal(true);
   };
 
@@ -109,7 +123,7 @@ export default function NoteOptionsMenu({
       aria-label="Note options"
     >
       {/* ── Group 1: Utility ── */}
-      <NoteOptionsMenuItem icon={StarIcon}        label={t('editor.options.add_to_favorites', 'Add to Favorites')}  onClick={wrap(onAddToFavorites)}   />
+      <NoteOptionsMenuItem icon={StarIcon}        label={t('editor.options.add_to_favorites', 'Add to Favorites')}  onClick={handleAddToFavorites}   />
       <NoteOptionsMenuItem icon={FileIcon}        label={t('editor.options.note_information', 'Note Information')}   onClick={handleNoteInformation}    />
 
       <div className={styles.separator} role="separator" />
@@ -117,13 +131,6 @@ export default function NoteOptionsMenu({
       {/* ── Group 2: Collaboration ── */}
       <NoteOptionsMenuItem icon={CollaborateIcon} label={t('editor.options.share', 'Share')}         onClick={handleShare}       />
       <NoteOptionsMenuItem icon={FilesIcon}       label={t('editor.options.move_to_space', 'Move to Space')} onClick={handleMoveToSpace} />
-
-      <div className={styles.separator} role="separator" />
-
-      {/* ── Group 3: Export ── */}
-      <NoteOptionsMenuItem icon={UploadIcon}      label={t('editor.options.export_as_pdf', 'Export as PDF')}     onClick={wrap(onExportPDF)}  />
-      <NoteOptionsMenuItem icon={UploadIcon}      label={t('editor.options.export_as_text', 'Export as Text')}    onClick={wrap(onExportText)} />
-      <NoteOptionsMenuItem icon={UploadIcon}      label={t('editor.options.export_as_word', 'Export as Word')}    onClick={wrap(onExportWord)} />
 
       <div className={styles.separator} role="separator" />
 

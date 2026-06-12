@@ -3,16 +3,26 @@ import styles from "./Trash.module.css";
 import WarningIcon from "@assets/icons/warning.svg?react";
 import TrashCard from "./TrashCard/TrashCard";
 import { useTranslation } from "react-i18next";
-const dummyNotes = [
-    { id: 1, title: "Note 1", content: "Content 1", createdAt: "2022-01-01", updatedAt: "2022-01-01",deletedAt: "2022-01-01" },
-
-    { id: 2, title: "Note 2", content: "Content 2", createdAt: "2022-01-01", updatedAt: "2022-01-01",deletedAt: "2022-01-01" },
-    { id: 3, title: "Note 3", content: "Content 3", createdAt: "2022-01-01", updatedAt: "2022-01-01",deletedAt: "2022-01-01" },
-
-];
+import { useRead } from "@hooks/api/useRead.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { Note } from "@customTypes/Note.ts";
+import { AxiosClientV1 } from "../../axiosClient.ts";
 
 export default function Trash() {
     const { t } = useTranslation();
+    const queryClient = useQueryClient();
+    const { data: notes } = useRead<UseQueryResult<Note[]>>("notes/trashed");
+
+    const restoreMutation = useMutation({
+        mutationFn: (noteId: string) => AxiosClientV1.post(`/notes/${noteId}/restore`),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ["notes/trashed"]}),
+    });
+
+    const forceDeleteMutation = useMutation({
+        mutationFn: (noteId: string) => AxiosClientV1.delete(`/notes/${noteId}/force`),
+        onSuccess: () => queryClient.invalidateQueries({queryKey: ["notes/trashed"]}),
+    });
     return (
         <div className={`${styles.container} `}>
             <div className={`${styles.header} `}>
@@ -27,12 +37,12 @@ export default function Trash() {
             </div>
             <>
             <div className={`${styles.deletedNotesContainer}`}>
-           {dummyNotes.length == 0 ? <div className={`${styles.emptyTrashContainer}`}>
+           {(notes?.data?.length ?? 0) === 0 ? <div className={`${styles.emptyTrashContainer}`}>
              <EmptyTrash />
              </div>
-             : dummyNotes.map((note) => (
-                <div className={styles.cardContainer}>
-                <TrashCard key={note.id} title={note.title} deletedDate={note.deletedAt} onRestore={()=> {}} onPermanentDelete={() => {}} />
+             : notes?.data?.map((note) => (
+                <div className={styles.cardContainer} key={note.id}>
+                <TrashCard title={note.title} deletedDate={note.deleted_at ?? note.created_at} onRestore={() => restoreMutation.mutate(note.id)} onPermanentDelete={() => forceDeleteMutation.mutate(note.id)} />
                 </div>
             ))}
           

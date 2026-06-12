@@ -16,7 +16,8 @@ export interface EditorProps {
 
 export interface NoteUpdatePayload {
     id: string,
-    content: string
+    content: string,
+    space_id?: string,
 }
 
 export interface Note {
@@ -27,6 +28,8 @@ export interface Note {
     title: string,
     space_id: string,
     created_at: string,
+    updated_at?: string,
+    deleted_at?: string,
     is_favorite: boolean,
 }
 

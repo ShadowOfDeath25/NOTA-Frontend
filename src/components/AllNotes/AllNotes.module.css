@@ -1,0 +1,202 @@
+.container {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp6);
+    margin-bottom: var(--sp8);
+    flex-wrap: wrap;
+}
+
+.searchContainer {
+    position: relative;
+    width: 320px;
+    max-width: 100%;
+}
+
+.searchIcon {
+    position: absolute;
+    left: var(--sp3);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.searchInput {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    padding-left: var(--sp10);
+    padding-right: var(--sp4);
+    background-color: var(--notecard-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-home-page);
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.searchInput::placeholder {
+    color: var(--text-muted-color);
+}
+
+.searchInput:focus {
+    border-color: var(--brand-secondary-color);
+}
+
+.notesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp4);
+    width: 100%;
+}
+
+.skeletonGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp4);
+    width: 100%;
+}
+
+.skeletonCard {
+    background-color: var(--notecard-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    min-height: 200px;
+    padding: var(--sp5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp8);
+}
+
+.skeletonTitle {
+    height: 20px;
+    width: 60%;
+    border-radius: 4px;
+    background-color: rgb(from var(--text-muted-color) r g b / 0.15);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonLine {
+    height: 14px;
+    width: 100%;
+    border-radius: 4px;
+    background-color: rgb(from var(--text-muted-color) r g b / 0.15);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonLineShort {
+    height: 14px;
+    width: 75%;
+    border-radius: 4px;
+    background-color: rgb(from var(--text-muted-color) r g b / 0.15);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonFooter {
+    margin-top: auto;
+    height: 14px;
+    width: 40%;
+    border-radius: 4px;
+    background-color: rgb(from var(--text-muted-color) r g b / 0.15);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp12) var(--sp8);
+    text-align: center;
+    background-color: var(--notecard-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    min-height: 300px;
+}
+
+.emptyIcon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--sp5);
+    opacity: 0.5;
+}
+
+.emptyTitle {
+    color: var(--text-home-page);
+    margin-bottom: var(--sp2);
+}
+
+.emptyDescription {
+    color: var(--text-muted-color);
+    margin-bottom: var(--sp6);
+}
+
+.createNoteBtn {
+    width: 200px;
+    max-width: 100%;
+}
+
+.errorState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp12) var(--sp8);
+    text-align: center;
+    background-color: var(--notecard-bg-color);
+    border: 1px solid var(--danger-color);
+    border-radius: var(--radius-lg);
+    min-height: 300px;
+}
+
+.errorTitle {
+    color: var(--danger-color);
+    margin-bottom: var(--sp2);
+}
+
+.errorDescription {
+    color: var(--text-muted-color);
+    margin-bottom: var(--sp6);
+}
+
+.retryBtn {
+    width: 200px;
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .notesGrid,
+    .skeletonGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .notesGrid,
+    .skeletonGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        width: 100%;
+    }
+}

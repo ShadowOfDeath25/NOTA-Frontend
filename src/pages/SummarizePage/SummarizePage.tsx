@@ -1,16 +1,20 @@
-import {useState} from 'react';
 import styles from './SummarizePage.module.css';
 import SummarizeInputSection from '@components/Summarize/SummarizeInputSection/SummarizeInputSection';
 import {useTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
+import {useSnackbar} from '@components/Snackbar/SnackbarContext';
 
 export default function SummarizePage() {
     const {t} = useTranslation();
-    const [generating, setGenerating] = useState(false);
+    const navigate = useNavigate();
+    const {showSnackbar} = useSnackbar();
 
     const handleGenerate = (_payload: { text: string; noteId: string | null }) => {
-        setGenerating(true);
-        // TODO: call AI summary API with payload
-        console.log('Generating summary for:', _payload);
+        showSnackbar({
+            type: 'info',
+            message: t('summarizePage.generating', 'Generating summary...'),
+        });
+        navigate('/');
     };
 
     return (
@@ -30,15 +34,7 @@ export default function SummarizePage() {
 
             {/* ── Content ── */}
             <div className={styles.content}>
-                <SummarizeInputSection
-                    onGenerate={handleGenerate}
-                    disabled={generating}
-                />
-                {generating && (
-                    <div className={styles.generatingNotice}>
-                        {t('summarizePage.generating', 'Generating summary...')}
-                    </div>
-                )}
+                <SummarizeInputSection onGenerate={handleGenerate}/>
             </div>
 
         </main>
