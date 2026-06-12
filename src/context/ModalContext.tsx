@@ -10,7 +10,7 @@ import ShareNoteModal from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import type {Collaborator} from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import DeleteNoteModal from "@components/Editor/DeleteNoteModal/DeleteNoteModal";
 import {useCreate} from "@hooks/api/useCreate.ts";
-import type {UseMutationResult, UseQueryResult} from "@tanstack/react-query";
+import {useQuery, type UseMutationResult, type UseQueryResult} from "@tanstack/react-query";
 import type {Note} from "@customTypes/Note.ts";
 import {useDelete} from "@hooks/api/useDelete.ts";
 import {useRead} from "@hooks/api/useRead.ts";
@@ -69,7 +69,11 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     });
     const updateNoteMutation = useUpdate("notes");
 
-    const {data: spacesData} = useRead<UseQueryResult<Space[]>>("spaces");
+    const {data: user} = useQuery({queryKey: ["user"], queryFn: () => null, enabled: false});
+
+    const {data: spacesData} = useRead<UseQueryResult<Space[]>>("spaces", undefined, {
+        enabled: !!user,
+    });
     const spaceOptions = useMemo(
         () => (spacesData?.data ?? []).map((s) => ({id: s.id, name: s.name})),
         [spacesData],
