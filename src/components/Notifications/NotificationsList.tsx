@@ -5,6 +5,7 @@ import NotificationsLoading from './NotificationsLoading/NotificationsLoading';
 import NotificationsError from './NotificationsError/NotificationsError';
 import { useTranslation } from 'react-i18next';
 import type { Notification } from '@customTypes/Notification';
+import CloseIcon from '@assets/icons/close.svg?react';
 
 interface NotificationsListProps {
     notifications?: Notification[];
@@ -15,6 +16,7 @@ interface NotificationsListProps {
     onMarkAsRead?: (id: string) => void;
     onMarkAllAsRead?: () => void;
     onNotificationClick?: (notification: Notification) => void;
+    onClose?: () => void;
 }
 
 export default function NotificationsList({
@@ -26,6 +28,7 @@ export default function NotificationsList({
     onMarkAsRead,
     onMarkAllAsRead,
     onNotificationClick,
+    onClose,
 }: NotificationsListProps) {
     const { t } = useTranslation();
 
@@ -47,14 +50,25 @@ export default function NotificationsList({
                         </span>
                     )}
                 </div>
-                {unreadCount > 0 && onMarkAllAsRead && (
-                    <button
-                        className={`${styles.markAllBtn} bodyTextSm`}
-                        onClick={onMarkAllAsRead}
-                    >
-                        {t('notifications.mark_all_read', 'Mark all as read')}
-                    </button>
-                )}
+                <div className={styles.headerRight}>
+                    {unreadCount > 0 && onMarkAllAsRead && (
+                        <button
+                            className={`${styles.markAllBtn} bodyTextSm`}
+                            onClick={onMarkAllAsRead}
+                        >
+                            {t('notifications.mark_all_read', 'Mark all as read')}
+                        </button>
+                    )}
+                    {onClose && (
+                        <button
+                            className={styles.closeBtn}
+                            onClick={onClose}
+                           
+                        >
+                            <CloseIcon />
+                        </button>
+                    )}
+                </div>
             </div>
 
             {(!notifications || notifications.length === 0) ? (

@@ -149,6 +149,7 @@ const WelcomeHeader = () => {
                             isError={false}
                             onMarkAsRead={handleMarkAsRead}
                             onMarkAllAsRead={handleMarkAllAsRead}
+                            onClose={() => setShowNotifications(false)}
                         />
                     </div>
                 )}

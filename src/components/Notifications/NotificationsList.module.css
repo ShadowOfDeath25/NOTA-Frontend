@@ -55,6 +55,41 @@
     }
 }
 
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: var(--sp1);
+}
+
+.closeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted-color);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    & svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    &:hover {
+       
+        color: var(--text-home-page);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--brand-primary-color);
+        outline-offset: 2px;
+    }
+}
+
 .list {
     display: flex;
     flex-direction: column;
