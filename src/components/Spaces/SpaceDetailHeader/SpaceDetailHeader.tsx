@@ -8,6 +8,7 @@ import CollaborateIcon from '@assets/icons/collaborate.svg?react';
 import BackIcon from '@assets/icons/back.svg?react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getGradient } from '@utils/space';
 
 interface SpaceDetailHeaderProps {
   space: Space;
@@ -39,7 +40,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
 
         <div
           className={styles.spaceIcon}
-          style={{ backgroundImage: GRADIENT_MAP[space.gradient] }}
+          style={{ backgroundImage: GRADIENT_MAP[getGradient(space.gradient, space.id)] }}
           aria-hidden="true"
         >
           <div className={styles.spaceIconImg}>

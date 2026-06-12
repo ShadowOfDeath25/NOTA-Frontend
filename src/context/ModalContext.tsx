@@ -1,4 +1,4 @@
-import {createContext, useContext, useState, type ReactNode} from "react";
+import {createContext, useContext, useState, useMemo, type ReactNode} from "react";
 import ImportModal from "../components/ImportModal/ImportModal";
 import CreateSpaceModal from "@components/Spaces/CreateSpaceModal/CreateSpaceModal";
 import InviteMemberModal from "@components/Spaces/InviteMemberModal/InviteMemberModal";
@@ -10,16 +10,12 @@ import ShareNoteModal from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import type {Collaborator} from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import DeleteNoteModal from "@components/Editor/DeleteNoteModal/DeleteNoteModal";
 import {useCreate} from "@hooks/api/useCreate.ts";
-import type {UseMutationResult} from "@tanstack/react-query";
+import type {UseMutationResult, UseQueryResult} from "@tanstack/react-query";
 import type {Note} from "@customTypes/Note.ts";
-
-// ── Mock spaces — replace with API data ──────────────────────────────────────
-const MOCK_SPACES_FOR_MOVE = [
-    {id: '1', name: 'Marketing Team'},
-    {id: '2', name: 'Product Development'},
-    {id: '3', name: 'Design Resources'},
-    {id: '4', name: 'Engineering'},
-];
+import {useDelete} from "@hooks/api/useDelete.ts";
+import {useRead} from "@hooks/api/useRead.ts";
+import {useUpdate} from "@hooks/api/useUpdate.ts";
+import type {Space} from "@customTypes/Space.ts";
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -42,6 +38,10 @@ interface ModalContextType {
     setShareNoteModal: (value: boolean) => void;
     isOpenDeleteNoteModal: boolean;
     setDeleteNoteModal: (value: boolean) => void;
+    deleteNoteId: string | null;
+    setDeleteNoteId: (id: string | null) => void;
+    moveToSpaceNoteId: string | null;
+    setMoveToSpaceNoteId: (id: string | null) => void;
 }
 
 const ModalContext = createContext<ModalContextType | null>(null);
@@ -56,9 +56,25 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [noteInfo, setNoteInfo] = useState<NoteInfo | null>(null);
     const [isOpenShareNoteModal, setShareNoteModal] = useState<boolean>(false);
     const [isOpenDeleteNoteModal, setDeleteNoteModal] = useState<boolean>(false);
+    const [deleteNoteId, setDeleteNoteId] = useState<string | null>(null);
+    const [moveToSpaceNoteId, setMoveToSpaceNoteId] = useState<string | null>(null);
 
 
+    const createSpaceMutation = useCreate("spaces");
     const creatNoteMutation = useCreate<UseMutationResult<Note>>("notes");
+    const deleteNoteMutation = useDelete('notes', {
+        onSuccess: () => {
+            window.location.href = '/home';
+        },
+    });
+    const updateNoteMutation = useUpdate("notes");
+
+    const {data: spacesData} = useRead<UseQueryResult<Space[]>>("spaces");
+    const spaceOptions = useMemo(
+        () => (spacesData?.data ?? []).map((s) => ({id: s.id, name: s.name})),
+        [spacesData],
+    );
+
     // ── Mock collaborators — replace with real note data ──────────────────────
     const MOCK_COLLABORATORS: Collaborator[] = [
         {
@@ -106,6 +122,10 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
             setShareNoteModal,
             isOpenDeleteNoteModal,
             setDeleteNoteModal,
+            deleteNoteId,
+            setDeleteNoteId,
+            moveToSpaceNoteId,
+            setMoveToSpaceNoteId,
         }}>
             {children}
 
@@ -117,13 +137,11 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
             )}
 
 
-
             <CreateSpaceModal
                 isOpen={isOpenCreateSpaceModal}
                 onClose={() => setCreateSpaceModal(false)}
                 onSubmit={(data) => {
-                    // TODO: call API to create space
-                    console.log('Create space:', data);
+                    createSpaceMutation.mutate({ name: data.name, description: data.description });
                     setCreateSpaceModal(false);
                 }}
             />
@@ -153,11 +171,13 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
 
             <MoveToSpaceModal
                 isOpen={isOpenMoveToSpaceModal}
-                spaces={MOCK_SPACES_FOR_MOVE}
+                spaces={spaceOptions}
                 onClose={() => setMoveToSpaceModal(false)}
                 onMove={(spaceId) => {
-                    // TODO: call API to move note to space
-                    console.log('Move note to space:', spaceId);
+                    if (moveToSpaceNoteId) {
+                        // @ts-expect-error — TVariables defaults to BasePayload, but we need extra fields
+                        updateNoteMutation.mutate({id: moveToSpaceNoteId, space_id: spaceId});
+                    }
                     setMoveToSpaceModal(false);
                 }}
             />
@@ -182,8 +202,9 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
                 isOpen={isOpenDeleteNoteModal}
                 onClose={() => setDeleteNoteModal(false)}
                 onConfirm={() => {
-                    // TODO: call API to delete note
-                    console.log('Delete note confirmed');
+                    if (deleteNoteId) {
+                        deleteNoteMutation.mutate(deleteNoteId);
+                    }
                     setDeleteNoteModal(false);
                 }}
             />

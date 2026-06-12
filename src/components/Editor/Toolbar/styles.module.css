@@ -119,9 +119,9 @@
   background: transparent;
   border: 1px solid var(--border-divider);
   color: var(--icon-color);
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   cursor: pointer;

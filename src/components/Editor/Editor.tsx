@@ -12,8 +12,10 @@ import styles from "./Editor.module.css";
 import CloseIcon from "@assets/icons/close.svg?react";
 import SparklesIcon from "@assets/icons/collaborate.svg?react";
 import Toolbar from "./Toolbar/Toolbar";
-import AISummaryPanel from "./AISummaryPanel/AISummaryPanel";
 import {useUpdate} from "@hooks/api/useUpdate.ts";
+import {useSummarizeNote} from "@hooks/api/useSummarizeNote.ts";
+import {useSnackbar} from '@components/Snackbar/SnackbarContext';
+import {echo} from "../../echo.ts";
 
 Quill.register("modules/cursors", QuillCursors);
 
@@ -24,7 +26,6 @@ interface EditorProps {
 export default function Editor({noteId}: EditorProps) {
     const quillRef = useRef<HTMLDivElement>(null);
     const [quill, setQuill] = useState<Quill | null>(null);
-    const [showAIPanel, setShowAIPanel] = useState(false);
     const {user: authUser} = useAuth();
     const {lang} = useSettings();
     const {t} = useTranslation();
@@ -32,6 +33,8 @@ export default function Editor({noteId}: EditorProps) {
     const {state} = useLocation()
     const [title, setTitle] = useState(state?.note_title ?? "");
     const {mutate: updateNote} = useUpdate("notes");
+    const summarizeNoteMutation = useSummarizeNote();
+    const {showSnackbar} = useSnackbar();
     const initialTitleRef = useRef(title);
 
     const navigate = useNavigate();
@@ -109,7 +112,34 @@ export default function Editor({noteId}: EditorProps) {
     const {provider} = useCollaboration(noteId, quill, currentUser);
     const {activeUsers} = useAwareness(provider);
 
+    useEffect(() => {
+        const userId = authUser?.data?.id;
+        if (!userId) return;
 
+        const channel = echo.private(`App.Models.User.${userId}`);
+
+        const handleSummarized = () => {
+            showSnackbar({
+                type: 'success',
+                message: t('editor.ai_summary_generated', 'AI summary generated successfully'),
+            });
+        };
+
+        const handleFailed = () => {
+            showSnackbar({
+                type: 'error',
+                message: t('editor.ai_summary_failed', 'AI summarization failed. Please try again.'),
+            });
+        };
+
+        channel.listen('.note.summarized', handleSummarized);
+        channel.listen('.note.summarization_failed', handleFailed);
+
+        return () => {
+            channel.stopListening('.note.summarized', handleSummarized);
+            channel.stopListening('.note.summarization_failed', handleFailed);
+        };
+    }, [authUser?.data?.id, showSnackbar, t]);
 
     return (
         <div className={styles.container}>
@@ -167,35 +197,21 @@ export default function Editor({noteId}: EditorProps) {
                 {/* ── Custom React Toolbar ────────────────────────────────── */}
                 <Toolbar
                     quill={quill}
-                    onAISummarize={() => setShowAIPanel(true)}
+                    onAISummarize={() => {
+                        showSnackbar({
+                            type: 'info',
+                            message: t('summarizePage.generating', 'Generating summary...'),
+                        });
+                        summarizeNoteMutation.mutate(noteId);
+                    }}
+                    noteId={noteId}
                 />
 
-                {/* ── Split: Quill editor + AI Summary Panel ──────────────── */}
+                {/* ── Quill editor ────────────────────────────────────────── */}
                 <div className={styles.editorWrapper}>
-                    {/* Editor area — shrinks when panel is open */}
                     <div className={styles.editorContent}>
                         <div ref={quillRef} className={styles.quillContainer}/>
                     </div>
-
-                    {/* AI Summary panel — slides in from the right */}
-                    {showAIPanel && (
-                        <AISummaryPanel
-                            noteId={noteId}
-                            onClose={() => setShowAIPanel(false)}
-                            onInsertIntoNote={(text) => {
-                                // Insert the summary text at the current cursor position safely
-                                if (quill) {
-                                    const range = quill.getSelection(true);
-                                    const index = range ? range.index : quill.getLength() - 1;
-                                    quill.insertText(index, '\n' + text, 'user');
-                                }
-                                setShowAIPanel(false);
-                            }}
-                            onSaveSummary={() => {
-                                // TODO: allow user to edit the summary
-                            }}
-                        />
-                    )}
                 </div>
 
 

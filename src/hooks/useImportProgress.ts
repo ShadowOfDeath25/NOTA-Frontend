@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 
-export function useImportProgress(file: File | null) {
+export function useImportProgress(file: File | null, isApiDone: boolean = false) {
   const [progress, setProgress] = useState(0);
   const [step, setStep] = useState<
     "Analyzing pages" | "Recognizing text" | "Formatting content"
   >("Analyzing pages");
   const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    if (isApiDone) {
+      setProgress(100);
+      setStep("Formatting content");
+      setIsCompleted(true);
+      return;
+    }
+  }, [isApiDone]);
 
   useEffect(() => {
     if (!file) return;

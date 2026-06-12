@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: var(--home-bg-color);
-  border-bottom: 1px solid var(--border-divider);
+  background-color: var(--sidebar-bg-color);
+  border-bottom: 1px solid var(--sidebar-divider-color);
   height: 64px;
 }
 
@@ -35,7 +35,7 @@
 .brandName {
   font-size: 17px;
   font-weight: 600;
-  color: var(--text-home-page);
+  color: #fff;
 }
 
 .desktopNav {
@@ -46,7 +46,7 @@
 }
 
 .navLink {
-  color: var(--text-sidebar-item);
+  color: var(--text-sidebar-nav);
   font-size: 14px;
   line-height: 20px;
   text-decoration: none;
@@ -56,6 +56,36 @@
 
 .navLink:hover {
   color: var(--brand-primary-color);
+}
+
+.themeLangRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp1);
+  flex-shrink: 0;
+}
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: transparent;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.iconButton:hover {
+  border-color: var(--brand-primary-color);
+}
+
+.icon {
+  color: #fff;
+  width: 16px;
+  height: 16px;
 }
 
 .actions {
@@ -116,8 +146,8 @@
   top: 64px;
   left: 0;
   right: 0;
-  background-color: var(--home-bg-color);
-  border-bottom: 1px solid var(--border-divider);
+  background-color: var(--sidebar-bg-color);
+  border-bottom: 1px solid var(--sidebar-divider-color);
   padding: var(--sp4) var(--sp6) var(--sp6);
   z-index: 99;
 }
@@ -129,7 +159,7 @@
 }
 
 .mobileNavLink {
-  color: var(--text-sidebar-item);
+  color: var(--text-sidebar-nav);
   font-size: 16px;
   line-height: 24px;
   text-decoration: none;
@@ -151,6 +181,12 @@
 .mobileAction {
   width: 100%;
   justify-content: center;
+}
+
+.mobileThemeRow {
+  display: flex;
+  gap: var(--sp2);
+  padding: var(--sp2) 0;
 }
 
 @media (max-width: 768px) {

@@ -10,6 +10,7 @@ import SpaceSettingsInvitationsSection
     from '@components/Spaces/SpaceSettingsInvitationsSection/SpaceSettingsInvitationsSection';
 import SpaceSettingsDangerSection from '@components/Spaces/SpaceSettingsDangerSection/SpaceSettingsDangerSection';
 import {useTranslation} from 'react-i18next';
+import { getGradient } from '@utils/space';
 
 // ── Mock data — replace with API calls ──────────────────────────────────────
 const MOCK_SPACES: Space[] = [
@@ -95,7 +96,7 @@ export default function SpaceSettingsPage() {
 
                 <div
                     className={styles.spaceIcon}
-                    style={{backgroundImage: GRADIENT_MAP[space.gradient]}}
+                    style={{backgroundImage: GRADIENT_MAP[getGradient(space.gradient, space.id)]}}
 
                     aria-hidden="true"
                 >

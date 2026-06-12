@@ -39,7 +39,7 @@ html[lang="ar"] {
 :root, :root[data-theme="dark"] {
     /* Design Colors */
     --import-modal-bg: #0A0E1A;
-    --auth-card-bg: #101828;    /* auth card keeps the original sidebar tone */
+    --auth-card-bg: #101828; /* auth card keeps the original sidebar tone */
     --text-home-tag: #1A2030;
     --auth-divider: rgba(79, 139, 255, 0.1); /* matches Figma divider/border in auth */
     --brand-primary-color: #9810fa;
@@ -66,8 +66,8 @@ html[lang="ar"] {
     --editor-main-bg: #101828;
     --border-color: #4F8BFF26;
     --topBar-bg-color: #101828;
-    --topBar-divider-color:#1E2939;
-    --text-secondary:#0a0a0a;
+    --topBar-divider-color: #1E2939;
+    --text-secondary: #0a0a0a;
     --icon-color-secondary: #0a0a0a;
 
     /* Gradients */
@@ -89,7 +89,7 @@ html[lang="ar"] {
     --topBar-bg-color: #FFFFFF;
     --auth-card-bg: #FFFFFF;
     --text-home-tag: #E5E7EB;
-    --auth-divider: #E5E7EB;    /* visible divider on white auth card */
+    --auth-divider: #E5E7EB; /* visible divider on white auth card */
     --sidebar-bg-color: #101828;
 
     /* Text */
@@ -105,7 +105,7 @@ html[lang="ar"] {
     --border-divider: #E5E7EB;
     --border-color: rgba(79, 139, 255, 0.15);
     --topBar-divider-color: #E5E7EB;
-    --sidebar-divider-color: #1E2939;  /* sidebar stays dark */
+    --sidebar-divider-color: #1E2939; /* sidebar stays dark */
 
     /* Icons */
     --icon-color: #64748b;
@@ -169,9 +169,10 @@ html[lang="ar"] {
     }
 
     &.btnSecondary {
-        background-color: var(--surface-color);
-        color: var(--text-primary-color);
-        border: 1px solid #4F8BFF26;
+        background-color: transparent;
+        color: var(--brand-primary-color);
+        border: 1px solid var(--brand-primary-color);
+
     }
 
     &.btnDanger {

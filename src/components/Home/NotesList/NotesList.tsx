@@ -2,10 +2,12 @@ import styles from "./NotesList.module.css";
 import NoteCard from "@components/Home/NoteCard/NoteCard";
 import NoNotesFound from "@components/Home/NoNotesFound/NoNotesFound";
 import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
 import type {Note} from "@customTypes/Note.ts";
 
 const NotesList = ({recentNotes}: { recentNotes: Note[] | undefined }) => {
     const {t} = useTranslation();
+    const navigate = useNavigate();
     const handleNoteSelection = (id: string, starred?: boolean) => {
         console.log("ID:", id);
         console.log("Starred:", starred);
@@ -20,7 +22,7 @@ const NotesList = ({recentNotes}: { recentNotes: Note[] | undefined }) => {
                 <>
                     <div className={styles.header}>
                         <h3>{t("recent_notes", "Recent Notes")}</h3>
-                        <button className={`${styles.viewAllButton} bodyTextSm`}>{t("view_all", "View All")}</button>
+                        <button className={`${styles.viewAllButton} bodyTextSm`} onClick={() => navigate("/notes")}>{t("view_all", "View All")}</button>
                     </div>
                     <div className={styles.recentNotes}>
                         {recentNotes?.slice(0, 6).map((note) => (

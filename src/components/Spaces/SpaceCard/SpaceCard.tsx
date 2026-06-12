@@ -5,6 +5,7 @@ import CollaborateIcon from '@assets/icons/collaborate.svg?react';
 import LockIcon from '@assets/icons/Lock.svg?react';
 import WorldIcon from '@assets/icons/world.svg?react';
 import {useTranslation} from 'react-i18next';
+import {getGradient} from '@utils/space';
 
 interface SpaceCardProps {
     space: Space;
@@ -33,7 +34,7 @@ export default function SpaceCard({space, onClick}: SpaceCardProps) {
             <div className={styles.topRow}>
                 <div
                     className={styles.iconWrapper}
-                    style={{backgroundImage: GRADIENT_MAP[space.gradient ?? 'blue-cyan']}}
+                    style={{backgroundImage: GRADIENT_MAP[getGradient(space.gradient, space.id)]}}
                     aria-hidden="true"
                 >
                     <div className={styles.iconCollarate}>

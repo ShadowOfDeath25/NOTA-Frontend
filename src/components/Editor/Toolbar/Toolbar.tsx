@@ -27,16 +27,18 @@ import TagIcon from "@assets/icons/tag.svg?react";
 
 // ── Props ────────────────────────────────────────────────────────────────────
 interface ToolbarProps {
- 
+  
   quill: Quill | null;
 
   onAISummarize?: () => void;
 
   noteOptions?: NoteOptionsCallbacks;
+
+  noteId?: string;
 }
 
 
-export default function Toolbar({ quill, onAISummarize, noteOptions = {} }: ToolbarProps) {
+export default function Toolbar({ quill, onAISummarize, noteOptions = {}, noteId }: ToolbarProps) {
   const { t } = useTranslation();
   const { formats, syncNow } = useToolbarFormats(quill);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -272,6 +274,7 @@ export default function Toolbar({ quill, onAISummarize, noteOptions = {} }: Tool
           {menuOpen && (
             <NoteOptionsMenu
               onClose={() => setMenuOpen(false)}
+              noteId={noteId}
               {...noteOptions}
             />
           )}

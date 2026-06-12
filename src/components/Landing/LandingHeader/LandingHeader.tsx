@@ -2,12 +2,25 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import logo from "@assets/logo.svg";
+import WorldIcon from "@assets/icons/world.svg?react";
+import LightIcon from "@assets/icons/light.svg?react";
+import DarkIcon from "@assets/icons/dark.svg?react";
+import { useSettings } from "@context/SettingsContext";
 import styles from "./LandingHeader.module.css";
 
 export default function LandingHeader() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { lang, setLang, theme, setTheme } = useSettings();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLanguageChange = () => {
+    setLang(lang === "ar" ? "en" : "ar");
+  };
+
+  const handleThemeChange = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const navLinks = [
     { label: t("features_nav", "Features"), href: "#features" },
@@ -31,6 +44,18 @@ export default function LandingHeader() {
             </a>
           ))}
         </nav>
+
+        <div className={styles.themeLangRow}>
+          <button className={styles.iconButton} onClick={handleLanguageChange} aria-label={t("change_language", "Change language")}>
+            <WorldIcon className={styles.icon} />
+          </button>
+          <button className={styles.iconButton} onClick={handleThemeChange} aria-label={t("toggle_theme", "Toggle theme")}>
+            {theme === "dark"
+              ? <LightIcon className={styles.icon} />
+              : <DarkIcon className={styles.icon} />
+            }
+          </button>
+        </div>
 
         <div className={styles.actions}>
           <button
@@ -73,6 +98,17 @@ export default function LandingHeader() {
               </a>
             ))}
             <hr className={styles.mobileDivider} />
+            <div className={styles.mobileThemeRow}>
+              <button className={styles.iconButton} onClick={handleLanguageChange} aria-label={t("change_language", "Change language")}>
+                <WorldIcon className={styles.icon} />
+              </button>
+              <button className={styles.iconButton} onClick={handleThemeChange} aria-label={t("toggle_theme", "Toggle theme")}>
+                {theme === "dark"
+                  ? <LightIcon className={styles.icon} />
+                  : <DarkIcon className={styles.icon} />
+                }
+              </button>
+            </div>
             <button
               className={`btn btnSecondary ${styles.mobileAction}`}
               onClick={() => { setMenuOpen(false); navigate("/login"); }}

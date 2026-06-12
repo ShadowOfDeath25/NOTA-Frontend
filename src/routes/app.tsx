@@ -10,6 +10,7 @@
     import SpaceDetailPage from "@pages/SpaceDetailPage/SpaceDetailPage.tsx";
     import SpaceSettingsPage from "@pages/SpaceSettingsPage/SpaceSettingsPage.tsx";
     import SummarizePage from "@pages/SummarizePage/SummarizePage.tsx";
+    import AllNotesPage from "@pages/AllNotesPage/AllNotesPage.tsx";
 
     const routes: RouteObject[] = [
         {
@@ -25,6 +26,7 @@
                 { path: "/import-pdf", element: <App/> },
                 { path: "/settings", element: <SettingsPage/> },
                 { path: "/trash", element: <TrashPage/> },
+                { path: "notes", element: <AllNotesPage/> },
 
             ]
         },
