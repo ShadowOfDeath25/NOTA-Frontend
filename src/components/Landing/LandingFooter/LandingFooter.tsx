@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import logo from "@assets/logo.svg";
+import Reveal from "@components/Landing/Reveal.tsx";
 import styles from "./LandingFooter.module.css";
 
 export default function LandingFooter() {
@@ -24,7 +25,7 @@ export default function LandingFooter() {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.inner}>
+      <Reveal as="div" className={styles.inner}>
         <div className={styles.brandCol}>
           <div className={styles.brand} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <img src={logo} alt="Nota logo" className={styles.logo} />
@@ -61,7 +62,7 @@ export default function LandingFooter() {
             </a>
           ))}
         </div>
-      </div>
+      </Reveal>
 
       <div className={styles.bottom}>
         <p className={styles.copyright}>

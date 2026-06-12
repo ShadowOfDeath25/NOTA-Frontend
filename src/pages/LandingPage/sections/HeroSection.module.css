@@ -56,6 +56,17 @@
   height: auto;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .illustrationWrapper {
+    animation: float 4s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 @media (max-width: 1024px) {
   .heading {
     font-size: 36px;

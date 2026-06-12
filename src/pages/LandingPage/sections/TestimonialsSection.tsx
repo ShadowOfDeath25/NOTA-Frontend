@@ -1,5 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import Reveal from "@components/Landing/Reveal.tsx";
 import styles from "./TestimonialsSection.module.css";
+
+const easing = [0.16, 1, 0.3, 1] as const;
 
 const gradientMap: Record<string, string> = {
   purple: "var(--gradient-purple-pink)",
@@ -22,6 +26,24 @@ const testimonials = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easing },
+  },
+};
+
 function InitialsCircle({ initials, gradient }: { initials: string; gradient: string }) {
   return (
     <div className={styles.avatar} style={{ background: gradient }}>
@@ -36,7 +58,7 @@ export default function TestimonialsSection() {
   return (
     <section id="testimonials" className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.header}>
+        <Reveal as="header" className={styles.header}>
           <h2 className={styles.title}>{t("testimonials_title", "Loved by Teams Everywhere")}</h2>
           <p className={styles.subtitle}>
             {t(
@@ -44,11 +66,17 @@ export default function TestimonialsSection() {
               "See what our users say about their experience with Nota."
             )}
           </p>
-        </div>
+        </Reveal>
 
-        <div className={styles.grid}>
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {testimonials.map((t_) => (
-            <article key={t_.key} className={styles.card}>
+            <motion.article key={t_.key} className={styles.card} variants={cardVariants}>
               <div className={styles.stars} aria-label="5 stars">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -89,9 +117,9 @@ export default function TestimonialsSection() {
                   </span>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

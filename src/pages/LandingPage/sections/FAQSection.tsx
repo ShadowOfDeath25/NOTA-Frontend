@@ -1,6 +1,17 @@
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import Accordion from "@components/Landing/Accordion/Accordion.tsx";
+import Reveal from "@components/Landing/Reveal.tsx";
 import styles from "./FAQSection.module.css";
+
+const accordionVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
+};
 
 export default function FAQSection() {
   const { t } = useTranslation();
@@ -42,7 +53,7 @@ export default function FAQSection() {
   return (
     <section id="faq" className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.header}>
+        <Reveal as="header" className={styles.header}>
           <h2 className={styles.title}>{t("faq_title", "Frequently Asked Questions")}</h2>
           <p className={styles.subtitle}>
             {t(
@@ -50,11 +61,17 @@ export default function FAQSection() {
               "Have questions? We have answers. If you can not find what you are looking for, feel free to contact us."
             )}
           </p>
-        </div>
+        </Reveal>
 
-        <div className={styles.accordionWrapper}>
+        <motion.div
+          className={styles.accordionWrapper}
+          variants={accordionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <Accordion items={items} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

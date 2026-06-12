@@ -1,11 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { HeroEntrance, HeroItem } from "@components/Landing/HeroEntrance.tsx";
 import styles from "./HeroSection.module.css";
 
 function HeroIllustration() {
   return (
-    <div className={styles.illustrationWrapper}>
-      <svg
+    <motion.div
+      className={styles.illustrationWrapper}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <motion.svg
         className={styles.illustration}
         viewBox="0 0 560 420"
         fill="none"
@@ -98,10 +105,20 @@ function HeroIllustration() {
         <text x="380" y="312" fill="#00c950" fontSize="10" opacity="0.8">Live Sync</text>
 
         {/* Gradient accent blobs */}
-        <circle cx="80" cy="180" r="60" fill="url(#hero-purple)" opacity="0.08" filter="url(#hero-glow)" />
-        <circle cx="480" cy="320" r="50" fill="url(#hero-blue)" opacity="0.06" filter="url(#hero-glow)" />
-      </svg>
-    </div>
+        <motion.circle
+          cx="80" cy="180" r="60" fill="url(#hero-purple)" opacity="0.08"
+          filter="url(#hero-glow)"
+          animate={{ x: [0, 15, 0, -10, 0], y: [0, -10, 5, 10, 0] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.circle
+          cx="480" cy="320" r="50" fill="url(#hero-blue)" opacity="0.06"
+          filter="url(#hero-glow)"
+          animate={{ x: [0, -12, 5, 10, 0], y: [0, 8, -5, -10, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
+      </motion.svg>
+    </motion.div>
   );
 }
 
@@ -112,25 +129,31 @@ export default function HeroSection() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.content}>
-          <h1 className={styles.heading}>
-            {t("hero_title", "Think. Write. Collaborate.\nAll in One Place.")}
-          </h1>
-          <p className={styles.subtitle}>
-            {t(
-              "hero_subtitle",
-              "Nota is an AI-powered note-taking platform that helps you capture ideas, organize knowledge, and collaborate with your team in real time."
-            )}
-          </p>
-          <div className={styles.actions}>
-            <button className="btn btnPrimary" onClick={() => navigate("/signup")}>
-              {t("get_started_free", "Get Started Free")}
-            </button>
-            <button className="btn btnSecondary" onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}>
-              {t("learn_more", "Learn More")}
-            </button>
-          </div>
-        </div>
+        <HeroEntrance className={styles.content}>
+          <HeroItem>
+            <h1 className={styles.heading}>
+              {t("hero_title", "Think. Write. Collaborate.\nAll in One Place.")}
+            </h1>
+          </HeroItem>
+          <HeroItem distance={16}>
+            <p className={styles.subtitle}>
+              {t(
+                "hero_subtitle",
+                "Nota is an AI-powered note-taking platform that helps you capture ideas, organize knowledge, and collaborate with your team in real time."
+              )}
+            </p>
+          </HeroItem>
+          <HeroItem distance={12} duration={0.5}>
+            <div className={styles.actions}>
+              <button className="btn btnPrimary" onClick={() => navigate("/signup")}>
+                {t("get_started_free", "Get Started Free")}
+              </button>
+              <button className="btn btnSecondary" onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}>
+                {t("learn_more", "Learn More")}
+              </button>
+            </div>
+          </HeroItem>
+        </HeroEntrance>
         <HeroIllustration />
       </div>
     </section>

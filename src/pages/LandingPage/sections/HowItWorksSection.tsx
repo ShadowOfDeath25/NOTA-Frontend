@@ -1,6 +1,28 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import Reveal from "@components/Landing/Reveal.tsx";
 import styles from "./HowItWorksSection.module.css";
+
+const easing = [0.16, 1, 0.3, 1] as const;
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const stepVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easing },
+  },
+};
 
 export default function HowItWorksSection() {
   const { t } = useTranslation();
@@ -14,7 +36,7 @@ export default function HowItWorksSection() {
   return (
     <section id="how-it-works" className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.header}>
+        <Reveal as="header" className={styles.header}>
           <h2 className={styles.title}>{t("how_it_works_title", "How It Works")}</h2>
           <p className={styles.subtitle}>
             {t(
@@ -22,12 +44,18 @@ export default function HowItWorksSection() {
               "Get started in minutes. Three simple steps to transform your note-taking."
             )}
           </p>
-        </div>
+        </Reveal>
 
-        <div className={styles.steps}>
+        <motion.div
+          className={styles.steps}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {steps.map((step, i) => (
             <Fragment key={step.key}>
-              <div className={styles.step}>
+              <motion.div className={styles.step} variants={stepVariants}>
                 <div className={styles.stepNumber}>
                   <span>{step.icon}</span>
                 </div>
@@ -51,11 +79,11 @@ export default function HowItWorksSection() {
                     )}
                   </p>
                 </div>
-              </div>
+              </motion.div>
               {i < steps.length - 1 && <div className={styles.connector} aria-hidden="true" />}
             </Fragment>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

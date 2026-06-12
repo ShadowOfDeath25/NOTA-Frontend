@@ -161,18 +161,31 @@ html[lang="ar"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 
+    &:active {
+        transform: scale(0.98);
+    }
 
     &.btnPrimary {
         background-color: var(--brand-primary-color);
         color: #fff;
     }
 
+    &.btnPrimary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(152, 16, 250, 0.3);
+    }
+
     &.btnSecondary {
         background-color: transparent;
         color: var(--brand-primary-color);
         border: 1px solid var(--brand-primary-color);
+    }
 
+    &.btnSecondary:hover {
+        background-color: rgba(152, 16, 250, 0.08);
+        transform: translateY(-1px);
     }
 
     &.btnDanger {
@@ -276,6 +289,15 @@ h5 {
     background: rgb(from var(--text-muted-color) r g b / 0.5);
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 
 @media (max-width: 640px) {
 

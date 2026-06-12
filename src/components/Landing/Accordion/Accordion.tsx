@@ -1,4 +1,5 @@
 import { useState, useId, type ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Accordion.module.css";
 
 interface AccordionItem {
@@ -37,13 +38,15 @@ export default function Accordion({ items }: AccordionProps) {
                 aria-controls={panelId}
               >
                 <span>{item.question}</span>
-                <svg
-                  className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
+                <motion.svg
+                  className={styles.chevron}
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
                   fill="none"
                   aria-hidden="true"
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <path
                     d="M4 6L8 10L12 6"
@@ -52,18 +55,26 @@ export default function Accordion({ items }: AccordionProps) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </svg>
+                </motion.svg>
               </button>
             </h3>
-            <div
-              id={panelId}
-              role="region"
-              aria-labelledby={headingId}
-              className={`${styles.panel} ${isOpen ? styles.panelOpen : ""}`}
-              hidden={!isOpen}
-            >
-              <div className={styles.panelContent}>{item.answer}</div>
-            </div>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={headingId}
+                  className={styles.panel}
+                  key="panel"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <div className={styles.panelContent}>{item.answer}</div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import logo from "@assets/logo.svg";
 import WorldIcon from "@assets/icons/world.svg?react";
 import LightIcon from "@assets/icons/light.svg?react";
@@ -30,7 +31,12 @@ export default function LandingHeader() {
   ];
 
   return (
-    <header className={styles.header}>
+    <motion.header
+      className={styles.header}
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className={styles.inner}>
         <div className={styles.brand} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <img src={logo} alt="Nota logo" className={styles.logo} />
@@ -124,6 +130,6 @@ export default function LandingHeader() {
           </nav>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }

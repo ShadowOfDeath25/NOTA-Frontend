@@ -1,9 +1,13 @@
 import { useTranslation } from "react-i18next";
 import type { ComponentType, SVGProps } from "react";
+import { motion } from "framer-motion";
 import StarIcon from "@assets/icons/star.svg?react";
 import LightIcon from "@assets/icons/light.svg?react";
 import ChecklistIcon from "@assets/icons/checklist.svg?react";
+import Reveal from "@components/Landing/Reveal.tsx";
 import styles from "./BenefitsSection.module.css";
+
+const easing = [0.16, 1, 0.3, 1] as const;
 
 interface Benefit {
   key: string;
@@ -17,13 +21,31 @@ const benefits: Benefit[] = [
   { key: "clarity", icon: ChecklistIcon, gradient: "var(--gradient-green)" },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easing },
+  },
+};
+
 export default function BenefitsSection() {
   const { t } = useTranslation();
 
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <div className={styles.header}>
+        <Reveal as="header" className={styles.header}>
           <h2 className={styles.title}>{t("benefits_title", "Why Teams Choose Nota")}</h2>
           <p className={styles.subtitle}>
             {t(
@@ -31,13 +53,19 @@ export default function BenefitsSection() {
               "We focus on outcomes that matter to your productivity and peace of mind."
             )}
           </p>
-        </div>
+        </Reveal>
 
-        <div className={styles.grid}>
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {benefits.map((b) => {
             const Icon = b.icon;
             return (
-            <article key={b.key} className={styles.card}>
+            <motion.article key={b.key} className={styles.card} variants={cardVariants}>
               <div className={styles.iconBox} style={{ background: b.gradient }}>
                 <Icon width="24" height="24" stroke="currentColor" />
               </div>
@@ -59,10 +87,10 @@ export default function BenefitsSection() {
                       : "Structured knowledge ensures your ideas and projects are always clear and easy to navigate."
                 )}
               </p>
-            </article>
+            </motion.article>
           );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
