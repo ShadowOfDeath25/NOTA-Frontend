@@ -43,6 +43,12 @@ export function useCollaboration(
 
         bindingRef.current = new QuillBinding(yText, quill, p?.awareness ?? undefined);
 
+        p.on('sync', (isSynced: boolean) => {
+            if (isSynced) {
+                quill.setContents(yText.toDelta());
+            }
+        });
+
 
         const color =
             user.color || COLORS[Math.floor(Math.random() * COLORS.length)];

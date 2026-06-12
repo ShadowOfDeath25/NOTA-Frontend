@@ -53,7 +53,7 @@ export default function Editor({noteId}: EditorProps) {
 
     useEffect(() => {
         if (!quillRef.current || quill) return;
-        // Prevent double-initialization in React StrictMode
+
         if (quillRef.current.classList.contains("ql-container")) return;
 
         const editor = new Quill(quillRef.current, {
@@ -66,6 +66,7 @@ export default function Editor({noteId}: EditorProps) {
                 },
             },
         });
+        console.log(editor.getContents())
 
         // Set initial direction synchronously on initialization
         const isEmpty = editor.getText().trim() === "";
