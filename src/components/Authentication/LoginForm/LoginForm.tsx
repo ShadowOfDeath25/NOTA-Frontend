@@ -38,7 +38,6 @@ function LoginForm() {
                         value={formData.email}
                         onChange={handleChange}
                         errors={login.error?.response?.data?.errors?.email}
-                        helperText={login.error?.response?.data?.errors?.email?.[0]}
                     />
                     <InputForm
                         label={t("password", "Password")}
@@ -48,7 +47,6 @@ function LoginForm() {
                         value={formData.password}
                         onChange={handleChange}
                         errors={login.error?.response?.data?.errors?.password}
-                        helperText={login.error?.response?.data?.errors?.password?.[0]}
                     />
                     <div className={styles.forgotPasswordContainer}>
                         <Link to={'/forgot-password'} className={`${styles.forgotPassword} bodyTextSm`}>

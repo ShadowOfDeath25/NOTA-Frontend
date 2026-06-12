@@ -11,7 +11,7 @@ import {useModal} from "@context/ModalContext.tsx";
 const ActionList = () => {
     const {t} = useTranslation();
 
-    const {setAddNoteModal} = useModal();
+    const {setAddNoteModal, setImportModal} = useModal();
     const onCreate = ()=>{
         setAddNoteModal(true);
     }
@@ -36,8 +36,7 @@ const ActionList = () => {
             descEn: "Convert PDF to note",
             icon: uploadIcon,
             color: "blueIcon",
-            onClick: () => {
-            }
+            onClick: () => setImportModal(true)
         },
         {
             id: "team",

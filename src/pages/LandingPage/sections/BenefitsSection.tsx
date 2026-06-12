@@ -1,25 +1,20 @@
 import { useTranslation } from "react-i18next";
+import type { ComponentType, SVGProps } from "react";
+import StarIcon from "@assets/icons/star.svg?react";
+import LightIcon from "@assets/icons/light.svg?react";
+import ChecklistIcon from "@assets/icons/checklist.svg?react";
 import styles from "./BenefitsSection.module.css";
 
-const gradientMap: Record<string, string> = {
-  purple: "var(--gradient-purple-pink)",
-  blue: "var(--gradient-blue-cyan)",
-  green: "var(--gradient-green)",
-};
+interface Benefit {
+  key: string;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  gradient: string;
+}
 
-const benefits = [
-  {
-    key: "focus",
-    icon: "purple",
-  },
-  {
-    key: "speed",
-    icon: "blue",
-  },
-  {
-    key: "clarity",
-    icon: "green",
-  },
+const benefits: Benefit[] = [
+  { key: "focus", icon: StarIcon, gradient: "var(--gradient-purple-pink)" },
+  { key: "speed", icon: LightIcon, gradient: "var(--gradient-blue-cyan)" },
+  { key: "clarity", icon: ChecklistIcon, gradient: "var(--gradient-green)" },
 ];
 
 export default function BenefitsSection() {
@@ -39,12 +34,12 @@ export default function BenefitsSection() {
         </div>
 
         <div className={styles.grid}>
-          {benefits.map((b) => (
+          {benefits.map((b) => {
+            const Icon = b.icon;
+            return (
             <article key={b.key} className={styles.card}>
-              <div className={styles.iconBox} style={{ background: gradientMap[b.icon] }}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M10 2L12.9 8.1L19 9L14.5 13.2L16 20L10 16.5L4 20L5.5 13.2L1 9L7.1 8.1L10 2Z" stroke="#fff" strokeWidth="1.5" strokeLinejoin="round" />
-                </svg>
+              <div className={styles.iconBox} style={{ background: b.gradient }}>
+                <Icon width="24" height="24" stroke="currentColor" />
               </div>
               <h3 className={styles.cardTitle}>
                 {t(`benefit_${b.key}_title`,
@@ -65,7 +60,8 @@ export default function BenefitsSection() {
                 )}
               </p>
             </article>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>

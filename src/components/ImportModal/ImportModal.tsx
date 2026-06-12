@@ -4,11 +4,9 @@ import StorageIcon from "@assets/icons/storge.svg?react";
 import UploadIcon from "@assets/icons/upload.svg?react";
 import FilesIcon from "@assets/icons/files.svg?react";
 
-import Step from "./StepModal";
-import ImportResult from "./ImportResult"; 
-
-import { useImportProgress } from "../../hooks/useImportProgress";
 import { useFileHandler } from "../../hooks/useFileHandler";
+import { useCreate } from "@hooks/api/useCreate";
+import { useSnackbar } from "@components/Snackbar/SnackbarContext";
 import { t } from "i18next";
 
 interface ImportModalProps {
@@ -18,18 +16,77 @@ interface ImportModalProps {
 
 export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
   const {
-    file,
-    fileInputRef,   
-    handleDrop,
-    handleFileSelect, 
+    fileInputRef,
     openFileDialog,
   } = useFileHandler();
 
-  const { progress, step, isCompleted } = useImportProgress(file);
+  const importPdfMutation = useCreate("notes/read-pdf");
+  const { showSnackbar } = useSnackbar();
+
+  const onFileSelected = (selectedFile: File) => {
+    if (selectedFile.type !== "application/pdf") {
+      showSnackbar({
+        type: "error",
+        message: t("ImportModal.only_pdf_allowed", "Only PDF files are allowed"),
+      });
+      return;
+    }
+
+    if (selectedFile.size > 100 * 1024 * 1024) {
+      showSnackbar({
+        type: "error",
+        message: t("ImportModal.max_size_error", "Maximum file size is 100MB"),
+      });
+      return;
+    }
+
+    onCancel();
+
+    showSnackbar({
+      type: "info",
+      message: t("ImportModal.import_in_progress", "Importing in progress…"),
+    });
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    importPdfMutation.mutate(formData, {
+      onSuccess: () => {
+        showSnackbar({
+          type: "success",
+          message: t("ImportModal.import_success", "PDF imported successfully"),
+        });
+      },
+      onError: () => {
+        showSnackbar({
+          type: "error",
+          message: t("ImportModal.import_error", "Failed to import PDF"),
+          action: {
+            label: t("ImportModal.retry", "Retry"),
+            onClick: () => onFileSelected(selectedFile),
+          },
+        });
+      },
+    });
+  };
+
+  const handleFileSelectWrapper = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      onFileSelected(selectedFile);
+    }
+    event.target.value = "";
+  };
+
+  const handleDropWrapper = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile) {
+      onFileSelected(droppedFile);
+    }
+  };
 
   if (!isOpen) return null;
-
-  const status = !file ? "idle" : isCompleted ? "done" : "processing";
 
   return (
     <div className={styles.overlay}>
@@ -47,113 +104,57 @@ export default function ImportModal({ isOpen, onCancel }: ImportModalProps) {
           </p>
         </div>
 
-      
-        {status === "idle" && (
-          <>
-            <div className={styles.tabs}>
-              <div className={styles.tab}>
-                <button className={styles.active}>
-                  <StorageIcon />
-                  <span className={styles.tabText}>
-                    {t("ImportModal.Upload_from_Device", "Upload from Device")}
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            <div
-              className={styles.uploadArea}
-              onDrop={handleDrop}
-              onDragOver={(e) => e.preventDefault()}
-            >
-              <div className={styles.uploadIcon}>
-                <UploadIcon />
-              </div>
-
-              <h5>{t("ImportModal.Drag_and_drop_your_PDF_here", "Drag and drop your PDF here")}</h5>
-              <div className={`${styles.or} bodyTextSm`}>{t("ImportModal.or", "or")}</div>
-
-              <button
-                className={`${styles.browseBtn} btn btnPrimary`}
-                onClick={openFileDialog}
-              >
-                <FilesIcon />
-                <span>{t("ImportModal.browse_files", "Browse Files")}</span>
+        <>
+          <div className={styles.tabs}>
+            <div className={styles.tab}>
+              <button className={styles.active}>
+                <StorageIcon />
+                <span className={styles.tabText}>
+                  {t("ImportModal.Upload_from_Device", "Upload from Device")}
+                </span>
               </button>
-
-              <div className={styles.uploadHints}>
-                <p className={styles.hintText}>{t("ImportModal.supported_formats", "Supported: PDF files only")}</p>
-                <p className={styles.hintText}>{t("ImportModal.max_size", "Max size: 50MB")}</p>
-              </div>
-
-              <input
-                type="file"
-                accept="application/pdf"
-                ref={fileInputRef}
-                onChange={handleFileSelect}
-                hidden
-              />
-            </div>
-          </>
-        )}
-
-   
-        {status === "processing" && (
-          <div className={styles.processingContainer}>
-          
-            <div className={styles.fileCard}>
-              <div>
-                <p>{file?.name}</p>
-              </div>
-
-              <div className={styles.fileStatus}>
-                <span className={styles.loader}></span>
-                <span>{step}</span>
-              </div>
-            </div>
-
-            
-            <div className={styles.progressBar}>
-              <div
-                className={styles.progressFill}
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-
-          
-            <div className={styles.steps}>
-              <Step
-                active={true}
-                label={t("ImportModal.analyzing_pages", "Analyzing pages")}
-                done={progress > 30}
-              />
-              <Step
-                active={progress > 30}
-                label={t("ImportModal.recognizing_text", "Recognizing text")}
-                done={progress > 60}
-              />
-              <Step
-                active={progress > 60}
-                label={t("ImportModal.formatting_content", "Formatting content")}
-                done={false}
-              />
             </div>
           </div>
-        )}
 
-       
-        {status === "done" && file && (
-          <ImportResult file={file} />
-        )}
+          <div
+            className={styles.uploadArea}
+            onDrop={handleDropWrapper}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <div className={styles.uploadIcon}>
+              <UploadIcon />
+            </div>
 
+            <h5>{t("ImportModal.Drag_and_drop_your_PDF_here", "Drag and drop your PDF here")}</h5>
+            <div className={`${styles.or} bodyTextSm`}>{t("ImportModal.or", "or")}</div>
 
+            <button
+              className={`${styles.browseBtn} btn btnPrimary`}
+              onClick={openFileDialog}
+            >
+              <FilesIcon />
+              <span>{t("ImportModal.browse_files", "Browse Files")}</span>
+            </button>
+
+            <div className={styles.uploadHints}>
+              <p className={styles.hintText}>{t("ImportModal.supported_formats", "Supported: PDF files only")}</p>
+              <p className={styles.hintText}>{t("ImportModal.max_size", "Max size: 50MB")}</p>
+            </div>
+
+            <input
+              type="file"
+              accept="application/pdf"
+              ref={fileInputRef}
+              onChange={handleFileSelectWrapper}
+              hidden
+            />
+          </div>
+        </>
 
         <div className={styles.footer}>
           <button className={styles.cancelBtn} onClick={onCancel}>
             {t("ImportModal.cancel", "Cancel")}
           </button>
-
-          {status === "done" && <button className={`${styles.saveNoteBtn} btn btnPrimary`}>{t("ImportModal.save_as_note", "Save as Note")}</button>}
         </div>
       </div>
     </div>

@@ -25,11 +25,11 @@ createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={queryClient}>
             <LanguageSync/>
             <SettingsProvider>
-                <ModalProvider>
                 <SnackbarProvider>
+                <ModalProvider>
                   <RouterProvider router={router} />
-                </SnackbarProvider>
                 </ModalProvider>
+                </SnackbarProvider>
             </SettingsProvider>
         </QueryClientProvider>
     </StrictMode>

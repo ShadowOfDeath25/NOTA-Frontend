@@ -5,9 +5,10 @@ import EyeIcon from "@assets/icons/eye.svg?react";
 import { useTranslation } from "react-i18next";
 interface Props {
   file: File;
+  extractedContent?: string | null;
 }
 
-export default function ImportResult({ file }: Props) {
+export default function ImportResult({ file, extractedContent }: Props) {
   const { t } = useTranslation();
   return (
     <div className={styles.resultContainer}>
@@ -46,39 +47,44 @@ export default function ImportResult({ file }: Props) {
                 </button>
       </div>
 
-   
+    
       <div className={styles.previewBox}>
         <h4>{t("ImportModal.Scope", "Scope")}</h4>
+        {extractedContent ? (
+          <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0 }}>{extractedContent}</pre>
+        ) : (
+          <>
+            <h5>## Document Summary</h5>
+            <p>
+              This document has been automatically extracted from a PDF
+              file using OCR technology...
+            </p>
 
-        <h5>## Document Summary</h5>
-        <p>
-          This document has been automatically extracted from a PDF
-          file using OCR technology...
-        </p>
-
-        <h5>## Introduction</h5>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p><p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p>
-        <h5>## Introduction</h5>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-        </p>
+            <h5>## Introduction</h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p><p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p>
+            <h5>## Introduction</h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+            </p>
+          </>
+        )}
       </div>
 
     </div>
