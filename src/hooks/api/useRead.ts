@@ -13,7 +13,7 @@ export const useRead = <
 >(
     resource: string,
     id?: string,
-    options?: UseQueryOptions<TData, TError, TData>
+    options?: Omit<UseQueryOptions<TData, TError, TData>, 'queryKey'>
 ): UseQueryResult<TData, TError> => {
     return useQuery<TData, TError>({
         ...options,
