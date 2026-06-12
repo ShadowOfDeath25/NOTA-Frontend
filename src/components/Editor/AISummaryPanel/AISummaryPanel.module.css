@@ -10,6 +10,16 @@
   overflow: hidden;
 }
 
+@media (max-width: 1024px) {
+  .panel {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
+    border-top: 0.8px solid var(--sidebar-divider-color);
+    max-height: 50vh;
+  }
+}
+
 
 .panelHeader {
   display: flex;

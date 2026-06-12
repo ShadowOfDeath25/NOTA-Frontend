@@ -186,6 +186,6 @@
   .snackbar {
     min-width: 0;
     max-width: 100%;
-    width: calc(100vw - var(--sp6));
+    width: calc(100vw - var(--sp4));
   }
 }

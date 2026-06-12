@@ -1,7 +1,7 @@
 .mainContainer {
     display: flex;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 main {
@@ -11,12 +11,20 @@ main {
     padding: 32px;
     flex: 1;
     align-self: stretch;
+    min-width: 0;
 }
 
 @media (max-width: 1024px) {
     main {
         /* push content below the fixed 56px TopBar */
         padding-top: calc(56px + 32px);
+    }
+}
+
+@media (max-width: 640px) {
+    main {
+        padding: 16px;
+        padding-top: calc(56px + 16px);
     }
 }
 

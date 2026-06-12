@@ -16,6 +16,17 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+@media (max-width: 480px) {
+    .topBar {
+        gap: 8px;
+        padding-inline: 8px;
+    }
+
+    .appName {
+        font-size: 15px;
+    }
+}
+
 .menuButton {
     display: flex;
     align-items: center;

@@ -289,6 +289,12 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 768px) {
+  .permTrigger {
+    width: 100px;
+  }
+}
+
 @media (max-width: 640px) {
   .dialog {
     max-width: 100%;

@@ -6,6 +6,7 @@
   z-index: 200;
 
   width: 192px;
+  max-width: calc(100vw - 16px);
   background: var(--import-modal-bg);
   border: 0.8px solid rgba(79, 139, 255, 0.15);
   border-radius: var(--radius-sm);          /* 8px */

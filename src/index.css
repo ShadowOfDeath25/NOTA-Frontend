@@ -259,7 +259,7 @@ h5 {
 
 ::-webkit-scrollbar {
     width: 6px;
-    background: var(--home-bg-color);
+    background: var(--sidebar-bg-color);
 }
 
 ::-webkit-scrollbar-track {
@@ -267,13 +267,13 @@ h5 {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(from var(--icon-color) r g b / 0.25);
+    background: rgb(from var(--text-muted-color) r g b / 0.25);
     border-radius: 10px;
     transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(from var(--icon-color) r g b / 0.5);
+    background: rgb(from var(--text-muted-color) r g b / 0.5);
 }
 
 
@@ -281,5 +281,30 @@ h5 {
 
     :root {
         --btn-height: 32px;
+    }
+
+    h1 {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    h4 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    h5 {
+        font-size: 16px;
+        line-height: 24px;
     }
 }

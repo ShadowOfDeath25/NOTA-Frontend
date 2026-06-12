@@ -5,6 +5,14 @@
     width: 100%;
 }
 
+@media (max-width: 1024px) {
+    .recentNotes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
 .header {
     margin-bottom: var(--sp6);
     color: var(--text-home-page);
@@ -36,14 +44,8 @@
 }
 
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
     .recentNotes {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .recentNotes {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: 1fr;
     }
 }

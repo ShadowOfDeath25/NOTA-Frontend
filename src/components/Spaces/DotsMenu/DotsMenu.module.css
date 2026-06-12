@@ -16,6 +16,7 @@
     right:0;
 
     width:320px;
+    max-width: calc(100vw - 16px);
 
     background:#081325;
     border:1px solid #173267;

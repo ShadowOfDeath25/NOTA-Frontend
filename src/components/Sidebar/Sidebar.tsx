@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import logo from '@assets/logo.svg';
 import Searchbar from "@components/Searchbar/Searchbar.tsx";
-import {Activity, useState} from "react";
+import {Activity, useState, useMemo} from "react";
 import * as React from "react";
 import AiIcon from "@assets/icons/ai.svg";
 import HomeIcon from "@assets/icons/home.svg";
@@ -44,6 +44,14 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
 
     const {data: notes, isLoading: notesLoading} = useRead<UseQueryResult<Note[]>>('notes');
 
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredNotes = useMemo(() => {
+        if (!searchQuery.trim()) return [];
+        const q = searchQuery.toLowerCase();
+        return notes?.data?.filter(note => note.title.toLowerCase().includes(q)) ?? [];
+    }, [searchQuery, notes]);
+
     return (
         <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>
             <div className={styles.header}>
@@ -54,7 +62,7 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
                         <CloseIcon/>
                     </div>)}
             </div>
-            <Searchbar/>
+            <Searchbar value={searchQuery} onChange={setSearchQuery}/>
             <div className={styles.navigation}>
                 <div className={`${styles.navCard} ${active == "home" ? styles.active : ""}`} onClick={handleClick}
                      id={"home"}
@@ -82,25 +90,45 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
                 </div>
             </div>
             <Activity mode={isEmpty ? "hidden" : "visible"}>
-                <hr className={styles.separator}/>
-                <Activity mode={isEmpty ? "hidden" : "visible"}>
-                    <hr className={styles.separator}/>
-                    <div className={styles.myNotes}>
-                        <span className={`label ${styles.navTitle}`}>{t("favorites", "Favorites")}</span>
-                        <Activity mode={favoritesLoading ? "hidden" : "visible"}>
-                            {favoriteNotes?.data?.map((note: { title: string; id: string; }) => <NoteLink
-                                name={note.title} uuid={note.id}/>)}
+                {searchQuery.trim() ? (
+                    <>
+                        <hr className={styles.separator}/>
+                        <div className={styles.myNotes}>
+                            <span className={`label ${styles.navTitle}`}>{t("search_results", "Search Results")}</span>
+                            <Activity mode={filteredNotes.length === 0 ? "hidden" : "visible"}>
+                                {filteredNotes.map((note: { title: string; id: string; }) => <NoteLink
+                                    key={note.id} name={note.title} uuid={note.id}/>)}
+                            </Activity>
+                            {filteredNotes.length === 0 && !notesLoading && (
+                                <span className={styles.noResults}>{t("no_results", "No results found")}</span>
+                            )}
+                        </div>
+                        <hr className={styles.separator}/>
+                    </>
+                ) : (
+                    <>
+                        <hr className={styles.separator}/>
+                        <Activity mode={isEmpty ? "hidden" : "visible"}>
+                            <hr className={styles.separator}/>
+                            <div className={styles.myNotes}>
+                                <span className={`label ${styles.navTitle}`}>{t("favorites", "Favorites")}</span>
+                                <Activity mode={favoritesLoading ? "hidden" : "visible"}>
+                                    {favoriteNotes?.data?.map((note: { title: string; id: string; }) => <NoteLink
+                                        key={note.id} name={note.title} uuid={note.id}/>)}
+                                </Activity>
+                            </div>
                         </Activity>
-                    </div>
-                </Activity>
-                <div className={styles.myNotes}>
-                    <span className={`label ${styles.navTitle}`}>{t("my_notes", "My Notes")}</span>
-                    <Activity mode={notesLoading ? "hidden" : "visible"}>
-                        {notes?.data?.map((note: { title: string; id: string; }) => <NoteLink name={note.title}
-                                                                                              uuid={note.id}/>)}
-                    </Activity>
-                </div>
-                <hr className={styles.separator}/>
+                        <div className={styles.myNotes}>
+                            <span className={`label ${styles.navTitle}`}>{t("my_notes", "My Notes")}</span>
+                            <Activity mode={notesLoading ? "hidden" : "visible"}>
+                                {notes?.data?.map((note: { title: string; id: string; }) => <NoteLink key={note.id}
+                                                                                                      name={note.title}
+                                                                                                      uuid={note.id}/>)}
+                            </Activity>
+                        </div>
+                        <hr className={styles.separator}/>
+                    </>
+                )}
                 <div className={styles.bottomNav}>
                     <div className={`${styles.navCard} ${active == "settings" ? styles.active : ""}`} id={'settings'}
                          onClick={handleClick}>

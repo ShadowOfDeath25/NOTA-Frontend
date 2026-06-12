@@ -66,6 +66,13 @@
     width: 100%;
 }
 
+@media (max-width: 1024px) {
+    .notesGrid,
+    .skeletonGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .skeletonCard {
     background-color: var(--notecard-bg-color);
     border: 1px solid var(--border-color);
@@ -178,14 +185,7 @@
     max-width: 100%;
 }
 
-@media (max-width: 1024px) {
-    .notesGrid,
-    .skeletonGrid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .notesGrid,
     .skeletonGrid {
         grid-template-columns: 1fr;

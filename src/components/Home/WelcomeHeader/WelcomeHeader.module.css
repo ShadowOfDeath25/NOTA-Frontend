@@ -75,6 +75,7 @@ p {
     top: calc(100% + var(--sp2));
     inset-inline-end: 0;
     width: 400px;
+    max-width: calc(100vw - 32px);
     max-height: 480px;
     overflow-y: auto;
     background-color: var(--notecard-bg-color);

@@ -2,9 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100dvh;
     width: 100%;
     background: linear-gradient(135deg, #59168B 0%, #6E11B0 50%, #A3004C 100%);
     padding: var(--sp8);
 
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: var(--sp4);
+    }
 }

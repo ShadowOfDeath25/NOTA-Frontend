@@ -4,7 +4,12 @@ import magnifier from '@assets/icons/magnifier.svg'
 import IconButton from '@mui/material/IconButton';
 import {useTranslation} from "react-i18next";
 
-export default function Searchbar() {
+interface SearchbarProps {
+    value: string;
+    onChange: (value: string) => void;
+}
+
+export default function Searchbar({value, onChange}: SearchbarProps) {
     const {t} = useTranslation();
     return (
         <div className={styles.container}>
@@ -19,7 +24,13 @@ export default function Searchbar() {
             >
                 <img src={magnifier} alt="magnifier"/>
             </IconButton>
-            <input type={"text"} className={`${styles.searchbar} focus-outline`} placeholder={t("search","Search")}/>
+            <input
+                type={"text"}
+                className={`${styles.searchbar} focus-outline`}
+                placeholder={t("search","Search")}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+            />
         </div>
     );
 }
