@@ -60,6 +60,7 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [moveToSpaceNoteId, setMoveToSpaceNoteId] = useState<string | null>(null);
 
 
+    const createSpaceMutation = useCreate("spaces");
     const creatNoteMutation = useCreate<UseMutationResult<Note>>("notes");
     const deleteNoteMutation = useDelete('notes', {
         onSuccess: () => {
@@ -140,8 +141,7 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
                 isOpen={isOpenCreateSpaceModal}
                 onClose={() => setCreateSpaceModal(false)}
                 onSubmit={(data) => {
-                    // TODO: call API to create space
-                    console.log('Create space:', data);
+                    createSpaceMutation.mutate({ name: data.name, description: data.description });
                     setCreateSpaceModal(false);
                 }}
             />

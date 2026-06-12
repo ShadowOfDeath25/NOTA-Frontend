@@ -3,17 +3,26 @@ import SummarizeInputSection from '@components/Summarize/SummarizeInputSection/S
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import {useSnackbar} from '@components/Snackbar/SnackbarContext';
+import {useCreate} from "@hooks/api/useCreate.ts";
+import {useSummarizeNote} from "@hooks/api/useSummarizeNote.ts";
 
 export default function SummarizePage() {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const {showSnackbar} = useSnackbar();
 
+    const textMutation = useCreate("summarize");
+    const summarizeNoteMutation = useSummarizeNote();
     const handleGenerate = (_payload: { text: string; noteId: string | null }) => {
         showSnackbar({
             type: 'info',
             message: t('summarizePage.generating', 'Generating summary...'),
         });
+        if (_payload.noteId) {
+            summarizeNoteMutation.mutate(_payload.noteId);
+        } else {
+            textMutation.mutate({content: _payload.text})
+        }
         navigate('/');
     };
 
