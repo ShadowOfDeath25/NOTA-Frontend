@@ -10,12 +10,13 @@ import ShareNoteModal from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import type {Collaborator} from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import DeleteNoteModal from "@components/Editor/DeleteNoteModal/DeleteNoteModal";
 import {useCreate} from "@hooks/api/useCreate.ts";
-import {useQuery, type UseMutationResult, type UseQueryResult} from "@tanstack/react-query";
+import {useQuery, useMutation, useQueryClient, type UseMutationResult, type UseQueryResult} from "@tanstack/react-query";
 import type {Note} from "@customTypes/Note.ts";
 import {useDelete} from "@hooks/api/useDelete.ts";
 import {useRead} from "@hooks/api/useRead.ts";
 import {useUpdate} from "@hooks/api/useUpdate.ts";
 import type {Space} from "@customTypes/Space.ts";
+import {AxiosClientV1} from "../axiosClient.ts";
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -27,7 +28,7 @@ interface ModalContextType {
     isOpenInviteMemberModal: boolean;
     setInviteMemberModal: (value: boolean) => void;
     isOpenAddNoteModal: boolean;
-    setAddNoteModal: (value: boolean) => void;
+    setAddNoteModal: (value: boolean, spaceId?: string | null) => void;
     isOpenMoveToSpaceModal: boolean;
     setMoveToSpaceModal: (value: boolean) => void;
     isOpenNoteInfoModal: boolean;
@@ -50,7 +51,18 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [isOpenImportModal, setImportModal] = useState<boolean>(false);
     const [isOpenCreateSpaceModal, setCreateSpaceModal] = useState<boolean>(false);
     const [isOpenInviteMemberModal, setInviteMemberModal] = useState<boolean>(false);
-    const [isOpenAddNoteModal, setAddNoteModal] = useState<boolean>(false);
+    const [isOpenAddNoteModal, setIsOpenAddNoteModal] = useState<boolean>(false);
+    const [addNoteSpaceId, setAddNoteSpaceId] = useState<string | null>(null);
+
+    const setAddNoteModal = (value: boolean, spaceId: string | null = null) => {
+        setIsOpenAddNoteModal(value);
+        if (value) {
+            setAddNoteSpaceId(spaceId);
+        } else {
+            setAddNoteSpaceId(null);
+        }
+    };
+
     const [isOpenMoveToSpaceModal, setMoveToSpaceModal] = useState<boolean>(false);
     const [isOpenNoteInfoModal, setNoteInfoModal] = useState<boolean>(false);
     const [noteInfo, setNoteInfo] = useState<NoteInfo | null>(null);
@@ -60,8 +72,22 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [moveToSpaceNoteId, setMoveToSpaceNoteId] = useState<string | null>(null);
 
 
+    const queryClient = useQueryClient();
     const createSpaceMutation = useCreate("spaces");
     const creatNoteMutation = useCreate<UseMutationResult<Note>>("notes");
+
+    const createSpaceNoteMutation = useMutation({
+        mutationFn: async ({ spaceId, data }: { spaceId: string; data: { title: string; tags: string[] } }) => {
+            const res = await AxiosClientV1.post(`/spaces/${spaceId}/notes`, data);
+            return res.data;
+        },
+        onSuccess: (_, variables) => {
+            queryClient.invalidateQueries({ queryKey: ["spaces", variables.spaceId, "notes"] });
+            queryClient.invalidateQueries({ queryKey: ["notes"] });
+            queryClient.invalidateQueries({ queryKey: ["spaces"] });
+        }
+    });
+
     const deleteNoteMutation = useDelete('notes', {
         onSuccess: () => {
             window.location.href = '/home';
@@ -168,7 +194,11 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
                 isOpen={isOpenAddNoteModal}
                 onClose={() => setAddNoteModal(false)}
                 onSubmit={(data) => {
-                    creatNoteMutation.mutate(data)
+                    if (addNoteSpaceId) {
+                        createSpaceNoteMutation.mutate({ spaceId: addNoteSpaceId, data });
+                    } else {
+                        creatNoteMutation.mutate(data);
+                    }
                     setAddNoteModal(false);
                 }}
             />

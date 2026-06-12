@@ -12,7 +12,7 @@ import SpaceSettingsDangerSection from '@components/Spaces/SpaceSettingsDangerSe
 import {useTranslation} from 'react-i18next';
 import { getGradient } from '@utils/space';
 
-// ── Mock data — replace with API calls ──────────────────────────────────────
+
 const MOCK_SPACES: Space[] = [
     {
         id: '1',

@@ -54,7 +54,7 @@ export default function SpaceNotesTab({ notes, onAddNote }: SpaceNotesTabProps) 
         </button>
       </div>
 
-      {/* Notes list */}
+    
       <div className={styles.list} role="list">
         {filtered.length === 0 ? (
           <p className={`${styles.empty} bodyText`}>

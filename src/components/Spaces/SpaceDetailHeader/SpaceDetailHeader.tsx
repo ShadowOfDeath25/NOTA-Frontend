@@ -31,7 +31,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
         <button
           className={styles.backBtn}
           onClick={() => navigate('/spaces')}
-          aria-label={t('back_to_spaces', 'Back to Spaces')}
+         
         >
           <div className={styles.backIcon}>
             <BackIcon/>
@@ -56,7 +56,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
 
         <button
           className={`${styles.settingsBtn} bodyTextSm`}
-          onClick={() => navigate(`/spaces/${space.id}/settings`)}
+          onClick={() => navigate(`/spaces/${space.id}/settings`, { state: { space } })}
         >
           <div className={styles.settingsBtnIcon}>
             <SettingsIcon />
