@@ -73,10 +73,5 @@ export const useUpdateSettings = () => {
             }
         },
 
-        onSettled: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["user"],
-            });
-        },
     });
 };

@@ -10,6 +10,7 @@ import LockIcon from "@assets/icons/Lock.svg?react";
 import LogoutIcon from "@assets/icons/logout.svg?react";
 import { useAuth } from "@hooks/api/useAuth.ts";
 import { useTranslation } from "react-i18next";
+import i18n from "../../i18n.ts";
 import { Switch } from '@mui/material';
 import { useSettings } from "@context/SettingsContext.tsx";
 import { useUpdateSettings } from "@hooks/api/useUpdateSettings.ts";
@@ -36,13 +37,13 @@ function Settings() {
             onSuccess: () => {
                 showSnackbar({
                     type: "success",
-                    message: t("settings_saved", "Settings saved"),
+                    message: i18n.t("settings_saved", "Settings saved"),
                 });
             },
             onError: () => {
                 showSnackbar({
                     type: "error",
-                    message: t("settings_save_error", "Failed to save settings. Please try again."),
+                    message: i18n.t("settings_save_error", "Failed to save settings. Please try again."),
                 });
             },
         });
@@ -50,6 +51,8 @@ function Settings() {
 
   
     const handleLangChange = (value: string) => {
+        const newLang = value === "ar" ? "ar" : "en";
+        i18n.changeLanguage(newLang);
         setLang(value);
         handleSettingChange({ language: value === "arabic" ? "arabic" : "english" });
     };
