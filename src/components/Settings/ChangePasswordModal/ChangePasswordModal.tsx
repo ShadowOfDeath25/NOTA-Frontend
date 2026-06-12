@@ -24,12 +24,12 @@ export default function ChangePasswordModal({
     const { t } = useTranslation();
     const currentPasswordRef = useRef<HTMLInputElement>(null);
 
-    // Form fields state
+
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    // Validation errors state
+
     const [errors, setErrors] = useState<{
         current_password?: string;
         password?: string;
@@ -42,7 +42,7 @@ export default function ChangePasswordModal({
         password_confirmation?: boolean;
     }>({});
 
-    // Reset state on open/close
+    
     useEffect(() => {
         if (isOpen) {
             setCurrentPassword("");
@@ -70,7 +70,7 @@ export default function ChangePasswordModal({
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [isOpen, onClose]);
 
-    // Reusable validation schema leveraging existing auth password rules
+    
     const changePasswordSchema = z.object({
         current_password: z.string().min(1, {
             message: t("validation.required", "This field is required"),
@@ -82,7 +82,6 @@ export default function ChangePasswordModal({
         path: ["password_confirmation"],
     });
 
-    // Validate form on field updates
     useEffect(() => {
         if (!isOpen) return;
 
