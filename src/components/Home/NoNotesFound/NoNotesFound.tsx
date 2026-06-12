@@ -9,9 +9,11 @@ function NoNotesFound() {
 
     return (
         <div className={styles.container}>
-            <img src={fileIcon} alt="file" className={styles.fileIcon}/>
-            <h3 className={`${styles.title} h3`}>{t("no_notes_found_yet", "No notes yet")}</h3>
-            <p className={`${styles.description} bodyText`}>{t("create_note_to_get_started", "Create your first note to get started")}</p>
+            <div className={styles.content}>
+                <img src={fileIcon} alt="file" className={styles.fileIcon}/>
+                <h3 className={`${styles.title} h3`}>{t("no_notes_found_yet", "No notes yet")}</h3>
+                <p className={`${styles.description} bodyText`}>{t("create_note_to_get_started", "Create your first note to get started")}</p>
+            </div>
             <button
                 onClick={() => setAddNoteModal(true)}
                 className={` btn btnPrimary bodyTextSm ${styles.createNoteBtn} `}
