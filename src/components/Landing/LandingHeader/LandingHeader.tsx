@@ -52,7 +52,7 @@ export default function LandingHeader() {
           <button className={styles.iconButton} onClick={handleThemeChange} aria-label={t("toggle_theme", "Toggle theme")}>
             {theme === "dark"
               ? <LightIcon className={styles.icon} />
-              : <DarkIcon className={styles.icon} />
+              : <DarkIcon className={styles.icon} fill="currentColor" stroke="currentColor" />
             }
           </button>
         </div>
@@ -105,7 +105,7 @@ export default function LandingHeader() {
               <button className={styles.iconButton} onClick={handleThemeChange} aria-label={t("toggle_theme", "Toggle theme")}>
                 {theme === "dark"
                   ? <LightIcon className={styles.icon} />
-                  : <DarkIcon className={styles.icon} />
+                  : <DarkIcon className={styles.icon} fill="currentColor" stroke="currentColor" />
                 }
               </button>
             </div>
