@@ -10,7 +10,8 @@
 }
 
 /* Admin — amber */
-.admin {
+.admin,
+.owner {
   background-color: rgba(115, 62, 10, 0.3);
   color: #fdc700;
 }
@@ -25,4 +26,21 @@
 .viewer {
   background-color: #1e2939;
   color: var(--text-sidebar-item);
+}
+
+/* ── Light theme overrides ── */
+:root[data-theme="light"] .admin,
+:root[data-theme="light"] .owner {
+  background-color: rgba(255, 193, 7, 0.12);
+  color: #b8860b;
+}
+
+:root[data-theme="light"] .contributor {
+  background-color: rgba(81, 162, 255, 0.12);
+  color: #2563eb;
+}
+
+:root[data-theme="light"] .viewer {
+  background-color: #f1f5f9;
+  color: #64748b;
 }

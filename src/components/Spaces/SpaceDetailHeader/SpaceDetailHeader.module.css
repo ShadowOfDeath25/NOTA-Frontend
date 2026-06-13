@@ -1,6 +1,6 @@
 .container {
-  background-color: var(--sidebar-bg-color);
-  border-bottom: 0.8px solid var(--sidebar-divider-color);
+  background-color: var(--topBar-bg-color);
+  border-bottom: 0.8px solid var(--topBar-divider-color);
   padding: var(--sp6) var(--sp6) var(--sp4);
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text-sidebar-nav);
+  color: var(--text-home-page);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,11 +47,12 @@
 }
 
 .spaceIconImg {
- svg{
+  color: white;
+}
 
+.spaceIconImg svg {
   width: 24px;
   height: 24px;
- }
 }
 
 .titleGroup {

@@ -1,6 +1,6 @@
 import styles from './SpaceDetailTabs.module.css';
-import fileIcon from '@assets/icons/file.svg';
-import collaborateIcon from '@assets/icons/collaborate.svg';
+import FileIcon from '@assets/icons/file.svg?react';
+import CollaborateIcon from '@assets/icons/collaborate.svg?react';
 import { useTranslation } from 'react-i18next';
 
 export type SpaceTab = 'notes' | 'members' | 'settings';
@@ -21,7 +21,7 @@ export default function SpaceDetailTabs({ activeTab, onTabChange }: SpaceDetailT
         className={`${styles.tab} ${activeTab === 'notes' ? styles.active : ''} bodyTextSm`}
         onClick={() => onTabChange('notes')}
       >
-        <img src={fileIcon} alt="" className={styles.tabIcon} aria-hidden="true" />
+        <FileIcon className={styles.tabIcon} aria-hidden="true" />
         <span>{t('space.notes', 'Notes')}</span>
       </button>
 
@@ -31,7 +31,7 @@ export default function SpaceDetailTabs({ activeTab, onTabChange }: SpaceDetailT
         className={`${styles.tab} ${activeTab === 'members' ? styles.active : ''} bodyTextSm`}
         onClick={() => onTabChange('members')}
       >
-        <img src={collaborateIcon} alt="" className={styles.tabIcon} aria-hidden="true" />
+        <CollaborateIcon className={styles.tabIcon} aria-hidden="true" />
         <span>{t('space.members', 'Members')}</span>
       </button>
     </div>

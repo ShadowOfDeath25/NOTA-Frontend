@@ -13,9 +13,11 @@ import CloseIcon from "@assets/icons/close.svg?react";
 import SparklesIcon from "@assets/icons/collaborate.svg?react";
 import Toolbar from "./Toolbar/Toolbar";
 import {useUpdate} from "@hooks/api/useUpdate.ts";
+import {useRead} from "@hooks/api/useRead.ts";
 import {useSummarizeNote} from "@hooks/api/useSummarizeNote.ts";
 import {useSnackbar} from '@components/Snackbar/SnackbarContext';
 import {echo} from "../../echo.ts";
+import type {Note} from "@customTypes/Note.ts";
 
 Quill.register("modules/cursors", QuillCursors);
 
@@ -142,6 +144,25 @@ export default function Editor({noteId}: EditorProps) {
         };
     }, [authUser?.data?.id, showSnackbar, t]);
 
+    const {data: noteResponse} = useRead<{ data: Note }>("notes", noteId);
+
+    const noteInfo = useMemo(() => {
+        const note = noteResponse?.data;
+        if (!note) return undefined;
+        const fmt = (iso: string) => {
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric',
+            }) + ' at ' + d.toLocaleTimeString('en-US', {
+                hour: 'numeric', minute: '2-digit', hour12: true,
+            });
+        };
+        return {
+            createdAt: fmt(note.created_at),
+            lastEditedAt: note.updated_at ? fmt(note.updated_at) : fmt(note.created_at),
+        };
+    }, [noteResponse]);
+
     return (
         <div className={styles.container}>
             {/* ── Top padding to avoid overlap with fixed header ──────── */}
@@ -206,6 +227,7 @@ export default function Editor({noteId}: EditorProps) {
                         summarizeNoteMutation.mutate(noteId);
                     }}
                     noteId={noteId}
+                    noteOptions={{ noteInfo }}
                 />
 
                 {/* ── Quill editor ────────────────────────────────────────── */}

@@ -2,7 +2,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   padding: 0;
   background-color: var(--home-bg-color);
@@ -113,6 +113,12 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 1024px) {
+  .page {
+    padding-top: 56px;
+  }
+}
+
 @media (max-width: 768px) {
   .pageHeader {
     padding: var(--sp4);

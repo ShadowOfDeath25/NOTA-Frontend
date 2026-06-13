@@ -26,7 +26,7 @@ interface ModalContextType {
     isOpenCreateSpaceModal: boolean;
     setCreateSpaceModal: (value: boolean) => void;
     isOpenInviteMemberModal: boolean;
-    setInviteMemberModal: (value: boolean) => void;
+    setInviteMemberModal: (value: boolean, spaceId?: string) => void;
     isOpenAddNoteModal: boolean;
     setAddNoteModal: (value: boolean, spaceId?: string | null) => void;
     isOpenMoveToSpaceModal: boolean;
@@ -50,7 +50,12 @@ const ModalContext = createContext<ModalContextType | null>(null);
 export const ModalProvider = ({children}: { children: ReactNode }) => {
     const [isOpenImportModal, setImportModal] = useState<boolean>(false);
     const [isOpenCreateSpaceModal, setCreateSpaceModal] = useState<boolean>(false);
-    const [isOpenInviteMemberModal, setInviteMemberModal] = useState<boolean>(false);
+    const [isOpenInviteMemberModal, setIsOpenInviteMemberModal] = useState<boolean>(false);
+    const [inviteMemberSpaceId, setInviteMemberSpaceId] = useState<string | null>(null);
+    const setInviteMemberModal = (value: boolean, spaceId?: string) => {
+        setIsOpenInviteMemberModal(value);
+        if (value && spaceId) setInviteMemberSpaceId(spaceId);
+    };
     const [isOpenAddNoteModal, setIsOpenAddNoteModal] = useState<boolean>(false);
     const [addNoteSpaceId, setAddNoteSpaceId] = useState<string | null>(null);
 
@@ -178,16 +183,8 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
 
             <InviteMemberModal
                 isOpen={isOpenInviteMemberModal}
+                spaceId={inviteMemberSpaceId ?? ''}
                 onClose={() => setInviteMemberModal(false)}
-                onSubmit={(data) => {
-                    // TODO: call API to invite member
-                    console.log('Invite member:', data);
-                    setInviteMemberModal(false);
-                }}
-                onCopyLink={() => {
-                    navigator.clipboard.writeText(window.location.href).catch(() => {
-                    });
-                }}
             />
 
             <AddNoteModal

@@ -5,6 +5,7 @@ import NoteOptionsMenuItem from './NoteOptionsMenuItem.tsx';
 import { useModal } from '@context/ModalContext.tsx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCreate } from '@hooks/api/useCreate.ts';
+import type { NoteInfo } from '@components/Editor/NoteInfoModal/NoteInfoModal';
 
 import StarIcon          from '@assets/icons/star.svg?react';
 import FileIcon          from '@assets/icons/file.svg?react';
@@ -16,6 +17,7 @@ import CloudIcon         from '@assets/icons/cloud.svg?react';
 import TrashIcon         from '@assets/icons/trash.svg?react';
 
 export interface NoteOptionsCallbacks {
+  noteInfo?:          NoteInfo;
   onAddToFavorites?:  () => void;
   onNoteInformation?: () => void;
   onShare?:           () => void;
@@ -34,6 +36,7 @@ interface NoteOptionsMenuProps extends NoteOptionsCallbacks {
 export default function NoteOptionsMenu({
   onClose,
   noteId,
+  noteInfo,
   onAddToFavorites,
   onNoteInformation,
   onShare,
@@ -107,11 +110,9 @@ export default function NoteOptionsMenu({
   const handleNoteInformation = () => {
     onNoteInformation?.();
     onClose();
-    // Pass mock timestamps — replace with real note data when API is wired
-    setNoteInfo({
-      createdAt:    'November 25, 2025 at 10:42 PM',
-      lastEditedAt: 'November 25, 2025 at 10:42 PM',
-    });
+    if (noteInfo) {
+      setNoteInfo(noteInfo);
+    }
     setNoteInfoModal(true);
   };
 

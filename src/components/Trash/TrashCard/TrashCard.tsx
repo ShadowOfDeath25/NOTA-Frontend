@@ -18,13 +18,14 @@ const TrashCard: React.FC<TrashCardProps> = ({
   onPermanentDelete 
 }) => {
   const { t } = useTranslation();
+    const date = new Date(deletedDate.split('T')[0]).toLocaleDateString('en-GB');
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>{title}</h3>
       
       <div className={styles.info}>
         <ClockIcon />
-        <span className={`${styles.dateText} bodyTextSm`}>{t("Trash.Deleted_on", "Deleted on")} {deletedDate}</span>
+        <span className={`${styles.dateText} bodyTextSm`}>{t("Trash.Deleted_on", "Deleted on")} {date}</span>
       </div>
 
       <div className={styles.divider}></div>

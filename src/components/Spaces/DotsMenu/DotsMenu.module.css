@@ -13,7 +13,7 @@
 .menu{
     position:absolute;
     top:50%;
-    right:0;
+    inset-inline-end: 0;
 
     width:320px;
     max-width: calc(100vw - 16px);
@@ -73,5 +73,25 @@
     height: 16px;
     color: var(--icon-color);
   }
+}
+
+:root[data-theme="light"] .menu {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="light"] .info,
+:root[data-theme="light"] .item {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .info {
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+:root[data-theme="light"] .item:hover {
+  background: #f1f5f9;
 }
 

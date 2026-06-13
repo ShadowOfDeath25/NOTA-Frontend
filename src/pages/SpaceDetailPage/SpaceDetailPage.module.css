@@ -23,3 +23,9 @@
   color: var(--text-sidebar-item);
   padding: var(--sp12);
 }
+
+@media (max-width: 1024px) {
+  .container {
+    padding-top: 56px;
+  }
+}

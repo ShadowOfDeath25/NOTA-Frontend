@@ -130,7 +130,7 @@
 
 .tag {
   background-color: #1a2030;
-  color: var(--text-home-page);
+  color: var(--text-sidebar-nav);
   font-size: 12px;
   line-height: 16px;
   padding: 3px var(--sp2);

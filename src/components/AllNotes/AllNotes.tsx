@@ -7,7 +7,7 @@ import type {Note} from "@customTypes/Note.ts";
 import NoteCard from "@components/Home/NoteCard/NoteCard";
 import styles from "./AllNotes.module.css";
 import magnifierIcon from "@assets/icons/magnifier.svg";
-import fileIcon from "@assets/icons/file.svg";
+import FileIcon from "@assets/icons/file.svg?react";
 
 function SkeletonGrid() {
     return (
@@ -28,7 +28,7 @@ function EmptyState({onCreate}: { onCreate: () => void }) {
     const {t} = useTranslation();
     return (
         <div className={styles.emptyState}>
-            <img src={fileIcon} alt="" className={styles.emptyIcon}/>
+            <FileIcon className={styles.emptyIcon}/>
             <h3 className={`${styles.emptyTitle} h3`}>{t("all_notes_no_notes", "No notes yet")}</h3>
             <p className={`${styles.emptyDescription} bodyText`}>
                 {t("all_notes_create_first", "Create your first note to get started")}
@@ -47,7 +47,7 @@ function EmptySearchState() {
     const {t} = useTranslation();
     return (
         <div className={styles.emptyState}>
-            <img src={fileIcon} alt="" className={styles.emptyIcon}/>
+            <FileIcon className={styles.emptyIcon}/>
             <h3 className={`${styles.emptyTitle} h3`}>{t("all_notes_no_results", "No notes match your search")}</h3>
             <p className={`${styles.emptyDescription} bodyText`}>
                 {t("all_notes_try_different_search", "Try a different search term")}

@@ -7,9 +7,15 @@ import Authenticated from "./guards/Authenticated.tsx";
 import Guest from "@guards/Guest.tsx";
 import GuestLayout from "./layouts/GuestLayout/GuestLayout.tsx";
 import GettingStartedPage from "@pages/auth/GettingStartedPage/GettingStartedPage.tsx";
+import JoinPage from "@pages/JoinPage/JoinPage.tsx";
+import NotFoundPage from "@pages/NotFoundPage/NotFoundPage.tsx";
 
 
 export const routes: RouteObject[] = [
+    {
+        path: "/join/:token",
+        element: <JoinPage />,
+    },
     {
         element: <Guest/>,
         children: [
@@ -46,8 +52,11 @@ export const routes: RouteObject[] = [
                 ]
             }
         ]
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />
     }
-
 
 ]
 

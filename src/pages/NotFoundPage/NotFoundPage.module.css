@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--sp8);
+  text-align: center;
+  background-color: var(--home-bg-color);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp4);
+  max-width: 400px;
+}
+
+.iconWrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--overlay-linear-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp2);
+  color: var(--brand-primary-color);
+}
+
+.icon {
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  svg path {
+    fill: currentColor;
+  }
+}
+
+.title {
+  color: var(--text-home-page);
+}
+
+.description {
+  color: var(--text-muted-color);
+  margin: 0;
+}
+
+.action {
+  margin-top: var(--sp2);
+}

@@ -1,20 +1,22 @@
 import {useTranslation} from "react-i18next";
 import ActionCard from "@components/Home/ActionCard/ActionCard.tsx";
 import styles from "./ActionList.module.css";
-import addIcon from "@assets/icons/add.svg";
-import uploadIcon from "@assets/icons/upload.svg";
-import collaborateIcon from "@assets/icons/collaborate.svg";
+import addIcon from "@assets/icons/add.svg?react";
+import uploadIcon from "@assets/icons/upload.svg?react";
+import collaborateIcon from "@assets/icons/collaborate.svg?react";
 
 import type {Action} from "@customTypes/Action.ts";
 import {useModal} from "@context/ModalContext.tsx";
+import {useNavigate} from "react-router-dom";
 
 const ActionList = () => {
     const {t} = useTranslation();
 
     const {setAddNoteModal, setImportModal} = useModal();
-    const onCreate = ()=>{
+    const onCreate = () => {
         setAddNoteModal(true);
     }
+    const navigate = useNavigate()
 
 
     const actions: Action[] = [
@@ -47,6 +49,7 @@ const ActionList = () => {
             icon: collaborateIcon,
             color: "greenIcon",
             onClick: () => {
+                navigate("/spaces")
             }
         },
     ];
