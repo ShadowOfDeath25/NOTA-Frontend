@@ -81,18 +81,21 @@
   gap: var(--sp2);
   height: var(--btn-height);
   padding-inline: var(--sp3);
-  background: rgba(79, 139, 255, 0.03);
-  border: 0.8px solid rgba(79, 139, 255, 0.1);
+  background: #e7000b;
+  border: none;
   border-radius: var(--radius-sm);
-  color: #e7000b;
+  color: white;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    border-color: rgba(231, 0, 11, 0.4);
-    background-color: rgba(231, 0, 11, 0.06);
+    opacity: 0.9;
+  }
+
+  svg path {
+    stroke: white;
   }
 }
 

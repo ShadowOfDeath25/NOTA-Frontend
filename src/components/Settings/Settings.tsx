@@ -1,6 +1,5 @@
-import {useState} from "react";
+import {useState, useMemo} from "react";
 import styles from './Settings.module.css';
-import profile from "../../assets/image/imageProfile.png";
 import WorldIcon from "@assets/icons/world.svg?react";
 import DarkIcon from "@assets/icons/dark.svg?react";
 import LightIcon from "@assets/icons/light.svg?react";
@@ -17,6 +16,7 @@ import {useUpdateSettings} from "@hooks/api/useUpdateSettings.ts";
 import {useSnackbar} from "@components/Snackbar/SnackbarContext.tsx";
 import type {UserSettings} from "@customTypes/User.ts";
 import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
+import SpaceMemberAvatar from '@components/Spaces/SpaceMemberAvatar/SpaceMemberAvatar';
 
 import {AxiosClientV1} from "../../axiosClient.ts";
 
@@ -27,6 +27,27 @@ function Settings() {
     const {showSnackbar} = useSnackbar();
     const updateSettings = useUpdateSettings();
     const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+
+    const AVATAR_GRADIENTS = [
+        'linear-gradient(135deg, #51a2ff 0%, #00d3f2 100%)',
+        'linear-gradient(135deg, #05df72 0%, #00d492 100%)',
+        'linear-gradient(135deg, #c27aff 0%, #fb64b6 100%)',
+        'linear-gradient(135deg, #ff8c42 0%, #ffd166 100%)',
+        'linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)',
+        'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+        'linear-gradient(135deg, #f43f5e 0%, #ec4899 100%)',
+        'linear-gradient(135deg, #14b8a6 0%, #10b981 100%)',
+    ];
+
+    const userName = user.data?.name ?? '';
+    const initials = useMemo(
+        () => userName.split(' ').map((p) => p[0]).join('').toUpperCase() || '?',
+        [userName],
+    );
+    const gradient = useMemo(() => {
+        const hash = [...userName].reduce((sum, c) => sum + c.charCodeAt(0), 0);
+        return AVATAR_GRADIENTS[hash % AVATAR_GRADIENTS.length];
+    }, [userName]);
 
     const settings = user.data?.settings;
     const emailNotificationsOn = settings?.email_notifications ?? false;
@@ -79,7 +100,7 @@ function Settings() {
                 <div className={styles.row}>
                     <div className={styles.basicInfo}>
                         <div className={styles.avatar}>
-                            <img src={profile} alt=""/>
+                            <SpaceMemberAvatar initials={initials} gradient={gradient} size={80} />
                         </div>
                         <div className={styles.info}>
                             <h5>{user.data?.name}</h5>

@@ -5,8 +5,9 @@ import SpaceDetailHeader from '@components/Spaces/SpaceDetailHeader/SpaceDetailH
 import SpaceDetailTabs from '@components/Spaces/SpaceDetailTabs/SpaceDetailTabs';
 import SpaceNotesTab from '@components/Spaces/SpaceNotesTab/SpaceNotesTab';
 import SpaceMembersTab from '@components/Spaces/SpaceMembersTab/SpaceMembersTab';
+import ChangeRoleModal from '@components/Spaces/ChangeRoleModal/ChangeRoleModal';
 import type {SpaceTab} from '@components/Spaces/SpaceDetailTabs/SpaceDetailTabs';
-import type {Space, SpaceMember, SpaceUser} from '@customTypes/Space';
+import type {Space, SpaceMember, SpaceUser, SpaceRole} from '@customTypes/Space';
 import {useModal} from '../../context/ModalContext';
 import {useRead} from '@hooks/api/useRead.ts';
 import {useSpaceNotes} from '@hooks/api/useSpaceNotes.ts';
@@ -15,9 +16,16 @@ import {useSpaceUsers} from '@hooks/api/useSpaceUsers.ts';
 import {useAuth} from "@hooks/api/useAuth.ts";
 
 
+interface ChangeRoleTarget {
+    memberId: string;
+    memberName: string;
+    currentRole: SpaceRole;
+}
+
 export default function SpaceDetailPage() {
     const {spaceId} = useParams<{ spaceId: string }>();
     const [activeTab, setActiveTab] = useState<SpaceTab>('notes');
+    const [changeRoleTarget, setChangeRoleTarget] = useState<ChangeRoleTarget | null>(null);
     const {setAddNoteModal} = useModal();
     const {user} = useAuth()
     const {data: spaceResponse, isLoading: spaceLoading, isError: spaceError} = useRead<{
@@ -76,6 +84,20 @@ export default function SpaceDetailPage() {
                         spaceId={spaceId!}
                         members={adaptedMembers}
                         viewerRole={user?.data?.roles[space.id] ?? "viewer"}
+                        onOpenChangeRole={(memberId, memberName, currentRole) =>
+                            setChangeRoleTarget({ memberId, memberName, currentRole })
+                        }
+                    />
+                )}
+
+                {changeRoleTarget && (
+                    <ChangeRoleModal
+                        isOpen={!!changeRoleTarget}
+                        spaceId={spaceId!}
+                        memberId={changeRoleTarget.memberId}
+                        memberName={changeRoleTarget.memberName}
+                        currentRole={changeRoleTarget.currentRole}
+                        onClose={() => setChangeRoleTarget(null)}
                     />
                 )}
             </div>

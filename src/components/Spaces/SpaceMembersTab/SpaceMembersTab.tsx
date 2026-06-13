@@ -12,6 +12,7 @@ interface SpaceMembersTabProps {
     members: SpaceMember[];
     viewerRole: SpaceRole;
     onRemoveMember?: (memberId: string) => void;
+    onOpenChangeRole?: (memberId: string, memberName: string, currentRole: SpaceRole) => void;
 }
 
 export default function SpaceMembersTab({
@@ -19,6 +20,7 @@ export default function SpaceMembersTab({
                                             members,
                                             viewerRole,
                                             onRemoveMember,
+                                            onOpenChangeRole,
                                         }: SpaceMembersTabProps) {
     const {t} = useTranslation();
     const [search, setSearch] = useState('');
@@ -78,6 +80,7 @@ export default function SpaceMembersTab({
                                 member={member}
                                 viewerIsAdmin={viewerIsAdmin}
                                 onRemove={onRemoveMember}
+                                onOpenChangeRole={onOpenChangeRole}
                             />
                         </div>
                     ))

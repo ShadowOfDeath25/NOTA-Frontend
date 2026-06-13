@@ -1,5 +1,5 @@
 import styles from './SpaceMemberRow.module.css';
-import type { SpaceMember } from '@customTypes/Space';
+import type { SpaceMember, SpaceRole } from '@customTypes/Space';
 import SpaceMemberAvatar from '@components/Spaces/SpaceMemberAvatar/SpaceMemberAvatar';
 import SpaceBadge from '@components/Spaces/SpaceBadge/SpaceBadge';
 import DotsIcon from "@assets/icons/dots.svg?react";
@@ -11,12 +11,14 @@ interface SpaceMemberRowProps {
   member: SpaceMember;
   viewerIsAdmin?: boolean;
   onRemove?: (memberId: string) => void;
+  onOpenChangeRole?: (memberId: string, memberName: string, currentRole: SpaceRole) => void;
 }
 
 export default function SpaceMemberRow({
   member,
   viewerIsAdmin = false,
-  onRemove
+  onRemove,
+  onOpenChangeRole
 }: SpaceMemberRowProps) {
 
   const { t } = useTranslation();
@@ -167,8 +169,10 @@ export default function SpaceMemberRow({
 
           onChangeRole={()=>{
 
-            console.log(
-              "change role"
+            onOpenChangeRole?.(
+              member.id,
+              member.name,
+              member.role
             );
 
             setShowMenu(false);

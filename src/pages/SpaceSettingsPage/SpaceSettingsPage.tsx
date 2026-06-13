@@ -1,4 +1,5 @@
-import {useParams, useNavigate, useLocation} from 'react-router-dom';
+import {useState} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
 import styles from './SpaceSettingsPage.module.css';
 import type {Space} from '@customTypes/Space';
 import SettingsIcon from '@assets/icons/settings.svg?react';
@@ -15,6 +16,7 @@ import {useCreate} from "@hooks/api/useCreate.ts";
 import {useQueryClient} from "@tanstack/react-query";
 import {useUpdate} from "@hooks/api/useUpdate.ts";
 import {useSnackbar} from "@components/Snackbar/SnackbarContext.tsx";
+import LoadingScreen from '@components/LoadingScreen/LoadingScreen';
 
 
 const GRADIENT_MAP: Record<Space['gradient'], string> = {
@@ -27,22 +29,23 @@ export default function SpaceSettingsPage() {
     const {spaceId} = useParams<{ spaceId: string }>();
     const navigate = useNavigate();
     const {t} = useTranslation();
-    const {state} = useLocation();
-    const {data: apiSpace} = useRead<Space>("spaces", spaceId, {
-        enabled: !!state.space
-    })
+    const {data: apiResponse, isLoading} = useRead<{ data: Space }>("spaces", spaceId);
     const {user} = useAuth();
-    const space = state.space ?? apiSpace
-    const isAdmin = user?.data?.roles[space.id] === "owner";
+    const [saveCount, setSaveCount] = useState(0);
     const deleteMutation = useDelete("spaces");
     const queryClient = useQueryClient();
-    const leaveSpaceMutation = useCreate(`spaces/${space.id}/leave`, {
+    const leaveSpaceMutation = useCreate(`spaces/${spaceId}/leave`, {
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ["spaces"]}).then()
         }
     })
     const updateSpaceMutation = useUpdate("spaces")
     const {showSnackbar} = useSnackbar();
+
+    const space = apiResponse?.data;
+    if (!space || isLoading) return <LoadingScreen />;
+
+    const isAdmin = user?.data?.roles[space.id] === "owner";
     return (
         <main className={styles.page}>
 
@@ -62,7 +65,7 @@ export default function SpaceSettingsPage() {
 
                 <div
                     className={styles.spaceIcon}
-                    style={{backgroundImage: GRADIENT_MAP[getGradient(state.space.gradient, state.space.id)]}}
+                    style={{backgroundImage: GRADIENT_MAP[getGradient(space.gradient, space.id)]}}
 
                     aria-hidden="true"
                 >
@@ -88,6 +91,7 @@ export default function SpaceSettingsPage() {
 
                 {/* General — visible to all, editable only by admin */}
                 <SpaceSettingsGeneralSection
+                    key={saveCount}
                     initialName={space.name}
                     initialDescription={space.description}
                     readOnly={!isAdmin}
@@ -99,11 +103,22 @@ export default function SpaceSettingsPage() {
                             description: data.description
                         }, {
                             onSuccess: () => {
+                                queryClient.setQueryData(["spaces", space.id], (old: { data: Space } | undefined) => {
+                                    if (!old) return old;
+                                    return {
+                                        data: {
+                                            ...old.data,
+                                            name: data.name,
+                                            description: data.description,
+                                        },
+                                    };
+                                });
                                 showSnackbar({
                                     type: "success",
                                     message: "Space updated successfully"
                                 })
-                                queryClient.invalidateQueries({queryKey: ["spaces"]}).then();
+                                queryClient.invalidateQueries({queryKey: [`spaces`,space.id]}).then();
+                                setSaveCount(c => c + 1);
                             }
                         })
                     }}

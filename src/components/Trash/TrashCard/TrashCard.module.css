@@ -51,7 +51,13 @@ border: 1px solid  var(--border-color);
 }
 .deleteBtn{
     background-color:var(--danger-color);
+    color: white;
+
    &:hover{
    background-color:rgba(185, 33, 35, 0.9)
+   }
+
+   svg path {
+    stroke: white;
    }
 }
