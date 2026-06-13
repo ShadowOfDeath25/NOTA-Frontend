@@ -6,7 +6,7 @@ import SpaceDetailTabs from '@components/Spaces/SpaceDetailTabs/SpaceDetailTabs'
 import SpaceNotesTab from '@components/Spaces/SpaceNotesTab/SpaceNotesTab';
 import SpaceMembersTab from '@components/Spaces/SpaceMembersTab/SpaceMembersTab';
 import type {SpaceTab} from '@components/Spaces/SpaceDetailTabs/SpaceDetailTabs';
-import type {Space, SpaceMember} from '@customTypes/Space';
+import type {Space, SpaceMember, SpaceUser} from '@customTypes/Space';
 import {useModal} from '../../context/ModalContext';
 import {useRead} from '@hooks/api/useRead.ts';
 import {useSpaceNotes} from '@hooks/api/useSpaceNotes.ts';
@@ -22,7 +22,7 @@ export default function SpaceDetailPage() {
 
     const {data: spaceResponse, isLoading: spaceLoading, isError: spaceError} = useRead<{ data: Space }>('spaces', spaceId);
     const {data: notesResponse, isLoading: notesLoading} = useSpaceNotes(spaceId);
-    const { data: usersResponse } = useSpaceUsers(spaceId);
+    const { data: usersResponse } = useSpaceUsers<{ data: SpaceUser[] }>(spaceId);
     console.log("Space API Response:", spaceResponse);
     
 
@@ -33,9 +33,10 @@ export default function SpaceDetailPage() {
     const space = spaceResponse?.data;
     if (spaceError || !space) return <Navigate to="/spaces" replace/>;
 
- const adaptedMembers: SpaceMember[] = (usersResponse?.data ?? []).map((user) => ({
+const adaptedMembers: SpaceMember[] = (usersResponse?.data ?? []).map((user) => ({
     id: user.pivot.user_id,
     name: user.name,
+    email: user.email,
     initials: user.name
         .split(" ")
         .map((part) => part[0])
@@ -43,7 +44,8 @@ export default function SpaceDetailPage() {
         .toUpperCase(),
     avatarGradient: "linear-gradient(135deg, #51a2ff 0%, #00d3f2 100%)",
     role: user.pivot.role,
-    joinedDate: new Date(user.pivot.joined_at).toLocaleDateString()
+    joinedDate: new Date(user.pivot.joined_at).toLocaleDateString(),
+    isOnline: false,
 }));
     
     const adaptedNotes = (notesResponse?.data ?? []).map((note) => ({

@@ -24,6 +24,7 @@ export default function SpaceDetailHeader({ space }: SpaceDetailHeaderProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+
   return (
     <div className={styles.container}>
       {/* Top row: back + icon + title + settings */}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import styles from './Settings.module.css';
 import profile from "../../assets/image/imageProfile.png";
 import WorldIcon from "@assets/icons/world.svg?react";
@@ -8,30 +8,32 @@ import ToggleButton from '../ToggleButton/ToggleButton';
 import NotificationIcon from "@assets/icons/notification.svg?react";
 import LockIcon from "@assets/icons/Lock.svg?react";
 import LogoutIcon from "@assets/icons/logout.svg?react";
-import { useAuth } from "@hooks/api/useAuth.ts";
-import { useTranslation } from "react-i18next";
+import {useAuth} from "@hooks/api/useAuth.ts";
+import {useTranslation} from "react-i18next";
 import i18n from "../../i18n.ts";
-import { Switch } from '@mui/material';
-import { useSettings } from "@context/SettingsContext.tsx";
-import { useUpdateSettings } from "@hooks/api/useUpdateSettings.ts";
-import { useSnackbar } from "@components/Snackbar/SnackbarContext.tsx";
-import type { UserSettings } from "@customTypes/User.ts";
+import {Switch} from '@mui/material';
+import {useSettings} from "@context/SettingsContext.tsx";
+import {useUpdateSettings} from "@hooks/api/useUpdateSettings.ts";
+import {useSnackbar} from "@components/Snackbar/SnackbarContext.tsx";
+import type {UserSettings} from "@customTypes/User.ts";
 import ChangePasswordModal from "./ChangePasswordModal/ChangePasswordModal";
 
+import {AxiosClientV1} from "../../axiosClient.ts";
+
 function Settings() {
-    const { t } = useTranslation();
-    const { user, logout } = useAuth();
-    const { lang, setLang, theme, setTheme } = useSettings();
-    const { showSnackbar } = useSnackbar();
+    const {t} = useTranslation();
+    const {user, logout} = useAuth();
+    const {lang, setLang, theme, setTheme} = useSettings();
+    const {showSnackbar} = useSnackbar();
     const updateSettings = useUpdateSettings();
     const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
     const settings = user.data?.settings;
     const emailNotificationsOn = settings?.email_notifications ?? false;
-    const pushNotificationsOn  = settings?.push_notifications  ?? false;
-    const twoFactorOn          = settings?.["2FA"]             ?? false;
+    const pushNotificationsOn = settings?.push_notifications ?? false;
+    const twoFactorOn = settings?.["2FA"] ?? false;
 
-    
+
     const handleSettingChange = (patch: Partial<UserSettings>) => {
         updateSettings.mutate(patch, {
             onSuccess: () => {
@@ -49,18 +51,18 @@ function Settings() {
         });
     };
 
-  
+
     const handleLangChange = (value: string) => {
         const newLang = value === "ar" ? "ar" : "en";
         i18n.changeLanguage(newLang);
         setLang(value);
-        handleSettingChange({ language: value === "arabic" ? "arabic" : "english" });
+        handleSettingChange({language: value === "arabic" ? "arabic" : "english"});
     };
 
     // ── Theme ────────────────────────────────────────────────────────────
     const handleThemeChange = (value: string) => {
         setTheme(value);
-        handleSettingChange({ theme: value as UserSettings["theme"] });
+        handleSettingChange({theme: value as UserSettings["theme"]});
     };
 
     // ── Logout ───────────────────────────────────────────────────────────
@@ -77,7 +79,7 @@ function Settings() {
                 <div className={styles.row}>
                     <div className={styles.basicInfo}>
                         <div className={styles.avatar}>
-                            <img src={profile} alt="" />
+                            <img src={profile} alt=""/>
                         </div>
                         <div className={styles.info}>
                             <h5>{user.data?.name}</h5>
@@ -94,7 +96,7 @@ function Settings() {
                 {/* Language */}
                 <div className={styles.row}>
                     <div className={styles.language}>
-                        <div className={styles.icon}><WorldIcon /></div>
+                        <div className={styles.icon}><WorldIcon/></div>
                         <div className={styles.info}>
                             <p>{t("language", "Language")}</p>
                             <p className={styles.email}>
@@ -105,8 +107,8 @@ function Settings() {
                     <div className={styles.toggleLang}>
                         <ToggleButton
                             options={[
-                                { label: "English", value: "en" },
-                                { label: "العربية", value: "ar" },
+                                {label: "English", value: "en"},
+                                {label: "العربية", value: "ar"},
                             ]}
                             activeValue={lang}
                             onChange={handleLangChange}
@@ -114,13 +116,13 @@ function Settings() {
                     </div>
                 </div>
 
-                <div className={styles.divider} />
+                <div className={styles.divider}/>
 
                 {/* Theme */}
                 <div className={styles.row}>
                     <div className={styles.theme}>
                         <div className={styles.icon}>
-                            {theme === "light" ? <LightIcon /> : <DarkIcon />}
+                            {theme === "light" ? <LightIcon/> : <DarkIcon/>}
                         </div>
                         <div className={styles.info}>
                             <p>{t("theme", "Theme")}</p>
@@ -132,8 +134,8 @@ function Settings() {
                     <div className={styles.themeToggle}>
                         <ToggleButton
                             options={[
-                                { label: t("dark", "Dark"), value: "dark" },
-                                { label: t("light", "Light"), value: "light" },
+                                {label: t("dark", "Dark"), value: "dark"},
+                                {label: t("light", "Light"), value: "light"},
                             ]}
                             activeValue={theme}
                             onChange={handleThemeChange}
@@ -149,7 +151,7 @@ function Settings() {
                 {/* Email notifications */}
                 <div className={styles.row}>
                     <div className={styles.emailNotification}>
-                        <div className={styles.icon}><NotificationIcon /></div>
+                        <div className={styles.icon}><NotificationIcon/></div>
                         <div className={styles.info}>
                             <p>{t("email_notifications", "Email Notifications")}</p>
                             <p className={styles.description}>
@@ -160,19 +162,19 @@ function Settings() {
                     <Switch
                         checked={emailNotificationsOn}
                         onChange={(e) =>
-                            handleSettingChange({ email_notifications: e.target.checked })
+                            handleSettingChange({email_notifications: e.target.checked})
                         }
                         className={styles.switch}
                         disabled={updateSettings.isPending}
                     />
                 </div>
 
-                <div className={styles.divider} />
+                <div className={styles.divider}/>
 
                 {/* Push notifications */}
                 <div className={styles.row}>
                     <div className={styles.emailNotification}>
-                        <div className={styles.icon}><NotificationIcon /></div>
+                        <div className={styles.icon}><NotificationIcon/></div>
                         <div className={styles.info}>
                             <p>{t("push_notifications", "Push Notifications")}</p>
                             <p className={styles.description}>
@@ -183,7 +185,7 @@ function Settings() {
                     <Switch
                         checked={pushNotificationsOn}
                         onChange={(e) =>
-                            handleSettingChange({ push_notifications: e.target.checked })
+                            handleSettingChange({push_notifications: e.target.checked})
                         }
                         className={styles.switch}
                         disabled={updateSettings.isPending}
@@ -200,14 +202,14 @@ function Settings() {
                         className={`${styles.changePasswordBtn} bodyTextSm`}
                         onClick={() => setIsChangePasswordOpen(true)}
                     >
-                        <div className={styles.icon}><LockIcon /></div>
+                        <div className={styles.icon}><LockIcon/></div>
                         <span>{t("change_password", "Change Password")}</span>
                     </button>
                 </div>
 
                 <div className={`${styles.row} ${styles.securityRow}`}>
                     <div className={styles.twoFactorAuth}>
-                        <div className={styles.icon}><LockIcon /></div>
+                        <div className={styles.icon}><LockIcon/></div>
                         <div className={styles.info}>
                             <p>{t("two_factor_authentication", "Two-Factor Authentication")}</p>
                             <p className={styles.description}>
@@ -218,7 +220,7 @@ function Settings() {
                     <Switch
                         checked={twoFactorOn}
                         onChange={(e) =>
-                            handleSettingChange({ "2FA": e.target.checked })
+                            handleSettingChange({"2FA": e.target.checked})
                         }
                         className={styles.switch}
                         disabled={updateSettings.isPending}
@@ -232,7 +234,7 @@ function Settings() {
                 onClick={handleLogout}
                 disabled={logout.isPending}
             >
-                <div className={styles.icon}><LogoutIcon /></div>
+                <div className={styles.icon}><LogoutIcon/></div>
                 <span>{t("logout", "Logout")}</span>
             </button>
 
@@ -240,13 +242,22 @@ function Settings() {
                 isOpen={isChangePasswordOpen}
                 onClose={() => setIsChangePasswordOpen(false)}
                 onSubmit={(data) => {
-                    // TODO: Integrate actual password change API mutation here.
-                    console.log("Change password submit:", data);
-                    setIsChangePasswordOpen(false);
-                    showSnackbar({
-                        type: "success",
-                        message: t("password_changed_success", "Password changed successfully"),
-                    });
+                    AxiosClientV1.patch("/auth/change-password", {
+                        current_password: data.current_password,
+                        password: data.password,
+                        password_confirmation: data.password_confirmation
+                    }).then(() => {
+                        showSnackbar({
+                            type: "success",
+                            message: t("password_changed_success", "Password changed successfully"),
+                        });
+                        setIsChangePasswordOpen(false);
+                    }).catch(() => {
+                        showSnackbar({
+                            type: "error",
+                            message: t("incorrect_password", "Incorrect password")
+                        })
+                    })
                 }}
             />
         </div>

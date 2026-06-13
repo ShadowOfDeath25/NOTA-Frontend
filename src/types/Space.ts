@@ -24,6 +24,13 @@ export interface SpaceUserPivot {
     joined_at: string
 }
 
+export interface SpaceUser {
+    id: string;
+    name: string;
+    email: string;
+    pivot: SpaceUserPivot;
+}
+
 export interface SpaceMember {
     id: string;
     name: string;

@@ -1,22 +1,17 @@
 import { useState } from 'react';
 import styles from './SpaceSettingsGeneralSection.module.css';
-import LockIcon from '@assets/icons/Lock.svg?react';
-import WorldIcon from '@assets/icons/world.svg?react';
 import { useTranslation } from 'react-i18next';
-import type { SpaceAccess } from '@customTypes/Space';
 
 interface SpaceSettingsGeneralSectionProps {
   initialName: string;
   initialDescription: string;
-  initialPrivacy: SpaceAccess;
   readOnly?: boolean;
-  onSave?: (data: { name: string; description: string; privacy: SpaceAccess }) => void;
+  onSave?: (data: { name: string; description: string }) => void;
 }
 
 export default function SpaceSettingsGeneralSection({
   initialName,
   initialDescription,
-  initialPrivacy,
   readOnly = false,
   onSave,
 }: SpaceSettingsGeneralSectionProps) {
@@ -24,16 +19,14 @@ export default function SpaceSettingsGeneralSection({
 
   const [name, setName]               = useState(initialName);
   const [description, setDescription] = useState(initialDescription);
-  const [privacy, setPrivacy]         = useState<SpaceAccess>(initialPrivacy);
 
   const isDirty =
     name !== initialName ||
-    description !== initialDescription ||
-    privacy !== initialPrivacy;
+    description !== initialDescription;
 
   const handleSave = () => {
     if (!name.trim()) return;
-    onSave?.({ name: name.trim(), description: description.trim(), privacy });
+    onSave?.({ name: name.trim(), description: description.trim() });
   };
 
   return (
@@ -74,50 +67,6 @@ export default function SpaceSettingsGeneralSection({
             readOnly={readOnly}
             maxLength={200}
           />
-        </div>
-
-        {/* Privacy */}
-        <div className={`${styles.field} ${readOnly ? styles.readOnlyField : ''}`}>
-          <span className={`${styles.fieldLabel} bodyTextSm`}>
-            {t('space.privacy', 'Privacy')}
-          </span>
-          <div className={styles.privacyOptions}>
-
-            <button
-              type="button"
-              className={`${styles.privacyCard} ${privacy === 'private' ? styles.privacySelected : ''}`}
-              onClick={() => !readOnly && setPrivacy('private')}
-              aria-pressed={privacy === 'private'}
-              disabled={readOnly}
-            >
-              <div className={styles.privacyIcon}><LockIcon /></div>
-              <div className={styles.privacyText}>
-                <span className={`${styles.privacyTitle} bodyText`}>{t('private', 'Private')}</span>
-                <span className={`${styles.privacyDesc} caption`}>{t('private_desc', 'Only invited members can access')}</span>
-              </div>
-              <div className={`${styles.radio} ${privacy === 'private' ? styles.radioSelected : ''}`}>
-                {privacy === 'private' && <div className={styles.radioDot} />}
-              </div>
-            </button>
-
-            <button
-              type="button"
-              className={`${styles.privacyCard} ${privacy === 'public' ? styles.privacySelected : ''}`}
-              onClick={() => !readOnly && setPrivacy('public')}
-              aria-pressed={privacy === 'public'}
-              disabled={readOnly}
-            >
-              <div className={styles.privacyIcon}><WorldIcon /></div>
-              <div className={styles.privacyText}>
-                <span className={`${styles.privacyTitle} bodyText`}>{t('public', 'Public')}</span>
-                <span className={`${styles.privacyDesc} caption`}>{t('public_desc', 'Anyone can join')}</span>
-              </div>
-              <div className={`${styles.radio} ${privacy === 'public' ? styles.radioSelected : ''}`}>
-                {privacy === 'public' && <div className={styles.radioDot} />}
-              </div>
-            </button>
-
-          </div>
         </div>
 
         {/* Save button — hidden in readOnly mode */}

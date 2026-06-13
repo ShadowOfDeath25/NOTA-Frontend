@@ -11,4 +11,5 @@ export interface User {
     name: string;
     email: string;
     settings?: UserSettings;
+    roles: Record<string, "admin" | "owner" | "viewer">;
 }

@@ -1,23 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './CreateSpaceModal.module.css';
-import LockIcon from '@assets/icons/Lock.svg?react';
-import WorldIcon from '@assets/icons/world.svg?react';
 import CloseIcon from '@assets/icons/close.svg?react';
 import { useTranslation } from 'react-i18next';
-
-type PrivacyType = 'private' | 'public';
 
 interface CreateSpaceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit?: (data: { name: string; description: string; privacy: PrivacyType }) => void;
+  onSubmit?: (data: { name: string; description: string }) => void;
 }
 
 export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSpaceModalProps) {
   const { t } = useTranslation();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [privacy, setPrivacy] = useState<PrivacyType>('private');
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   // Focus name input when modal opens
@@ -27,7 +22,6 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
     } else {
       setName('');
       setDescription('');
-      setPrivacy('private');
     }
   }, [isOpen]);
 
@@ -46,7 +40,7 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
 
   const handleSubmit = () => {
     if (!isValid) return;
-    onSubmit?.({ name: name.trim(), description: description.trim(), privacy });
+    onSubmit?.({ name: name.trim(), description: description.trim() });
     onClose();
   };
 
@@ -120,61 +114,6 @@ export default function CreateSpaceModal({ isOpen, onClose, onSubmit }: CreateSp
             />
           </div>
 
-          {/* Privacy */}
-          <div className={styles.field}>
-            <span className={`${styles.label} bodyTextSm`}>
-              {t('space.privacy', 'Privacy')}
-            </span>
-            <div className={styles.privacyOptions}>
-
-              {/* Private option */}
-              <button
-                type="button"
-                className={`${styles.privacyCard} ${privacy === 'private' ? styles.selected : ''}`}
-                onClick={() => setPrivacy('private')}
-                aria-pressed={privacy === 'private'}
-              >
-                <div className={styles.privacyIcon}>
-                  <LockIcon />
-                </div>
-                <div className={styles.privacyText}>
-                  <span className={`${styles.privacyTitle} bodyText`}>
-                    {t('space.private', 'Private')}
-                  </span>
-                  <span className={`${styles.privacyDesc} caption`}>
-                    {t('space.private_desc', 'Only invited members can access')}
-                  </span>
-                </div>
-                <div className={`${styles.radio} ${privacy === 'private' ? styles.radioSelected : ''}`}>
-                  {privacy === 'private' && <div className={styles.radioDot} />}
-                </div>
-              </button>
-
-              {/* Public option */}
-              <button
-                type="button"
-                className={`${styles.privacyCard} ${privacy === 'public' ? styles.selected : ''}`}
-                onClick={() => setPrivacy('public')}
-                aria-pressed={privacy === 'public'}
-              >
-                <div className={styles.privacyIcon}>
-                  <WorldIcon />
-                </div>
-                <div className={styles.privacyText}>
-                  <span className={`${styles.privacyTitle} bodyText`}>
-                    {t('space.public', 'Public')}
-                  </span>
-                  <span className={`${styles.privacyDesc} caption`}>
-                    {t('space.public_desc', 'Anyone can join')}
-                  </span>
-                </div>
-                <div className={`${styles.radio} ${privacy === 'public' ? styles.radioSelected : ''}`}>
-                  {privacy === 'public' && <div className={styles.radioDot} />}
-                </div>
-              </button>
-
-            </div>
-          </div>
         </div>
 
         {/* Footer */}
