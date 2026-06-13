@@ -53,6 +53,8 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
     }, [searchQuery, notes]);
 
     return (
+        <>
+        <div className={`${styles.overlay} ${isSidebarOpen ? styles.open : ""}`} onClick={onToggle} />
         <div className={`${styles.container} ${isSidebarOpen ? styles.open : ""}`}>
             <div className={styles.header}>
                 <div className={styles.logoContainer}><img src={logo} className={styles.logo} alt="Logo"/>
@@ -143,6 +145,7 @@ export default function Sidebar({isSidebarOpen, onToggle}: SidebarProps) {
                 </div>
             </Activity>
         </div>
+        </>
     );
 }
 

@@ -127,6 +127,14 @@
     gap: 12px;
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+}
+
 .menuIcon, .closeIcon {
 
     display:none;
@@ -180,5 +188,7 @@
     .open {
         transform: translateX(0) !important;
     }
-   
+    .overlay.open {
+        display: block;
+    }
 }
