@@ -10,12 +10,18 @@ import ShareNoteModal from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import type {Collaborator} from "@components/Editor/ShareNoteModal/ShareNoteModal";
 import DeleteNoteModal from "@components/Editor/DeleteNoteModal/DeleteNoteModal";
 import {useCreate} from "@hooks/api/useCreate.ts";
-import {useQuery, useMutation, useQueryClient, type UseMutationResult, type UseQueryResult} from "@tanstack/react-query";
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    type UseMutationResult,
+    type UseQueryResult
+} from "@tanstack/react-query";
 import type {Note} from "@customTypes/Note.ts";
 import {useDelete} from "@hooks/api/useDelete.ts";
 import {useRead} from "@hooks/api/useRead.ts";
 import {useUpdate} from "@hooks/api/useUpdate.ts";
-import type {Space} from "@customTypes/Space.ts";
+import type {Space, SpaceRole} from "@customTypes/Space.ts";
 import {AxiosClientV1} from "../axiosClient.ts";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -82,14 +88,14 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const creatNoteMutation = useCreate<UseMutationResult<Note>>("notes");
 
     const createSpaceNoteMutation = useMutation({
-        mutationFn: async ({ spaceId, data }: { spaceId: string; data: { title: string; tags: string[] } }) => {
+        mutationFn: async ({spaceId, data}: { spaceId: string; data: { title: string; tags: string[] } }) => {
             const res = await AxiosClientV1.post(`/spaces/${spaceId}/notes`, data);
             return res.data;
         },
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: ["spaces", variables.spaceId, "notes"] });
-            queryClient.invalidateQueries({ queryKey: ["notes"] });
-            queryClient.invalidateQueries({ queryKey: ["spaces"] });
+            queryClient.invalidateQueries({queryKey: ["spaces", variables.spaceId, "notes"]});
+            queryClient.invalidateQueries({queryKey: ["notes"]});
+            queryClient.invalidateQueries({queryKey: ["spaces"]});
         }
     });
 
@@ -105,9 +111,14 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
     const {data: spacesData} = useRead<UseQueryResult<Space[]>>("spaces", undefined, {
         enabled: !!user,
     });
-    const spaceOptions = useMemo(
-        () => (spacesData?.data ?? []).map((s) => ({id: s.id, name: s.name})),
-        [spacesData],
+
+    const spaceOptions = useMemo(() => {
+            const allowedRoles: SpaceRole[] = ['admin', 'owner', 'editor'];
+            return (spacesData?.data ?? [])
+                .filter((s) => allowedRoles.includes(s.pivot.role))
+                .map((s) => ({id: s.id, name: s.name}))
+        },
+        [spacesData?.data]
     );
 
     // ── Mock collaborators — replace with real note data ──────────────────────
@@ -176,7 +187,7 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
                 isOpen={isOpenCreateSpaceModal}
                 onClose={() => setCreateSpaceModal(false)}
                 onSubmit={(data) => {
-                    createSpaceMutation.mutate({ name: data.name, description: data.description });
+                    createSpaceMutation.mutate({name: data.name, description: data.description});
                     setCreateSpaceModal(false);
                 }}
             />
@@ -192,7 +203,7 @@ export const ModalProvider = ({children}: { children: ReactNode }) => {
                 onClose={() => setAddNoteModal(false)}
                 onSubmit={(data) => {
                     if (addNoteSpaceId) {
-                        createSpaceNoteMutation.mutate({ spaceId: addNoteSpaceId, data });
+                        createSpaceNoteMutation.mutate({spaceId: addNoteSpaceId, data});
                     } else {
                         creatNoteMutation.mutate(data);
                     }
