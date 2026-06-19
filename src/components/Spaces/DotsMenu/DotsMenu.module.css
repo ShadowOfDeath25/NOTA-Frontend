@@ -18,8 +18,8 @@
     width:320px;
     max-width: calc(100vw - 16px);
 
-    background:#081325;
-    border:1px solid #173267;
+    background: var(--import-modal-bg);
+    border: 0.8px solid rgba(79, 139, 255, 0.15);
 
     border-radius:18px;
     overflow:hidden;
@@ -42,13 +42,13 @@
     background:none;
     border:none;
 
-    color:#DDE6F5;
+    color: var(--text-home-page);
     font-size:16px;
 }
 
 .info{
-    color:#94A3B8;
-    border-bottom:1px solid #173267;
+    color: var(--text-muted-color);
+    border-bottom: 0.8px solid rgba(79, 139, 255, 0.15);
 }
 
 .item{
@@ -57,7 +57,7 @@
 }
 
 .item:hover{
-    background:#10203B;
+    background: rgba(79, 139, 255, 0.08);
 }
 
 
@@ -76,22 +76,10 @@
 }
 
 :root[data-theme="light"] .menu {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-:root[data-theme="light"] .info,
-:root[data-theme="light"] .item {
-  color: #0f172a;
-}
-
 :root[data-theme="light"] .info {
-  color: #64748b;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-:root[data-theme="light"] .item:hover {
-  background: #f1f5f9;
+  border-bottom: 0.8px solid rgba(79, 139, 255, 0.1);
 }
 
